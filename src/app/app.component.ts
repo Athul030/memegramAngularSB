@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NavigationStart, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,19 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+
   title = 'memegramAngular';
+
+  constructor(private router: Router) {
+
+  this.router.events.subscribe((event) => {
+    if (event instanceof NavigationStart) {
+      // Check the current route and set a class or style accordingly
+      const isLoginPage = event.url === '/login';
+      document.body.classList.toggle('login-background', isLoginPage);
+    }
+  });
+}
+
 }

@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+.login-background {
+    background-size: cover;
+    background-position: center;
+    opacity: 1;
+  }

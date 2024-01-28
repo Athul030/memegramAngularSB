@@ -9,6 +9,8 @@ const TOKEN = 'token';
 })
 export class StorageService {
 
+
+
   constructor() { }
 
 
@@ -33,7 +35,7 @@ export class StorageService {
   public static getUser() : User | null{
     const user = localStorage.getItem('user');
 
-    if(typeof user == 'string'){
+    if(typeof user === 'string'){
       const userParsed = JSON.parse(user) as User;
       return userParsed;
     }else{
@@ -61,7 +63,7 @@ export class StorageService {
     }
     const user = this.getUser();
     let role:string|null='';
-    if(user!=null && user.authorities!=undefined){
+    if(user!=null && user.authorities!==undefined){
       role = user.authorities[0].authority;
     }
     if(typeof(role) === 'string'){

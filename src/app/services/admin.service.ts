@@ -7,7 +7,7 @@ import { User } from '../model/user';
 })
 export class AdminService {
 
-  baseUrl:string="http://localhost:8080";
+  private baseUrl:string="http://localhost:8080";
 
   constructor(private http:HttpClient) { }
 
@@ -16,7 +16,7 @@ export class AdminService {
   }
 
   getUser(username:string){
-    return this.http.get<User>(this.baseUrl+ '/getUser'+'/'+username);
+    return this.http.get<User>(`${this.baseUrl}/getUser/${username}`);
   }
 
   

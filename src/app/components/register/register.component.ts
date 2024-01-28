@@ -13,7 +13,7 @@ export class RegisterComponent {
 
   regForm!: FormGroup;
 
-  constructor(private builder:FormBuilder,private userService:UserService, private snack:MatSnackBar){
+  constructor(private builder:FormBuilder,private userService:UserService, private _snack:MatSnackBar){
     
   }
 
@@ -32,7 +32,7 @@ export class RegisterComponent {
     if(this.regForm.valid){
       if(this.regForm.value.password === this.regForm.value.rePassword){
         const userobj: User = {
-          fullName: this.regForm.value.firstName as string,
+          fullName: this.regForm.value.fullName as string,
           email: this.regForm.value.email as string,
           password: this.regForm.value.password as string,
           phoneNumber: this.regForm.value.phoneNumber as string,
@@ -43,12 +43,12 @@ export class RegisterComponent {
         );
 
       }else{
-        this.snack.open("Passwords dont Match",'Ok', {
+        this._snack.open("Passwords dont Match",'Ok', {
           duration:3000
         })
       }
     }else{
-      this.snack.open("Please enter all fields",'Ok', {
+      this._snack.open("Please enter all fields",'Ok', {
         duration:3000
       })  
     }

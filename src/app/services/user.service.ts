@@ -32,6 +32,6 @@ export class UserService {
   }
 
   public logout(){
-    return this.http.get(this.baseURL+'/logout');
+    return this.http.get(`${this.baseURL}/logout`);
   }
 }

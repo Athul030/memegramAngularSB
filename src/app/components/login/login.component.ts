@@ -14,7 +14,7 @@ export class LoginComponent {
   username:string = '';
   password:string='';
 
-  constructor(private service:UserService, private router:Router){
+  constructor(private service:UserService){
 
   }
 

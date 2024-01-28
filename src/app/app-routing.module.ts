@@ -9,8 +9,7 @@ const routes: Routes = [
   // {path:'',component:HomeComponent,pathMatch:'full'},
   {path:'register',component:RegisterComponent,pathMatch:'full'},
   {path:'login',component:LoginComponent,pathMatch:'full',canActivate:[loginGuardGuard]},
-  {path:'adminDashboard',component:AdminDashboardComponent,
-pathMatch:'full'}
+  {path:'adminDashboard',component:AdminDashboardComponent,pathMatch:'full'}
 ];
 
 @NgModule({

@@ -30,5 +30,6 @@ export interface UserCred{
 
 export interface CustomToken{
     token:string;
+    username:string;
     user:User;
 }

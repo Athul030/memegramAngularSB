@@ -6,12 +6,16 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
-import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import {BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HomeComponent } from './components/home/home.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { RightSideBarComponent } from './components/right-side-bar/right-side-bar.component';
+import { FeedsComponent } from './components/feeds/feeds.component'
 
 
 @NgModule({
@@ -20,7 +24,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     HeaderComponent,
     LoginComponent,
     RegisterComponent,
-    UserDashboardComponent
+    HomeComponent,
+    SidebarComponent,
+    RightSideBarComponent,
+    FeedsComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +35,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     BsDropdownModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule
     
     ],
   providers: [MatSnackBar],

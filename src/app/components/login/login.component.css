@@ -13,5 +13,12 @@
     z-index: -1; /* Place the image behind other content */
   }
   
-  /* Rest of your existing styles for other elements */
   
+
+  .logo-container {
+    position: relative; /* Ensure the container has a position to control child elements */
+  }
+  
+  .logo-container:hover .logo {
+    filter: hue-rotate(180deg); /* Rotate the hue by 180 degrees on hover */
+  }

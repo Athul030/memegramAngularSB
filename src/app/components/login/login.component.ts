@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { UserCred } from 'src/app/model/user';
 import { UserService } from 'src/app/services/user.service';
 
@@ -32,7 +31,9 @@ export class LoginComponent {
 
     this.service.login(this.userCred).subscribe(
       (customToken)=>{
-        console.log(customToken.user,customToken.username,customToken)
+        console.log(customToken.user,customToken.username,customToken);
+        const token = customToken.token;
+        // localStorage.setItem('token',token);
       },
       (error)=>{
         console.log(error)

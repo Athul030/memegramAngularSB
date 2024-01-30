@@ -5,7 +5,8 @@ export interface User {
     email:string;
     userHandle:string;
     password:string;
-    phoneNumber:string;
+    bio:string;
+    phoneNumber?:string;
     enabled?:boolean;
     accountNonExpired?:boolean;
     acccountNonLocked?:boolean;

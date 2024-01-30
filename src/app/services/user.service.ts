@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CustomToken, User, UserCred } from '../model/user';
-import { Observable } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +27,19 @@ export class UserService {
   
 
   public registerUser(user:User):Observable<string>{
-    return this.http.post<string>(`${this.baseURL}/api/v1/auth/register`,user);
+    return this.http.post<string>(`${this.baseURL}/api/v1/auth/register`,user)
+    .pipe(
+      catchError((error:HttpErrorResponse)=>{
+        if (error instanceof HttpErrorResponse && error.status === 400 && error.error === 'Email already exists')
+
+        {
+          return throwError('Email alread in use');
+        }else{
+          return throwError('An error occurred. Please try again.');
+        }
+      })
+    )
+    ;
 
   }
 

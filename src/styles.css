@@ -10,3 +10,12 @@
     background-position: center;
     opacity: 1;
   }
+
+
+/* styles.css or styles.scss */
+.custom-snack-bar-container {
+  position: fixed;
+  top: 10;
+  left: 50%;
+  transform: translateX(-50%);
+}

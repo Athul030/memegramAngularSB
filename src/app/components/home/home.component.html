@@ -1,0 +1,23 @@
+
+  <div class="flex flex-col h-screen overflow-hidden">
+    <header class="bg-blue-300" *ngIf="!isLoginOrRegisterRoute()">
+        <app-header></app-header>
+        </header>
+  
+    <div class="flex flex-1">
+      <!-- Sidebar component -->
+        <app-sidebar></app-sidebar>
+
+        
+  
+      <!-- Router outlet for other content -->
+      <router-outlet ></router-outlet>
+
+      <app-feeds class="flex-grow p-5"></app-feeds>
+
+      <app-right-side-bar class="ml-auto"></app-right-side-bar>
+
+
+    </div>
+  </div>
+  

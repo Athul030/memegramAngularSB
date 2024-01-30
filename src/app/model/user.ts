@@ -14,13 +14,14 @@ export interface User {
     
     deleted?:boolean
 
-    authorities?:[
-        {
-            authority:string;
-        }
-    ]
+    authorities?:Role[];
     
     
+}
+
+export interface Role{
+    id:number;
+    name:string;
 }
 
 export interface UserCred{

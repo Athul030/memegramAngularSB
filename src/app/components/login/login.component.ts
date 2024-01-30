@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
 import { UserCred } from 'src/app/model/user';
 import { UserService } from 'src/app/services/user.service';
+import { beginLogin } from 'src/app/store/store.actions';
 
 
 @Component({
@@ -10,49 +13,34 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class LoginComponent {
 
-  username:string = '';
-  password:string='';
+  loginForm!:FormGroup;
 
-  constructor(private service:UserService){
+  
+
+  constructor(private builder:FormBuilder, private store:Store){
 
   }
 
-  userCred:UserCred={
-  username:'',
-  password:''
-  };
-
-  onSubmit():void{
-
-    this.userCred = {
-      username: this.username,
-      password: this.password
-    };
-
-    this.service.login(this.userCred).subscribe(
-      (customToken)=>{
-        console.log(customToken.user,customToken.username,customToken);
-        const token = customToken.token;
-        // localStorage.setItem('token',token);
-      },
-      (error)=>{
-        console.log(error)
-      }
-    );
+  ngOnInit():void{
+    console.log("oninit")
+    this.loginForm = this.builder.group({
+      username:this.builder.control('',[Validators.required,Validators.email]),
+      password:this.builder.control('',[Validators.required])
+    });
   }
 
+  onLogin(){
 
+   if(this.loginForm.valid){
 
-  handleButtonClick():void{
-    console.log('Button is clicked');
-    this.service.testMethod().subscribe({
-      next: (response: string) => {
-        console.log('Request successful. Response:', response);
-      },
-      error: (error: any) => {
-        console.error('Error:', error);
-      }
-  });
+    const obj:UserCred={
+      username:this.loginForm.value.username as string,
+      password: this.loginForm.value.password as string
+    }
+
+    this.store.dispatch(beginLogin({usercred:obj}))
+   }
+  }
     
   }
-}
+

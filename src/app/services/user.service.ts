@@ -13,6 +13,7 @@ export class UserService {
   constructor(private http:HttpClient) { }
 
   public login(userCred:UserCred):Observable<CustomToken>{
+    
     return this.http.post<CustomToken>(`${this.baseURL}/api/v1/auth/login`,userCred);
   }
 

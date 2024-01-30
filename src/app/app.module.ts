@@ -15,7 +15,10 @@ import {BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './components/home/home.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { RightSideBarComponent } from './components/right-side-bar/right-side-bar.component';
-import { FeedsComponent } from './components/feeds/feeds.component'
+import { FeedsComponent } from './components/feeds/feeds.component';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects'
+import { storeEffects } from './store/store.effects';
 
 
 @NgModule({
@@ -36,7 +39,9 @@ import { FeedsComponent } from './components/feeds/feeds.component'
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    StoreModule.forRoot({}, {}),
+    EffectsModule.forRoot([storeEffects])
     
     ],
   providers: [MatSnackBar],

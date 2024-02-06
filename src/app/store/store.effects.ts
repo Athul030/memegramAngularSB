@@ -29,9 +29,9 @@ export class storeEffects{
 
                                 this.storage.saveToken(data.token);
                                 this.storage.saveUser(data.user);
-                                console.log("User Data:", data.user.authorities?.length);
-                                if (data.user && data.user.authorities){
-                                for(let item of data.user.authorities){
+                                console.log("User Data:", data.user.roles);
+                                if (data.user && data.user.roles){
+                                for(let item of data.user.roles){
                                     console.log("3");
 
                                           if (item.name === 'ROLE_ADMIN') {

@@ -38,9 +38,16 @@
 
       <div>
         <button type="submit" class="flex w-full max-w-2xl justify-center rounded-md bg-gradient-to-r from-green-400 to-blue-500 px-3 py-2 text-2sm font-semibold leading-6 text-white shadow-sm hover:from-green-800 hover:to-blue-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-400 mt-2">Sign in</button>
-       
-
       </div>
+
+      <div class="flex items-center justify-center  dark:bg-gray-800 rounded">
+        <button (click)="signInWithGoogle()" class="px-4 py-2  flex gap-2   text-slate-100 dark:text-slate-100 hover:border-slate-100 dark:hover:border-slate-100 hover:text-slate-100 dark:hover:text-slate-100 hover:shadow transition duration-150">
+          <img class="w-6 h-6" src="https://www.svgrepo.com/show/475656/google-color.svg" loading="lazy" alt="google logo">
+          
+            <span>Sign in with Google</span>
+        </button>
+    </div>
+    
       </form>
 
 

@@ -19,6 +19,7 @@ import { FeedsComponent } from './components/feeds/feeds.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects'
 import { storeEffects } from './store/store.effects';
+import { OauthCallbackComponent } from './components/oauth-callback/oauth-callback.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { storeEffects } from './store/store.effects';
     HomeComponent,
     SidebarComponent,
     RightSideBarComponent,
-    FeedsComponent
+    FeedsComponent,
+    OauthCallbackComponent
   ],
   imports: [
     BrowserModule,

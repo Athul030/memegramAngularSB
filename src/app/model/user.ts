@@ -14,7 +14,7 @@ export interface User {
     
     deleted?:boolean
 
-    authorities?:Role[];
+    roles?:Role[];
     
     
 }

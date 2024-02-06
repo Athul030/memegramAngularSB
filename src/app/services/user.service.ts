@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CustomToken, User, UserCred } from '../model/user';
-import { Observable, catchError, throwError } from 'rxjs';
+import { Observable, catchError, tap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +16,17 @@ export class UserService {
     
     return this.http.post<CustomToken>(`${this.baseURL}/api/v1/auth/login`,userCred);
   }
+
+  public checkAuthentication(): Observable<CustomToken> {
+    return this.http.get<CustomToken>(`${this.baseURL}/callback`);
+  }
+
+  // public oAuthLogin():Observable<CustomToken>{
+  //   return this.http.get<CustomToken>(`${this.baseURL}/login/oauth2/code/google`)
+  //   .pipe(
+  //     tap(data=>console.log('OAuth Login Respone',data))
+  //   );
+  // }
 
   public getCurrentUser():Observable<User>{
     return this.http.get<User>(`${this.baseURL}/current-user`);

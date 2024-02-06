@@ -63,8 +63,8 @@ export class StorageService {
     }
     const user = this.getUser();
     let role:string|null='';
-    if(user!=null && user.authorities!==undefined){
-      role = user.authorities[0].name;
+    if(user!=null && user.roles!==undefined){
+      role = user.roles[0].name;
     }
     if(typeof(role) === 'string'){
       return role === "ADMIN";
@@ -78,8 +78,8 @@ export class StorageService {
     }
     const user = this.getUser();
     let role:string | null = '';
-    if(user!==null && user.authorities!==undefined){
-      role = user.authorities[0].name;
+    if(user!==null && user.roles!==undefined){
+      role = user.roles[0].name;
     }
     if(typeof(role) === 'string'){
       return role === "USER";

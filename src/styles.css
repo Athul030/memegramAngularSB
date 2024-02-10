@@ -4,6 +4,7 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
 
 .login-background {
     background-size: cover;
@@ -13,9 +14,9 @@
 
 
 /* styles.css or styles.scss */
-.custom-snack-bar-container {
+/* .custom-snack-bar-container {
   position: fixed;
   top: 10;
   left: 50%;
   transform: translateX(-50%);
-}
+} */

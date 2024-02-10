@@ -1,7 +1,8 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { CustomToken, User, UserCred } from '../model/user';
+import { CustomToken, JwtAuthResponse, User, UserCred } from '../model/user';
 import { Observable, catchError, tap, throwError } from 'rxjs';
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,11 +11,31 @@ export class UserService {
 
   baseURL:string = "http://localhost:8080";
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient, private storage:StorageService) { }
 
   public login(userCred:UserCred):Observable<CustomToken>{
     
     return this.http.post<CustomToken>(`${this.baseURL}/api/v1/auth/login`,userCred);
+  }
+
+  // public refreshToken():Observable<JwtAuthResponse>{
+  //   const refreshToken:string|null = this.storage.getRefreshToken();
+  //   if (refreshToken !== null) {
+  //   const formData = new FormData();
+  //   formData.append('refreshToken', refreshToken);
+  //   console.log("enter+" + formData.get('refreshToken'));
+  //   const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+  //   return this.http.post<JwtAuthResponse>(`${this.baseURL}/api/v1/auth/refreshToken`,formData,{headers});
+  //   } else {
+  //     return throwError('Refresh token not available');
+  //   }
+  // }
+
+  public refreshToken():Observable<JwtAuthResponse>{
+    const refreshToken:string|null = this.storage.getRefreshToken();
+    return this.http.post<JwtAuthResponse>(`${this.baseURL}/api/v1/auth/refreshToken`,refreshToken);
+  
   }
 
   public checkAuthentication(): Observable<CustomToken> {
@@ -57,5 +78,10 @@ export class UserService {
 
   public logout(){
     return this.http.get(`${this.baseURL}/logout`);
+  }
+
+
+  handleGoogleCallback(): Observable<any> {
+    return this.http.get(`${this.baseURL}/login/oauth2/code/google`);
   }
 }

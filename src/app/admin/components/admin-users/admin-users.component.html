@@ -1,0 +1,46 @@
+<div class="container">
+  <h1>User Listing</h1>
+
+  <table mat-table [dataSource] = "datasource">
+
+    <ng-container matColumnDef="fullName">
+      <mat-header-cell mat-sort-header *matHeaderCellDef>Full Name</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.fullName}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="email">
+      <mat-header-cell mat-sort-header *matHeaderCellDef>Email</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.email}}</mat-cell>
+  </ng-container>
+  <ng-container  matColumnDef="userHandle">
+      <mat-header-cell mat-sort-header *matHeaderCellDef>User handle</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.userHandle}}</mat-cell>
+  </ng-container>
+  
+  
+  <ng-container matColumnDef="blockAction">
+    <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <button (click)="toggleBlockUser(element)" mat-raised-button [color]="element.isActive ? 'warn' : 'primary'" class="action-button">
+        {{ element.isActive ? 'Block' : 'Unblock' }}
+      </button>
+    </mat-cell>
+  </ng-container>
+  
+  <mat-header-row *matHeaderRowDef="displayedColumns" class="header-row"></mat-header-row>
+   <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+
+  </table>
+
+  <div class="pagination">
+    <select>
+      <option value="5">5</option>
+      <option value="10">10</option>
+      <option value="25">25</option>
+      <option value="100">100</option>
+    </select>
+    <button>
+      Next
+    </button>
+  </div>
+</div>

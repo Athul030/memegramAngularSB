@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { User } from '../model/user';
+import { User, refershTokenForSending } from '../model/user';
 
 const USER='user';
 const TOKEN = 'token';
@@ -19,13 +19,23 @@ export class StorageService {
     window.localStorage.setItem("user",JSON.stringify(user));
   }
 
-  public saveToken(token:any){
-    localStorage.removeItem("token");
-    localStorage.setItem("token",token);
+  public saveAccessToken(acessToken:any){
+    localStorage.removeItem("accessToken");
+    localStorage.setItem("accessToken",acessToken);
+
   }
 
-  public getToken(): string|null{
-    return localStorage.getItem("token");
+  public saveRefreshToken(refreshToken:any){
+    localStorage.removeItem("refreshToken");
+    localStorage.setItem("refreshToken",refreshToken);
+
+  }
+
+  public getAccessToken(): string|null{
+    return localStorage.getItem("accessToken");
+  }
+  public getRefreshToken(): string|null{
+    return localStorage.getItem("refreshToken");
   }
 
   public static getTokens(): string | null{
@@ -49,6 +59,8 @@ export class StorageService {
     }
     return false;
   }
+
+  
 
   static hasToken():boolean{
     if(this.getTokens()  === null) {

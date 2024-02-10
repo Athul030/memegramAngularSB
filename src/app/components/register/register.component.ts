@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { User } from 'src/app/model/user';
 import { UserService } from 'src/app/services/user.service';
+import { showalert } from 'src/app/store/store.actions';
 
 @Component({
   selector: 'app-register',
@@ -13,7 +16,7 @@ export class RegisterComponent {
 
   regForm!: FormGroup;
 
-  constructor(private builder:FormBuilder,private userService:UserService, private _snack:MatSnackBar){
+  constructor(private route:Router, private builder:FormBuilder,private userService:UserService, private _snack:MatSnackBar, private store:Store){
     
   }
 
@@ -50,10 +53,14 @@ export class RegisterComponent {
           
         }
         this.userService.registerUser(userobj).subscribe(
-          (datas)=>{console.log(datas)}
-        ),(error:string)=>{
+          (datas)=>{
+            this.route.navigate(['login'])
+
+            this.store.dispatch(showalert(({ message: 'Registered successfully.', resulttype: 'pass'  })));
+          }
+        ,(error:string)=>{
           console.error(error);
-          if(error === 'Email already in use'){
+          if(error === 'Email alread in use'){
             console.log('inside error');
 
             this._snack.open(
@@ -64,7 +71,7 @@ export class RegisterComponent {
             )
           }
         }
-
+        );
       }else{
         this._snack.open("Passwords dont Match",'Ok', {
           duration:3000,

@@ -1,0 +1,36 @@
+
+#sidebar {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #ffffff; /* Change this color to your desired background color */
+    padding-top: 20px;
+    border-right: 1px solid #021590;
+  }
+  
+  #sidebar a {
+    padding: 10px;
+    font-size: 1.2em;
+    color: #818181;
+    display: block;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  
+  #sidebar a:hover {
+    color: #f8f9fa;
+  }
+  
+  .sidebar-header {
+    text-align: center;
+    padding: 20px;
+    background-color: #ffffff; /* Change this color to your desired header background color */
+  }
+
+  
+  #sidebar h1 {
+    color: #ffffff;
+  }
+  

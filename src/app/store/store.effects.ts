@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { beginLogin, emptyaction, showalert } from "./store.actions";
+import { beginLogin, beginRegister, emptyaction, showalert } from "./store.actions";
 import { catchError, exhaustMap, map, mergeMap, of, switchMap } from "rxjs";
 import { UserService } from "../services/user.service";
 import { StorageService } from "../services/storage.service";
@@ -17,22 +17,42 @@ export class storeEffects{
 
     }
 
+    _userregister = createEffect(() =>
+this.action$.pipe(
+    ofType(beginRegister),
+    mergeMap((action) => {
+        return this.userService.registerUser(action.userdata).pipe(
+            map((response) => {
+              
+                this.route.navigate(['login'])
+                return showalert({ message: 'Registered successfully.', resulttype: 'pass' })
+              
+            }),
+            catchError((_error) => of(showalert({ message: 'Registerion Failed due to :.' + _error.error, resulttype: 'fail' })))
+        )
+    })
+)
+)
+
     userlogin = createEffect(()=>{
+        console.log("effect1")
         return this.action$.pipe(
             ofType(beginLogin),
             mergeMap((action)=>{
+                console.log("effect2")
+
                 return this.userService.login(action.usercred).pipe(
                     switchMap((data)=>{
-                        console.log(data)
-                        if(data.user!==null){
-                            console.log("1");
+                        console.log("effect3")
 
-                                this.storage.saveToken(data.token);
+                        console.log("data"+data.accessToken,data.refreshToken,data.username);
+                        if(data.user!==null){
+
+                                this.storage.saveAccessToken(data.accessToken);
+                                this.storage.saveRefreshToken(data.refreshToken);
                                 this.storage.saveUser(data.user);
-                                console.log("User Data:", data.user.roles);
                                 if (data.user && data.user.roles){
                                 for(let item of data.user.roles){
-                                    console.log("3");
 
                                           if (item.name === 'ROLE_ADMIN') {
                                             this.route.navigate(['admin']);
@@ -51,8 +71,11 @@ export class storeEffects{
                             return of(showalert({message:'Login failed:Inavlid cred',resulttype:'fail'}))
                         }
                     }),
-                    catchError((_error)=>of(showalert({message:'Login failed due to:'+_error.error,resulttype:"fail"
-                    })))
+                    
+                    catchError((_error)=>{
+                        return of(showalert({message:'Login failed due to:'+_error.error.message,resulttype:"fail"
+                    }));
+                })
                 )
             })
         )

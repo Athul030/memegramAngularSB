@@ -1,7 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { UserCred } from 'src/app/model/user';
+import { AuthResponse, UserCred } from 'src/app/model/user';
 import { UserService } from 'src/app/services/user.service';
 import { beginLogin } from 'src/app/store/store.actions';
 
@@ -17,18 +18,18 @@ export class LoginComponent {
 
   
 
-  constructor(private builder:FormBuilder, private store:Store, private service:UserService){
+  constructor(private builder:FormBuilder, private store:Store, private service:UserService,private http:HttpClient){
 
   }
 
   ngOnInit():void{
-    console.log("oninit")
+    console.log("oninitLogin")
     this.loginForm = this.builder.group({
       username:this.builder.control('',[Validators.required,Validators.email]),
       password:this.builder.control('',[Validators.required])
     });
 
-    this.handleCallback();
+    // this.handleCallback();
   }
 
 
@@ -40,6 +41,8 @@ export class LoginComponent {
       username:this.loginForm.value.username as string,
       password: this.loginForm.value.password as string
     }
+    console.log("User info"+obj.username)
+    console.log("User info"+obj.password)
 
     this.store.dispatch(beginLogin({usercred:obj}))
    }
@@ -47,30 +50,29 @@ export class LoginComponent {
    
   }
 
-
-
     signInWithGoogle() {
-      // Redirect to your OAuth login endpoint (replace 'your-oauth-endpoint' with the actual OAuth endpoint)
+      // my OAuth login endpoint 
       window.location.href = 'http://localhost:8080/oauth2/authorization/google';
 
     }
 
-    handleCallback() {
-      const queryParams = new URLSearchParams(window.location.search);
-      const responseJson = queryParams.get('response');
+    // handleCallback() {
+    //   const url = 'http://localhost:8080/login/oauth2/code/google';
 
-      // Check if responseJson is not null before parsing
-      if (responseJson !== null) {
-        // Parse the JSON response
-        const response = JSON.parse(responseJson);
+    //   this.http.get<AuthResponse>(url).subscribe(
+    //     (response) => {
+    //       console.log('Response JSON:', response);
+    //       // Access specific properties if needed
+    //       const accessToken = response.accessToken;
+    //       const user = response.user;
+    //       // ... and so on
+    //     },
+    //     (error) => {
+    //       console.error('Error fetching data:', error);
+    //     }
+    //   );
+    // }
     
-        // Now you can use the response object as needed
-        console.log(response);
-      } else {
-        console.error('Response JSON is null.');
-      }
-
-    }
     
   }
 

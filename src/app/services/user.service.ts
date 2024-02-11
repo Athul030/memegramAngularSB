@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { CustomToken, JwtAuthResponse, User, UserCred } from '../model/user';
+import { CustomToken, JwtAuthResponse, Post, User, UserCred } from '../model/user';
 import { Observable, catchError, tap, throwError } from 'rxjs';
 import { StorageService } from './storage.service';
 
@@ -83,5 +83,27 @@ export class UserService {
 
   handleGoogleCallback(): Observable<any> {
     return this.http.get(`${this.baseURL}/login/oauth2/code/google`);
+  }
+
+  // createPost(post:Post, categoryId:number,file:File):Observable<any>{
+
+  //   const formData = new FormData();
+  //   formData.append('post',JSON.stringify(post));
+  //   formData.append('categoryId', categoryId.toString());
+  //   formData.append('file',file);
+
+  //   return this.http.post<Post>(`${this.baseURL}/api/createPost`,formData);
+  // }
+
+  createPost(postDTO:Post, categoryId:number,file:File):Observable<any>{
+    const url = `${this.baseURL}/api/createPost`;
+
+  const formData: FormData = new FormData();
+  formData.append('postDTO', new Blob([JSON.stringify(postDTO)], { type: 'application/json' }));
+  formData.append('categoryId', categoryId.toString());
+  formData.append('file', file, file.name);
+
+  
+  return this.http.post<Post>(url, formData,  { observe: 'response' });
   }
 }

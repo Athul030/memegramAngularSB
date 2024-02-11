@@ -9,7 +9,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { FormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms'
 import { ReactiveFormsModule } from '@angular/forms';
 import {BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './components/home/home.component';

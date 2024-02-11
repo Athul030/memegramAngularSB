@@ -23,11 +23,20 @@ export interface User {
 
 
 export interface Post {
-    id:number;
+    id?:number;
+    title?:string;
     content: string;
-    imageName: string;
-    addedDate: Date;
-    user:User;
+    imageName?: string;
+    addedDate?: Date;
+    category?:Category;
+    user?:User;
+  }
+
+  export interface Category{
+    id:number;
+    categoryTitle:string,
+    categoryDescription:string,
+    Post:Post;
   }
 
 export interface Role{

@@ -4,13 +4,17 @@
     </mat-card-header>
 
     <div>
-        <textarea placeholder="Type Message..."></textarea>
+        <textarea  #commentInput  placeholder="Type Message..."></textarea>
+    </div>
+    <div *ngIf="selectedImageFile" id="post-preview">
+        <img id="post-preview-image"/>
     </div>
     <mat-card-actions align="end">
-        <button mat-button color="warm"><label for="photo-upload">
-            <input  id="photo-upload" type="file" accept="image/*" />
-            <mat-icon>insert image</mat-icon>
+        <button mat-button color="warn"><label for="photo-upload">
+            <input  #photoSelector (change) = "onPhotoSelected(photoSelector)"
+            id="photo-upload" type="file" accept="image/*" />
+            <mat-icon>insert_photo</mat-icon>
         </label></button>
-        <button mat-flat-button="warm">Post</button>
+        <button (click)="onPostClick(commentInput)" mat-flat-button="warn">Post</button>
     </mat-card-actions>
 </mat-card>

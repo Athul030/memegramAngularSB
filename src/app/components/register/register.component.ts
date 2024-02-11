@@ -67,8 +67,7 @@ export class RegisterComponent {
               'Email id already in use','Ok',{
                 duration:3000,
                 panelClass: 'custom-snack-bar-container',
-              }
-            )
+              });
           }
         }
         );

@@ -27,6 +27,7 @@ import { PostFeedComponent } from './components/post-feed/post-feed.component';
 import { MatButtonModule } from '@angular/material/button';
 import { CreatePostComponent } from './components/create-post/create-post.component';
 import { MatCardModule } from '@angular/material/card';
+import { PostComponent } from './components/post/post.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { MatCardModule } from '@angular/material/card';
     FeedsComponent,
     OauthCallbackComponent,
     PostFeedComponent,
-    CreatePostComponent
+    CreatePostComponent,
+    PostComponent
   ],
   imports: [
     BrowserModule,

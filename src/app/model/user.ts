@@ -27,6 +27,7 @@ export interface Post {
     title?:string;
     content: string;
     imageName?: string;
+    imageUrl?: string;
     addedDate?: Date;
     category?:Category;
     user?:User;

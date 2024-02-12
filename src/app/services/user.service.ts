@@ -106,4 +106,8 @@ export class UserService {
   
   return this.http.post<Post>(url, formData,  { observe: 'response' });
   }
+
+  getAllPostsForFeed():Observable<Post[]>{
+    return this.http.get<Post[]>(`${this.baseURL}/api/posts`);
+  }
 }

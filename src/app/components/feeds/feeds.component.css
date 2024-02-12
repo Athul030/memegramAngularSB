@@ -4,3 +4,20 @@
     bottom: 5%;
     right: 23%;
 }
+
+#post-feed {
+    max-width: 550px;
+    margin-top: 5em;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.scrollable-container {
+    height: 690px;
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+
+
+

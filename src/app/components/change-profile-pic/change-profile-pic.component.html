@@ -1,0 +1,16 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Change Profile Picture</mat-card-title>
+    </mat-card-header>
+
+    
+    <div *ngIf="selectedImageFile" id="post-preview"><img id="post-preview-image"/></div>
+    <mat-card-actions align="end">
+        <button mat-button color="warn"><label for="photo-upload">
+            <input  #photoSelector (change) = "onPhotoSelected(photoSelector)"
+            id="photo-upload" type="file" accept="image/*" />
+            <mat-icon>insert_photo</mat-icon>
+        </label></button>
+        <button (click)="onChangeDPClick()" mat-flat-button="warn">Change</button>
+    </mat-card-actions>
+</mat-card>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../../service/admin.service';
+import { Observable, map, of } from 'rxjs';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -8,25 +9,25 @@ import { AdminService } from '../../service/admin.service';
 })
 export class AdminDashboardComponent implements OnInit {
 
+  totalUsersNumber!: number;
+  totalPostsNumber!: number;
+
   constructor(private service:AdminService){
 
   }
+
   ngOnInit(): void {
-      this.service.getAllPosts().subscribe(
-        data=>{
-          this.totalPostsNumber = data.length;
-        }
-      );
+    console.log("inside admin dash")
 
+    this.service.getAllPostsForDashboard().subscribe(posts => {
+      this.totalPostsNumber = posts.length;
+    });
+    
 
-      this.service.getAllUsers().subscribe(
-        data=>{
-          this.totalUsersNumber = data.length;
-        }
-      );
-
+    this.service.getAllUsersForDashboard().subscribe(users => {
+      this.totalUsersNumber = users.length;
+    });
   }
-  totalUsersNumber:number=0
-  totalPostsNumber:number=0
+
 
 }

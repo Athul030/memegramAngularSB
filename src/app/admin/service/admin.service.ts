@@ -1,8 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/internal/Observable';
-import { Post, User } from 'src/app/model/user';
+import { Page, Post, PostDTO, User, UserDTO } from 'src/app/model/user';
 
 @Injectable({
   providedIn: 'root'
@@ -14,15 +14,35 @@ export class AdminService {
 
   constructor(private http:HttpClient) { }
 
-  getAllUsers():Observable<User[]>{
-    return this.http.get<User[]>(`${this.baseUrl}/api/user/getAll`);
+  // getAllUsers():Observable<User[]>{
+  //   return this.http.get<User[]>(`${this.baseUrl}/api/user/getAll`);
+  // }
+
+  getAllUsers(page:number,size:number):Observable<Page<UserDTO>>{
+    console.log("pageIndex:",page);
+    console.log("Size of page:",size);
+    const params = new HttpParams().set('page',page.toString()).set('size',size.toString());
+    return this.http.get<Page<UserDTO>>(`${this.baseUrl}/api/user/getAll`,{params});
   }
 
-  getAllPosts():Observable<Post[]>{
-    return this.http.get<Post[]>(`${this.baseUrl}/api/posts`);
+  getAllUsersForDashboard():Observable<UserDTO[]>{
+    return this.http.get<UserDTO[]>(`${this.baseUrl}/api/user/getAllUsers`);
+  }
+
+  getAllPostsForDashboard():Observable<PostDTO[]>{
+    return this.http.get<PostDTO[]>(`${this.baseUrl}/api/getAllPosts`);
+  }
+
+  getAllPosts(page:number,size:number):Observable<Page<PostDTO>>{
+    const params = new HttpParams().set('page',page.toString()).set('size',size.toString());
+    return this.http.get<Page<PostDTO>>(`${this.baseUrl}/api/posts`,{params});
   }
 
   logout(): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/api/v1/auth/logout`);
+    return this.http.post<any>(`${this.baseUrl}/api/v1/auth/logout`,{});
   }
+
+  // toggleBlock(id:number):Observable<any>{
+  //   retur ''
+  // }
 }

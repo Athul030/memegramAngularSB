@@ -68,3 +68,34 @@ span {
   margin: 0 10px;
 }
 
+
+.image-container {
+  width: 60px;
+  height: 60px;
+  overflow: hidden; /* Ensure the image does not exceed the container size */
+}
+
+.image {
+  width: 90%; /* Ensure the image fills the container */
+  height: 90%;
+  object-fit: cover; /* Preserve aspect ratio and cover the entire container */
+}
+
+/*change*/
+
+
+.container {
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+

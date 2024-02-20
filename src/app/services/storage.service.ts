@@ -32,10 +32,10 @@ export class StorageService {
   }
 
   public getAccessToken(): string|null{
-    return localStorage.getItem("accessToken");
+    return localStorage.getItem('accessToken');
   }
   public getRefreshToken(): string|null{
-    return localStorage.getItem("refreshToken");
+    return localStorage.getItem('refreshToken');
   }
 
   public static getTokens(): string | null{

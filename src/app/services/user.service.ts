@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CustomToken, JwtAuthResponse, Post, User, UserCred } from '../model/user';
 import { Observable, catchError, tap, throwError } from 'rxjs';
@@ -32,11 +32,29 @@ export class UserService {
   //   }
   // }
 
+  // public refreshToken():Observable<JwtAuthResponse>{
+  //   const refreshToken:string|null = this.storage.getRefreshToken();
+
+  //   return this.http.post<JwtAuthResponse>(`${this.baseURL}/api/v1/auth/refreshToken?refreshToken=${refreshToken}`, {});
+  
+  // }
+
   public refreshToken():Observable<JwtAuthResponse>{
     const refreshToken:string|null = this.storage.getRefreshToken();
-    return this.http.post<JwtAuthResponse>(`${this.baseURL}/api/v1/auth/refreshToken`,refreshToken);
-  
+    
+    return this.http.post<JwtAuthResponse>(`${this.baseURL}/api/v1/auth/refreshToken`, { refreshToken }, {})
+    .pipe(
+    tap((response) => {
+      console.log('Refresh Service Method', response);
+    }),
+    catchError((error) => {
+      console.error('Error in service method:', error);
+      return throwError(error);
+    })
+  );
   }
+
+
 
   public checkAuthentication(): Observable<CustomToken> {
     return this.http.get<CustomToken>(`${this.baseURL}/callback`);
@@ -50,7 +68,7 @@ export class UserService {
   // }
 
   public getCurrentUser():Observable<User>{
-    return this.http.get<User>(`${this.baseURL}/current-user`);
+    return this.http.get<User>(`${this.baseURL}/api/user/currentUser`);
   }
 
   public testMethod():Observable<string>{
@@ -102,12 +120,22 @@ export class UserService {
   formData.append('postDTO', new Blob([JSON.stringify(postDTO)], { type: 'application/json' }));
   formData.append('categoryId', categoryId.toString());
   formData.append('file', file, file.name);
-
-  
   return this.http.post<Post>(url, formData,  { observe: 'response' });
   }
 
+
+
+  //change the Profile picture in my side bar
+  changeDP(file:File):Observable<HttpResponse<{fileUrl: string}>>{
+    
+  const url = `${this.baseURL}/files/`;
+  const formData: FormData = new FormData();
+  formData.append('file', file, file.name);
+  return this.http.post<{fileUrl: string}>(url, formData,  { observe: 'response' });
+  }
+
+  
   getAllPostsForFeed():Observable<Post[]>{
-    return this.http.get<Post[]>(`${this.baseURL}/api/posts`);
+    return this.http.get<Post[]>(`${this.baseURL}/api/getAllPosts`);
   }
 }

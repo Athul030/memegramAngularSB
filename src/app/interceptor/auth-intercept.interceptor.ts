@@ -8,7 +8,7 @@ import {
   HttpClient,
   HttpErrorResponse
 } from '@angular/common/http';
-import { catchError, switchMap } from 'rxjs/operators';
+import { catchError, switchMap, tap } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 
 import { StorageService } from '../services/storage.service';
@@ -40,38 +40,44 @@ export class AuthInterceptInterceptor implements HttpInterceptor {
    
 
     return next.handle(authReq)
-    // .pipe(
-    //   catchError((error: any) => {
-    //     if (error instanceof HttpErrorResponse && error.status === 401) {
-    //       if (this.refreshAttempts < MAX_REFRESH_ATTEMPTS) {
-    //         console.log('Token expired. Refreshing...');
-    //         this.refreshAttempts++;
-    //         const refreshToken:string|null = this.storage.getRefreshToken()
-    //         return this.service.refreshToken().pipe(
-    //           switchMap((response) => {
-    //             console.log("resp" + response);
-    //             console.log("respAcces" + response.accessToken);
-    //             this.storage.saveAccessToken(response.accessToken);
-    //             this.storage.saveRefreshToken(response.refreshToken);
+    .pipe(
+      catchError((error: any) => {
+        if (error instanceof HttpErrorResponse && error.status === 401) {
+          if (this.refreshAttempts < MAX_REFRESH_ATTEMPTS) {
+            this.refreshAttempts++;
+            console.log('refreshAttemptsNo: '+this.refreshAttempts);
 
-    //             const newRequest = request.clone({
-    //               setHeaders: { 'Authorization': `Bearer ${response.accessToken}` }
-    //             });
+            return this.service.refreshToken().pipe(
+              catchError((error) => {
+                console.log('Inside tap block:', error);
+                return throwError(error);
+              }),
+              switchMap((response) => {
+                console.log('22222222222');
 
-    //             this.refreshAttempts = 0;
-    //             return next.handle(newRequest);
-    //           })
-    //         );
-    //       } else {
-    //         console.log('Max refresh attempts reached. Redirecting to login...');
-    //         this.router.navigate(['/login']);
-    //         return throwError('Max refresh attempts reached');
-    //       }
-    //     } else {
-    //       return throwError(error);
-    //     }
-    //   })
-    // );
+                console.log("resp" + response);
+                console.log("respAcces" + response.accessToken);
+                this.storage.saveAccessToken(response.accessToken);
+                this.storage.saveRefreshToken(response.refreshToken);
+
+                const newRequest = request.clone({
+                  setHeaders: { 'Authorization': `Bearer ${response.accessToken}` }
+                });
+
+                this.refreshAttempts = 0;
+                return next.handle(newRequest);
+              })
+            );
+          } else {
+            console.log('Max refresh attempts reached. Redirecting to login...');
+            this.router.navigate(['/login']);
+            return throwError('Max refresh attempts reached');
+          }
+        } else {
+          return throwError(error);
+        }
+      })
+    );
   }
 
   

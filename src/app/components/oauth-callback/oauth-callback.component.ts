@@ -15,6 +15,7 @@ export class OauthCallbackComponent implements OnInit {
 
   ngOnInit(): void {
       this.route.queryParams.subscribe(params =>{
+        console.log("insideoauthcallback");
         if(params['response']){
           this.responseData= JSON.parse(decodeURIComponent(params['response']));
           console.log('Response'+this.responseData);

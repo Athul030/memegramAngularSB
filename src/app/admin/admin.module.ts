@@ -9,6 +9,9 @@ import { AdminPostsComponent } from './components/admin-posts/admin-posts.compon
 import { RouterModule } from '@angular/router';
 import { MatTableModule } from '@angular/material/table'  
 import { MatButtonModule } from '@angular/material/button';
+import { DateTimeFormatPipe } from './pipe/pipe';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -19,14 +22,17 @@ import { MatButtonModule } from '@angular/material/button';
     AdminDashboardComponent,
     AdminSidebarComponent,
     AdminUsersComponent,
-    AdminPostsComponent
+    AdminPostsComponent,
+    DateTimeFormatPipe
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
     RouterModule,
     MatTableModule,
-    MatButtonModule
-  ]
+    MatButtonModule,
+    MatPaginatorModule,
+    FormsModule
+  ],
 })
 export class AdminModule { }

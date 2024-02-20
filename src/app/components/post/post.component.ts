@@ -9,4 +9,10 @@ import { Post } from 'src/app/model/user';
 export class PostComponent {
 
   @Input() postData!:Post;
+  creatorName:string='';
+  
+
+  getCreatorInfo(){
+    this.postData.user?.fullName
+  }
 }

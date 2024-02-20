@@ -1,30 +1,84 @@
-<div class="card">
+<div class="container">
+  <h5 class="text-center mt-3">POST LISTING</h5>
+  <div class="d-flex my-2">
+  </div>
+  <div class="table-responsive">
+      <table class="table table-bordered p-0 m-0">
+          <thead>
+              <tr>
+                  
+                  <th scope="col">User</th>
+                  <th scope="col">Content</th>
+                  <th scope="col">Image</th>
+                  <th scope="col">Added Date</th>
+                  <th scope="col">Action</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr scope="row" *ngFor="let post of postList">
+                  
+                  <td>{{ post.user?.fullName }}</td>
+                  <td>{{ post.content }}</td>
+                  <td><div class="image-container"><img [src]="post.imageUrl" alt="Image"></div></td>
+                  <td> {{post.addedDate | date: 'd/M/YYYY, h:mm:ss a'}}</td>
+                  <td>
+                      <button (click)="toggleBlockPost(post)" mat-raised-button [color]="post.isDeleted ? 'warn' : 'primary'" class="action-button">
+                          {{ post.isDeleted ? 'Unblock' : 'Block' }}
+                      </button>
+                  </td>
+              </tr>
+              <tr scope="row" *ngIf="postList.length === 0">
+                  <td colspan="6" class="text-center">No record found</td>
+              </tr>
+          </tbody>
+      </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="5" [length]="totalElements" (page)="nextPage($event)"></mat-paginator>
+  </div>
+</div>
+
+
+<!-- <div class="card">
     <div class="card-header">
       <h1>Manage Posts</h1>
     </div>
     <div class="card-content">
-      <table class="post-table">
-        <thead>
-          <tr>
-            <th>User</th>
-            <th>Content</th>
-            <th>Image</th>
-            <th>Comments</th>
-            <th>Likes Count</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Your table content here -->
-        </tbody>
+      <table mat-table [dataSource] = "datasource" class="post-table">
+
+        <ng-container matColumnDef="fullName">
+          <mat-header-cell mat-sort-header *matHeaderCellDef>User</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.user.fullName}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="content">
+          <mat-header-cell mat-sort-header *matHeaderCellDef>Content</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.content}}</mat-cell>
+      </ng-container>
+      <ng-container  matColumnDef="imageUrl">
+          <mat-header-cell mat-sort-header *matHeaderCellDef>Image</mat-header-cell>
+          <mat-cell *matCellDef="let element"><div class="image-container"><img [src]="element.imageUrl" alt="Image"></div></mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="addedDate">
+        <mat-header-cell mat-sort-header *matHeaderCellDef>Added Date</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.addedDate | dateTimeFormat}}</mat-cell>
+    </ng-container>
+      
+      
+      <ng-container matColumnDef="blockAction">
+        <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button (click)="toggleBlockPost(element)" mat-raised-button [color]="element.isActive ? 'warn' : 'primary'" class="action-button">
+            {{ element.isActive ? 'Block' : 'Unblock' }}
+          </button>
+        </mat-cell>
+      </ng-container>
+      
+      <mat-header-row *matHeaderRowDef="displayedColumns" class="header-row"></mat-header-row>
+       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    
       </table>
     </div>
-    <div class="card-footer">
-      <!-- Pagination component here -->
-      <div class="pagination">
-        <button>&lt;</button>
-        <span>1 of 5</span>
-        <button>&gt;</button>
-      </div>
+    <div class="paginator-container">
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+      (page) = "onPageChange($event)"
+      ></mat-paginator>
     </div>
-  </div>
+  </div> -->

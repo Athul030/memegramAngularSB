@@ -28,6 +28,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { CreatePostComponent } from './components/create-post/create-post.component';
 import { MatCardModule } from '@angular/material/card';
 import { PostComponent } from './components/post/post.component';
+import { ChangeProfilePicComponent } from './components/change-profile-pic/change-profile-pic.component';
+import { dpReducer } from './store/store.reducer';
+import { ProfileComponent } from './components/profile/profile.component';
 
 
 @NgModule({
@@ -43,7 +46,9 @@ import { PostComponent } from './components/post/post.component';
     OauthCallbackComponent,
     PostFeedComponent,
     CreatePostComponent,
-    PostComponent
+    PostComponent,
+    ChangeProfilePicComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +63,7 @@ import { PostComponent } from './components/post/post.component';
     MatButtonModule,
     MatCardModule,
 
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot({dp:dpReducer}, {}),
     EffectsModule.forRoot([storeEffects])
     
     ],

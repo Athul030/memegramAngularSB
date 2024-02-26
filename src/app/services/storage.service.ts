@@ -105,6 +105,19 @@ export class StorageService {
 
   }
 
+  public getUserId():number {
+    const userString = localStorage.getItem('user');
+    let id:number=-1;
+    if(userString){
+      const user = JSON.parse(userString);
+      if(user && user.id !==undefined){
+        id=user.id
+      }
+    }
+    return id;
+
+  }
+
 
 
 }

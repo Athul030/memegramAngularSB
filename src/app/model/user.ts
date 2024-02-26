@@ -1,3 +1,5 @@
+import { Like } from "./followDetails";
+import { LikeDTO } from "./likeComment";
 
 export interface User {
     id?:number;
@@ -36,10 +38,31 @@ export interface UserDTO {
   profilePicUrl?:string;
   isBlocked?:boolean;
   roles?:Role[];
+  followers:FollowerDTO[];
+  following:FollowingDTO[];
+  blockedUsers:UserDTO[];
   
 }
 
+export interface FollowerDTO {
+  id: number;
+  email: string;
+  user: UserDTO;
+  role: Role;
+  isBlocked: boolean;
+  
 
+}
+
+export interface FollowingDTO {
+  id: number;
+  email: string;
+  user: UserDTO;
+  role: Role;
+  isBlocked: boolean;
+ 
+
+}
 
 
 export interface Post {
@@ -52,19 +75,20 @@ export interface Post {
     category?:Category;
     user?:User;
     isDeleted?:boolean;
-
+    likes?:LikeDTO[];
   }
 
   export interface PostDTO {
-    id?:number;
+    postId?:number;
     title?:string;
     content: string;
     imageName?: string;
-    imageUrl?: string;
     addedDate?: Date;
     category?:Category;
-    user?:User;
+    imageUrl?: string;
+    user?:UserDTO;
     isDeleted?:boolean;
+    likes?:LikeDTO[];
   }
 
   export interface Category{

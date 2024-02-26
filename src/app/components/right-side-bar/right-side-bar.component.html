@@ -20,7 +20,10 @@
                         <span class="font-medium">{{user.fullName}}</span>
                         <span class="text-gray-500">@{{user.userHandle}}</span>
                     </div>
-                    <button class="bg-red-200 rounded-full px-3 py-1 text-blue-600 ml-auto me-2 cursor-pointer focus:outline-none">Follow</button>
+                    <button 
+                    (click)="toggleFollow(user)"
+                    class="bg-red-200 rounded-full px-3 py-1 text-blue-600 ml-auto me-2 cursor-pointer focus:outline-none">{{ getButtonText(user) }}</button>
+                    
 
                 </div>
                 <!-- More Button -->

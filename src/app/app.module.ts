@@ -23,7 +23,6 @@ import { OauthCallbackComponent } from './components/oauth-callback/oauth-callba
 import { AuthInterceptInterceptor } from './interceptor/auth-intercept.interceptor';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
-import { PostFeedComponent } from './components/post-feed/post-feed.component';
 import { MatButtonModule } from '@angular/material/button';
 import { CreatePostComponent } from './components/create-post/create-post.component';
 import { MatCardModule } from '@angular/material/card';
@@ -31,7 +30,11 @@ import { PostComponent } from './components/post/post.component';
 import { ChangeProfilePicComponent } from './components/change-profile-pic/change-profile-pic.component';
 import { dpReducer } from './store/store.reducer';
 import { ProfileComponent } from './components/profile/profile.component';
-
+import { ProfileContentComponent } from './components/profile-content/profile-content.component';
+import { ProfilePostsComponent } from './components/profile-posts/profile-posts.component';
+import { ProfileFollowersComponent } from './components/profile-followers/profile-followers.component';
+import { ProfileFollowingComponent } from './components/profile-following/profile-following.component';
+import { ChatComponent } from './components/chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -44,11 +47,15 @@ import { ProfileComponent } from './components/profile/profile.component';
     RightSideBarComponent,
     FeedsComponent,
     OauthCallbackComponent,
-    PostFeedComponent,
     CreatePostComponent,
     PostComponent,
     ChangeProfilePicComponent,
-    ProfileComponent
+    ProfileComponent,
+    ProfileContentComponent,
+    ProfilePostsComponent,
+    ProfileFollowersComponent,
+    ProfileFollowingComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,

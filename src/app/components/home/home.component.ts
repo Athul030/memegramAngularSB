@@ -15,4 +15,14 @@ export class HomeComponent {
     return currentRoute.includes('/login') || currentRoute.includes('/register');
   }
 
+  isFeedsRequired(){
+    
+  }
+
+  isProfilePage(){
+    const currentRoute = this.router.url;
+    return currentRoute.includes('/profile');
+  }
+  
+
 }

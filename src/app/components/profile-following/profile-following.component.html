@@ -1,0 +1,15 @@
+
+<div class="following-container">
+    <h1 class="following-header">Following</h1>
+    <div class="following" *ngFor="let following of allFollowingList">
+        <div class="thumbnail-container">
+            <div class="thumbnail"><img src="{{following.profilePicUrl}}" alt="thumbnail" ></div>
+        </div>
+        <div class="info">
+            <div class="username">{{following.userHandle}}</div>
+            <div class="full-name">{{following.fullName}}</div>
+        </div>
+        <button (click)="removeFollow(following.id)" class="follow-btn">Following</button>
+    </div>
+    <!-- Repeat the above div for each following -->
+</div>

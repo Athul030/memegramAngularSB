@@ -8,13 +8,10 @@
       <!-- Sidebar component -->
         <app-sidebar></app-sidebar>
 
-        
-  
       <!-- Router outlet for other content -->
       <router-outlet ></router-outlet>
-
-      <app-feeds class="flex-grow p-5"></app-feeds>
-
+      <app-feeds *ngIf="!isProfilePage()" class="flex-grow p-5"></app-feeds>
+      <app-profile *ngIf="isProfilePage()" ></app-profile>
       <app-right-side-bar class="ml-auto"></app-right-side-bar>
 
 

@@ -14,9 +14,8 @@ export class PostComponent {
   
   @Input() postData!:Post;
   creatorName:string='';
-  
   constructor(private likeSer:LikeCommentService,private storageSer:StorageService){
-    
+
   }
   getCreatorInfo(){
     this.postData.user?.fullName
@@ -30,23 +29,27 @@ export class PostComponent {
 
 
   likePost(postData:Post){
-    console.log("clicked");
-    if(postData.id===undefined){
+    if(postData.postId===undefined){
       return;
     }
    
-    this.likeSer.likePost(this.userId,postData.id).subscribe((response)=>{
-      console.log(response);
+    this.likeSer.likePost(this.userId,postData.postId).subscribe((response)=>{
+      postData.likes?.push(response.likeDTO);
     })
   }
 
   unlikePost(postData:Post){
-    console.log("clicked");
-    if(postData.id===undefined){
+    
+    if(postData.postId===undefined){
       return;
     }
-    this.likeSer.unlikePost(this.userId,postData.id).subscribe((response)=>{
-      console.log(response);
+    this.likeSer.unlikePost(this.userId,postData.postId).subscribe((response)=>{
+      if(postData.likes){
+        const likeIndex = postData.likes.findIndex((like)=>like.likeId === response.likeDTO.likeId);
+        if(likeIndex!==-1){
+          postData.likes.splice(likeIndex,1);
+        }
+      }
     })
   }
 

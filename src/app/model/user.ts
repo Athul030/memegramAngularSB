@@ -66,7 +66,7 @@ export interface FollowingDTO {
 
 
 export interface Post {
-    id?:number;
+    postId?:number;
     title?:string;
     content: string;
     imageName?: string;

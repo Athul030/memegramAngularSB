@@ -16,3 +16,9 @@
     border-radius: 50%;
     margin-right: 10px;
 }
+
+.like-count {
+    margin-left: 4px; /* Adjust the margin as needed */
+    font-weight:900;
+    color: #f60404; /* Choose your preferred color */
+  }

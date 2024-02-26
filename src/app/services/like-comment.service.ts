@@ -15,11 +15,13 @@ export class LikeCommentService {
 
   likePost(userId: number, postId: number): Observable<LikeResponse> {
     const likeRequestBody = { userIdOfPersonLiking: userId, postId };
+    console.log(likeRequestBody);
     return this.http.post<LikeResponse>(`${this.baseURL}/like`, likeRequestBody);
   }
 
   unlikePost(userId: number, postId: number): Observable<LikeResponse> {
     const likeRequestBody = { userIdOfPersonLiking: userId, postId };
+    console.log(likeRequestBody);
     return this.http.post<LikeResponse>(`${this.baseURL}/unlike`, likeRequestBody);
   }
 }

@@ -9,21 +9,24 @@
     <img mat-card-image src="{{postData.imageUrl}}" alt="post">
     <mat-card-content>
         {{postData.content}}
-        
     </mat-card-content>
     <mat-card-actions >
+        <span class="like-count">{{postData.likes?.length}}</span>  
         <mat-icon *ngIf="isLikedByUser(postData)"
-          (click)="likePost(postData)"
-          class="action-item" 
-          color="warn">
-            favorite
-        </mat-icon>
-
-    <mat-icon *ngIf="!isLikedByUser(postData)"
           (click)="unlikePost(postData)"
           class="action-item" 
           color="warn">
-            favorite_border
+            favorite 
         </mat-icon>
+
+    <mat-icon *ngIf="!isLikedByUser(postData)"
+          (click)="likePost(postData)"
+          class="action-item" 
+          color="warn">
+            favorite_border
+    </mat-icon>
+
+        <mat-icon class="action-item" color="warn">comment</mat-icon>
+
     </mat-card-actions>
 </mat-card>

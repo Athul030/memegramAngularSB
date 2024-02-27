@@ -35,6 +35,10 @@ import { ProfilePostsComponent } from './components/profile-posts/profile-posts.
 import { ProfileFollowersComponent } from './components/profile-followers/profile-followers.component';
 import { ProfileFollowingComponent } from './components/profile-following/profile-following.component';
 import { ChatComponent } from './components/chat/chat.component';
+import { CommentmodalComponent } from './components/commentmodal/commentmodal.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { ChatLeftSectionComponent } from './components/chat-left-section/chat-left-section.component';
+import { ChatRightSectionComponent } from './components/chat-right-section/chat-right-section.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +59,10 @@ import { ChatComponent } from './components/chat/chat.component';
     ProfilePostsComponent,
     ProfileFollowersComponent,
     ProfileFollowingComponent,
-    ChatComponent
+    ChatComponent,
+    CommentmodalComponent,
+    ChatLeftSectionComponent,
+    ChatRightSectionComponent
   ],
   imports: [
     BrowserModule,
@@ -69,6 +76,7 @@ import { ChatComponent } from './components/chat/chat.component';
     MatIconModule,
     MatButtonModule,
     MatCardModule,
+    MatMenuModule,
 
     StoreModule.forRoot({dp:dpReducer}, {}),
     EffectsModule.forRoot([storeEffects])

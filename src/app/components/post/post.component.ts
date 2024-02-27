@@ -2,6 +2,9 @@ import { Component, Input } from '@angular/core';
 import { Post } from 'src/app/model/user';
 import { LikeCommentService } from 'src/app/services/like-comment.service';
 import { StorageService } from 'src/app/services/storage.service';
+import { CommentmodalComponent } from '../commentmodal/commentmodal.component';
+import { MatDialog } from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-post',
@@ -14,7 +17,7 @@ export class PostComponent {
   
   @Input() postData!:Post;
   creatorName:string='';
-  constructor(private likeSer:LikeCommentService,private storageSer:StorageService){
+  constructor(private likeSer:LikeCommentService,private storageSer:StorageService, private dialog:MatDialog){
 
   }
   getCreatorInfo(){
@@ -32,7 +35,6 @@ export class PostComponent {
     if(postData.postId===undefined){
       return;
     }
-   
     this.likeSer.likePost(this.userId,postData.postId).subscribe((response)=>{
       postData.likes?.push(response.likeDTO);
     })
@@ -53,6 +55,20 @@ export class PostComponent {
     })
   }
 
+  openCommentModal():void{
+    const dialogRef = this.dialog.open(CommentmodalComponent,{
+      width :'400px',
+      data:{postId:this.postData.postId, imageUrl:this.postData.imageUrl,lastComment:this.postData.lastComment}
+    });
+
+    dialogRef.afterClosed().subscribe(result=>{
+      console.log('The comment modal was closed');
+    })
+
+  }
+
+
+  
 
 
 }

@@ -1,1 +1,26 @@
-<p>chat works!</p>
+<app-header class="app-header"></app-header>
+<div class="chat-modal-container">
+    <div class="flex-container">
+    <app-chat-left-section 
+    [followersList]="followerListData" 
+    [followingList]="followingListData" 
+    (userSelected)="selectUser($event)"
+    class="chat-left-section"
+    ></app-chat-left-section>
+    
+    <app-chat-right-section
+    *ngIf="selectedUser" 
+    [messages]="messagesData"
+    [selectedUser]="selectedUser"
+    class="chat-right-section"
+    ></app-chat-right-section>
+
+    <div *ngIf="!selectedUser" class="welcome-container">
+        <div class="welcome-content">
+            <h1>Welcome to Memegram Chat!</h1>
+            <p>Select a user from the left panel to start chatting! 😊👋</p>
+        </div>
+    </div>
+    </div>
+</div>
+  

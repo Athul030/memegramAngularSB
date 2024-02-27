@@ -22,3 +22,23 @@
     font-weight:900;
     color: #f60404; /* Choose your preferred color */
   }
+
+  .profile-thumbnail img {
+    width: 50px; /* Adjust the width as needed */
+    height: 50px; /* Adjust the height as needed */
+    border-radius: 50%; /* Ensure a circular shape for the thumbnail */
+    object-fit: cover;
+    margin-right: 10px;
+  }
+
+  .profile-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+  }
+  
+  .menu-button {
+    margin-left: auto;
+  }
+  

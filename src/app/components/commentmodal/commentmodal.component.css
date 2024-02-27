@@ -1,0 +1,111 @@
+/* combined-modal.component.css */
+.modal-container {
+    position: fixed;
+    top: 5%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    overflow-y: auto;
+  max-height: 95%; /* Set a maximum height for the scrollable area */
+  }
+  
+  .modal-image {
+    max-width: 100%;
+    max-height: 60vh;
+    object-fit: contain;
+  }
+  
+  .comment-container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%; /* Set the width to match the image */
+  }
+  
+  .comment-textarea {
+    width: 40%; /* Set the width to match the image */
+    margin-bottom: 10px;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+    width: 40%; /* Set the width to match the image */
+  }
+  
+  .comment-button,
+  .cancel-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .comment-button {
+    background-color: #4caf50;
+    color: #fff;
+  }
+  
+  .cancel-button {
+    background-color: #f44336;
+    color: #fff;
+  }
+  
+  /* Rest of your styles */
+  
+
+  .comments-container {
+    width:40rem;
+    background-color: white; /* White background for comments */
+    padding: 10px; /* Add padding to separate comments from the background */
+    border-radius: 5px; /* Optional: Add rounded corners for a nicer look */
+    margin-top: 10px; /* Optional: Add margin to separate comments from the dropdown */
+  }
+  
+  .comment-box {
+    display: flex;
+    margin-bottom: 15px;
+  }
+  
+  .profile-thumbnail {
+    margin-right: 10px;
+  }
+  
+  .profile-thumbnail img {
+    width: 50px; /* Adjust the width as needed */
+    height: 50px; /* Adjust the height as needed */
+    border-radius: 50%; /* Ensure a circular shape for the thumbnail */
+    object-fit: cover;
+  }
+  
+  .comment-content {
+    flex-grow: 1;
+  }
+  
+  .comment-text {
+    background-color: #f2f2f2; /* Background color for the comment text */
+    padding: 10px;
+    border-radius: 10px;
+    word-wrap: break-word;
+  }
+  
+  .comment-details {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+  }
+  
+  .comment-date {
+    color: #888; /* Color for the comment date */
+    font-size: 12px;
+  }
+  
+  
+  

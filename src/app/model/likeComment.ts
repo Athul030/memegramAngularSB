@@ -1,4 +1,4 @@
-import { PostDTO, UserDTO } from "./user";
+import { PostDTO, User, UserDTO } from "./user";
 
 export interface LikeRequestBody{
     userIdOfPersonLiking : number;
@@ -17,4 +17,23 @@ export interface LikeDTO{
     postDTO : PostDTO;
     userDTO: UserDTO;
     likedDate: string;
+}
+
+export interface AddCommentRequest{
+    postId:number;
+    userId:number;
+    commentText:string;
+}
+
+export interface CommentDTO{
+    commentId:number;
+    commentText:string;
+    commentedDate:string;
+    user:UserDTO;
+    post:PostDTO;
+}
+
+export interface ApiResponseCustom{
+    message:string,
+    httpStatus:string;
 }

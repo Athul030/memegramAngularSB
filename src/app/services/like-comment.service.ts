@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { StorageService } from './storage.service';
 import { Observable } from 'rxjs';
-import { LikeResponse } from '../model/likeComment';
+import { ApiResponseCustom, CommentDTO, LikeResponse } from '../model/likeComment';
 
 @Injectable({
   providedIn: 'root'
@@ -24,4 +24,21 @@ export class LikeCommentService {
     console.log(likeRequestBody);
     return this.http.post<LikeResponse>(`${this.baseURL}/unlike`, likeRequestBody);
   }
+
+  addComment(postId: number, userId: number, commentText:string): Observable<CommentDTO> {
+    const addCommentRequest = { postId, userId, commentText };
+    return this.http.post<CommentDTO>(`${this.baseURL}/addComment`, addCommentRequest);
+  }
+
+  deleteComment(commentId: number): Observable<ApiResponseCustom> {
+    const commentDTO = { commentId };
+    return this.http.post<ApiResponseCustom>(`${this.baseURL}/deleteComment`, commentDTO);
+  }
+
+  getAllComments(postId: number): Observable<CommentDTO[]>{
+    console.log("Inside getallcomments");
+
+    return this.http.get<CommentDTO[]>(`${this.baseURL}/getAllComments/${postId}`);
+  }
+
 }

@@ -1,0 +1,28 @@
+<div #modalContainer class="modal-container" >
+  <h1>Add a Comment</h1>
+  <img [src]="data.imageUrl" alt="Post Image" class="modal-image">
+
+  <!-- Display all comments -->
+  <div class="comments-container" *ngIf="comments && comments.length > 0">
+    <div *ngFor="let comment of comments" class="comment-box">
+      <div class="profile-thumbnail">
+        <img [src]="comment.user.profilePicUrl" alt="Profile Thumbnail">
+      </div>
+      <div class="comment-content">
+        <div class="comment-text">{{ comment.commentText }}</div>
+        <div class="comment-details">
+          <span class="comment-date">{{ comment.commentedDate | date: 'short' }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add your comment input and submit button below -->
+  <div class="comment-container">
+    <textarea [(ngModel)]="comment" placeholder="Enter your comment here" class="comment-textarea"></textarea>
+    <div class="button-container">
+      <button class="comment-button" (click)="submitComment(comment)">Comment</button>
+      <button class="cancel-button" (click)="close()">Cancel</button>
+    </div>
+  </div>
+</div>

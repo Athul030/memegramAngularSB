@@ -1,5 +1,5 @@
 import { Like } from "./followDetails";
-import { LikeDTO } from "./likeComment";
+import { CommentDTO, LikeDTO } from "./likeComment";
 
 export interface User {
     id?:number;
@@ -76,6 +76,7 @@ export interface Post {
     user?:User;
     isDeleted?:boolean;
     likes?:LikeDTO[];
+    lastComment?:CommentDTO;
   }
 
   export interface PostDTO {
@@ -89,6 +90,8 @@ export interface Post {
     user?:UserDTO;
     isDeleted?:boolean;
     likes?:LikeDTO[];
+    lastComment?: CommentDTO;
+
   }
 
   export interface Category{

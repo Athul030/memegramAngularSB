@@ -1,9 +1,23 @@
 
-<mat-card >
+<mat-card>
     <mat-card-header>
+    <div class="profile-section">
+      <div class="profile-thumbnail">
         <img *ngIf="postData.user?.profilePicUrl" class="profile-pic" [src]="postData.user?.profilePicUrl" alt="profile">
+      </div>
+      <div>
         <mat-card-title>{{postData.user?.fullName}}</mat-card-title>
         <mat-card-subtitle>{{postData.user?.userHandle}}</mat-card-subtitle>
+      </div>
+    </div>
+
+      <button mat-icon-button [matMenuTriggerFor]="menu" class="menu-button">
+        <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item >Report User</button>
+    </mat-menu>
+        
     </mat-card-header>
 
     <img mat-card-image src="{{postData.imageUrl}}" alt="post">
@@ -26,7 +40,9 @@
             favorite_border
     </mat-icon>
 
-        <mat-icon class="action-item" color="warn">comment</mat-icon>
+    
+
+        <mat-icon (click)="openCommentModal()" class="action-item" color="warn">comment</mat-icon>
 
     </mat-card-actions>
 </mat-card>

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Page, User, UserDTO } from 'src/app/model/user';
+import { Page, User, UserBlockRequest, UserDTO } from 'src/app/model/user';
 import { AdminService } from '../../service/admin.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
@@ -35,7 +35,7 @@ export class AdminUsersComponent implements OnInit {
   private getUsers(page:number,size:number){
 
     this.service.getAllUsers(page,size).subscribe(data=>{
-      console.log(data);
+      
       this.userList = data['content'];
       this.totalElements=data['totalElements'];
         })
@@ -47,24 +47,48 @@ export class AdminUsersComponent implements OnInit {
     this.getUsers(page,size);
   }
 
-    // fetchUsers(){
-    //   this.service.getAllUsers(this.pageIndex,this.pageSize).subscribe((usersPage: Page<UserDTO>)=>{
-    //     console.log(usersPage);
-    //     this.datasource = new MatTableDataSource(usersPage.content);
-    //     this.datasource.paginator = this.paginator;
-    //     this.paginator.length = usersPage.totalElements;
-    //   },(error)=>{
-    //     console.log("Error fetching users", error)
-    //   }
-      
-    //   );
-    // }
+  
 
-  toggleBlockUser(user:User) { 
+  // toggleBlockUser(user:UserDTO) { 
 
-    // this.service.toggleBlock(user.id!)
-      
+  //   if(user.blocked===false){
+  //     this.service.blockUserByAdmin(user.id!).subscribe((response) => {
+  //       console.log(response);
+  //     });
+  //   }else{
+  //     this.service.unBlockUserByAdmin(user.id!).subscribe((response) => {
+  //       console.log(response);
+  //     });
+  //   }
+
+  toggleBlockUser(user: UserDTO) {
+    const userId = user.id!;
+
+    if (user.blocked === false) {
+      this.service.blockUserByAdmin(userId).subscribe((response) => {
+        console.log(response);
+
+        const updatedUser: UserDTO = response;
+        const index = this.userList.findIndex(u => u.id === userId);
+        if (index !== -1) {
+          this.userList[index] = updatedUser;
+        }
+      });
+    } else {
+      this.service.unBlockUserByAdmin(userId).subscribe((response) => {
+        console.log(response);
+
+        const updatedUser: UserDTO = response; 
+
+        const index = this.userList.findIndex(u => u.id === userId);
+        if (index !== -1) {
+          this.userList[index] = updatedUser;
+        }
+      });
+    }
   }
+   
+  
 
   
     

@@ -26,8 +26,8 @@
                   <td>{{ user.userHandle }}</td>
                   <td>{{ user.provider }}</td>
                   <td>
-                      <button (click)="toggleBlockUser(user)" mat-raised-button [color]="user.isBlocked ? 'warn' : 'primary'" class="action-button">
-                          {{ user.isBlocked ? 'Unblock' : 'Block' }}
+                      <button (click)="toggleBlockUser(user)" mat-raised-button [color]="user.blocked ? 'warn' : 'primary'" class="action-button">
+                          {{ user.blocked ? 'Unblock' : 'Block' }}
                       </button>
                   </td>
               </tr>

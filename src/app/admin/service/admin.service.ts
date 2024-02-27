@@ -45,4 +45,13 @@ export class AdminService {
   // toggleBlock(id:number):Observable<any>{
   //   retur ''
   // }
+  
+
+  blockUserByAdmin(userId: number): Observable<any> {
+    return this.http.patch(`${this.baseUrl}/api/admin/blockUser/${userId}`, null);
+  }
+
+  unBlockUserByAdmin(userId: number): Observable<any> {
+    return this.http.patch(`${this.baseUrl}/api/admin/unBlockUser/${userId}`, null); 
+  }
 }

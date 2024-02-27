@@ -41,6 +41,7 @@ export interface UserDTO {
   followers:FollowerDTO[];
   following:FollowingDTO[];
   blockedUsers:UserDTO[];
+  blocked?:boolean;
   
 }
 
@@ -162,3 +163,7 @@ export interface AuthResponse {
   }
   
 
+export interface UserBlockRequest{
+  blockingUserId:number,
+  blockedUserId:number
+}

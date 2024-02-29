@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CustomToken, JwtAuthResponse, Post, User, UserCred } from '../model/user';
-import { Observable, catchError, tap, throwError } from 'rxjs';
+import { Observable, catchError, map, tap, throwError } from 'rxjs';
 import { StorageService } from './storage.service';
 
 @Injectable({
@@ -44,8 +44,9 @@ export class UserService {
     
     return this.http.post<JwtAuthResponse>(`${this.baseURL}/api/v1/auth/refreshToken`, { refreshToken }, {})
     .pipe(
-    tap((response) => {
-      console.log('Refresh Service Method', response);
+      map((response) => {
+        console.log('Refresh Service Method', response);
+        return response;
     }),
     catchError((error) => {
       console.error('Error in service method:', error);

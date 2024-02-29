@@ -3,3 +3,8 @@ export interface Message{
     text:string,
     from:string
 }
+
+export interface ChatMessage{
+    message: string;
+    user: string;
+}

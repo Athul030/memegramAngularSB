@@ -124,8 +124,8 @@ export interface CustomToken{
 export interface JwtAuthResponse{
     accessToken:string;
     username:string;
-    refreshToken:string;
     user:UserDTO;
+    refreshToken:string;
 }
 
 

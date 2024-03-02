@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Message } from 'src/app/model/message';
+import { ChatRoomDTO, Message } from 'src/app/model/message';
 import { UserDTO } from 'src/app/model/user';
+import { ChatService } from 'src/app/services/chat.service';
 import { FollowService } from 'src/app/services/follow.service';
 
 @Component({
@@ -15,8 +16,9 @@ export class ChatComponent implements OnInit {
   selectedUser!:UserDTO;
   //change the message interface later
   messagesData!:Message[];
+  roomId!: string;
 
-  constructor(private followSer:FollowService){}
+  constructor(private followSer:FollowService, private chatSer:ChatService){}
   ngOnInit(): void {
     this.getFollowerFollowingDetails();
   }
@@ -30,8 +32,47 @@ export class ChatComponent implements OnInit {
     });
   }
 
-  selectUser(user:UserDTO):void{
-    this.selectedUser = user;
+  // selectUser(user:UserDTO):void{
+  //   this.selectedUser = user;
+  // }
+
+  selectUser(event: { user: UserDTO, chatRoomId: string }): void {
+    this.selectedUser = event.user;
+    this.roomId = event.chatRoomId;
+
+    this.chatSer.getAllMessagesInChatRoom(this.roomId).subscribe(
+      (messages:Message[])=>{
+        this.messagesData = messages;
+      },(error)=>{
+        console.error('Error fetching messages', error);
+      }
+      );
+    
+
+    // Optionally, you can join the room here
+    // this.chatSer.joinRoom(this.roomId);
   }
+
+  onSelectUser(event: { user: UserDTO, chatRoomId: string }): void {
+    this.selectedUser = event.user;
+    this.roomId = event.chatRoomId;
+
+    // Optionally, you can join the room here
+    // this.chatSer.joinRoom(this.roomId);
+  }
+
+  // createChatRoom(userIds:number[]):void{
+  //   this.chatSer.createChatRoom(userIds).subscribe(
+  //     (chatRoom:ChatRoomDTO)=>{
+  //       this.joinRoom(chatRoom.id);
+  //     }, (error) => {
+  //       console.error('Error creating chat room', error);
+  //     }
+  //   )
+  // }
+
+  // joinRoom(roomId:string):void{
+  //   this.chatSer.joinRoom(roomId);
+  // }
   
 }

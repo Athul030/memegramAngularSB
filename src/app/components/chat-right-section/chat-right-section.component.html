@@ -1,4 +1,4 @@
-<div class="message-area-container">
+<div class="chat-container">
   <!-- Top bar with user thumbnail and icons -->
   <div class="top-bar">
     <div class="user-info">
@@ -11,26 +11,35 @@
     </div>
   </div>
 
-  <!-- Messages -->
-  <div class="message-area-container">
-    <div *ngFor="let message of messages" class="message">
-      <div *ngIf="message.from === selectedUser.email" class="sent-message">
-        {{message.text}}
-      </div>
-      <div *ngIf="message.from !== selectedUser.email" class="received-message">
-        {{message.text}}
+   <!-- Messages -->
+   <div class="message-area-container">
+    <div #messagesContainer class="messages">
+      <div *ngFor="let message of messages.slice().reverse()" class="message">
+        <div [ngClass]="{'sent-message': message.senderId === selectedUser.id, 'received-message': message.senderId !== selectedUser.id}">
+          <div class="message-content">{{message.content}}</div>
+        </div>
       </div>
     </div>
   </div>
-  
 
   <div class="text-area-container">
     <!-- Text area for new message -->
     <textarea [(ngModel)]="newMessage" placeholder="Type your message..."></textarea>
-
-    <!-- Send button -->
-    <button mat-raised-button color="primary" (click)="sendMessage()">Send</button>
-
+  
+    <!-- Send button for text message -->
+    
+  
+    <!-- Input for sending images -->
+    
+    <div class="image-icon-container">
+      <button mat-raised-button color="primary" (click)="sendMessage()">Send</button>
+      <input type="file" accept="image/*" (change)="sendImage($event)"  id="imageInput">
+      <label for="imageInput">
+        <mat-icon class="image-icon">image</mat-icon>
+      </label>
+    </div>
   </div>
   
-</div>
+  
+  
+    

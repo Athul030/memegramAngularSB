@@ -11,7 +11,9 @@
     <app-chat-right-section
     *ngIf="selectedUser" 
     [messages]="messagesData"
+    
     [selectedUser]="selectedUser"
+    [roomId]="roomId"
     class="chat-right-section"
     ></app-chat-right-section>
 

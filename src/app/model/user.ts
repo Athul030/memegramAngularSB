@@ -15,7 +15,7 @@ export interface User {
     credentialsNonExpired?:boolean;
     profilePicUrl?:string;
     blocked?:boolean;
-
+    userPresence?:boolean;
     roles?:Role[];
     
     
@@ -42,6 +42,8 @@ export interface UserDTO {
   following:FollowingDTO[];
   blockedUsers:UserDTO[];
   blocked?:boolean;
+  userPresence?:boolean;
+
   
 }
 

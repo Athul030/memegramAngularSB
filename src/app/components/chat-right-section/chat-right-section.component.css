@@ -1,23 +1,74 @@
-.message-area-container {
+
+
+.chat-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  min-height: 90vh;
-  background-color: #f0f0f0;
+  height: 90vh;
+  
 }
+.message-area-container {
+  display: flex;
+  flex-direction: column-reverse; /* Stack messages in reverse order */
+  align-items: flex-start;
+  padding: 20px;
+  min-height: 69vh;
+  background-color: #f0f0f0;
+  
+
+}
+.messages {
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+  overflow-y: auto;
+  width: 100%;
+  
+}
+
+.message {
+  margin-bottom: 10px;
+  
+  
+}
+.sent-message {
+  background-color: #4caf50; /* Green background for sent messages */
+  color: #fff; /* White text for sent messages */
+  padding: 10px;
+  border-radius: 8px;
+  max-width: 70%; /* Limit the width of the sent message box */
+  align-self: flex-end; /* Align sent messages to the right */
+  align-items: end;
+  text-align: end;
+  
+}
+
+.received-message {
+  background-color: #f8e3e3; /* Light gray background for received messages */
+  color: #333; /* Dark text for received messages */
+  padding: 10px;
+  border-radius: 8px;
+  max-width: 70%; /* Limit the width of the received message box */
+  align-self: flex-start; /* Align received messages to the left */
+  vertical-align: bottom;
+  align-items: start;
+  text-align: start;
+}
+
+
+
+
 
 .top-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  margin-bottom: 10px; 
-  border: 1px solid #333; 
-  border-radius: 10px; 
-  padding: 10px; 
-  
+  margin-bottom: 10px;
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 10px;
 }
+
 .user-info {
   display: flex;
   align-items: center;
@@ -30,43 +81,44 @@
   margin-right: 10px;
 }
 
-
-
 .call-icons mat-icon {
   cursor: pointer;
   margin-left: 10px;
   font-size: 24px;
-  color: #333; /* Adjust the color as needed */
+  color: #333;
 }
 
-.message {
-  margin-bottom: 10px;
-}
+
+
 
 .sent-message {
   background-color: #4caf50; /* Green background for sent messages */
   color: #fff; /* White text for sent messages */
   padding: 10px;
   border-radius: 8px;
-  align-self: flex-end; /* Align sent messages to the right */
   max-width: 70%; /* Limit the width of the sent message box */
+  align-self: flex-end; /* Align sent messages to the right */
+
 }
 
 .received-message {
-  background-color: #e0e0e0; /* Light gray background for received messages */
+  background-color: #f8e3e3; /* Light gray background for received messages */
   color: #333; /* Dark text for received messages */
   padding: 10px;
   border-radius: 8px;
-  align-self: flex-start; /* Align received messages to the left */
   max-width: 70%; /* Limit the width of the received message box */
+  align-self: flex-start; /* Align received messages to the left */
+
 }
+
+
 
 textarea {
   resize: none;
   height: 60px;
   padding: 10px;
   margin-top: 10px;
-  width: 100%; /* Make the textarea full width */
+  width: 100%;
 }
 
 .text-area-container {
@@ -78,23 +130,30 @@ textarea {
 
 button {
   padding: 10px;
-  background-color: #4caf50; /* Green color for the send button */
-  color: #fff; /* White text for the send button */
+  background-color: #4caf50;
+  color: #fff;
   border: none;
   cursor: pointer;
 }
 
 button:hover {
-  background-color: #45a049; /* Darker green color on hover */
-}
-
-.message-area-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  min-height: 69vh;
-  background-color: #f0f0f0;
+  background-color: #45a049;
 }
 
 
+#imageInput{
+  display: none;
+}
+
+text-area-container textarea {
+  flex: 1;
+}
+
+.image-icon-container {
+  cursor: pointer;
+  margin-left: 10px; /* Adjust the margin as needed */
+}
+
+.image-icon {
+  font-size: 24px; /* Adjust the font size as needed */
+}

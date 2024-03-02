@@ -1,35 +1,79 @@
 import { Injectable } from '@angular/core';
 import { Stomp } from '@stomp/stompjs';
-import { BehaviorSubject } from 'rxjs';
-import { ChatMessage } from '../model/message';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { ChatRoomDTO, Message, MessageType } from '../model/message';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
 export class ChatService {
-  private stompClient: any
-  private messageSubject: BehaviorSubject<ChatMessage[]> = new BehaviorSubject<ChatMessage[]>([]);
 
-  constructor() { 
+  baseURL:string = "http://localhost:8080";
+
+  private stompClient: any
+  private messageSubject: BehaviorSubject<Message[]> = new BehaviorSubject<Message[]>([]);
+
+  constructor(private http:HttpClient) { 
     this.initConnenctionSocket();
   }
   initConnenctionSocket() {
-    const url = 'ws://localhost:8080/chat-socket';
+    const url = 'ws://localhost:8080/socket';
     this.stompClient = Stomp.client(url);
   }
   joinRoom(roomId: string) {
     this.stompClient.connect({}, ()=>{
       this.stompClient.subscribe(`/topic/${roomId}`, (messages: any) => {
         const messageContent = JSON.parse(messages.body);
-        const currentMessage = this.messageSubject.getValue();
-        currentMessage.push(messageContent);
-        this.messageSubject.next(currentMessage);
+        const currentMessages = this.messageSubject.getValue();
+
+        const updatedMessages=[...currentMessages,messageContent];
+        this.messageSubject.next(updatedMessages);
+        
       })
     })
   }
-  sendMessage(roomId: string, chatMessage: ChatMessage) {
+
+  sendMessage(roomId: string, content: string , senderId:number) {
+    if(!this.stompClient.connected){
+      console.error('WebSocket connection not established. Please reconnect');
+      return;
+    }
+    const chatMessage:Message = {
+      chatId: roomId,
+      senderId: senderId,
+      messageType: MessageType.TEXT,
+      content: content
+
+    }
     this.stompClient.send(`/app/chat/${roomId}`, {}, JSON.stringify(chatMessage))
   }
+
   getMessageSubject(){
     return this.messageSubject.asObservable();
   }
+
+  createChatRoom(userIds:number[]):Observable<ChatRoomDTO>{
+    const url = this.baseURL+'/createChatRoom';
+    const requestBody = {participantUserIds:userIds}
+    return this.http.post<ChatRoomDTO>(url,requestBody);
+  }
+
+  getAllMessagesInChatRoom(roomId:string):Observable<Message[]>{
+    const url = this.baseURL+'/chat/history';
+    const params = {id:roomId};
+    const options = {params};
+    return this.http.get<Message[]>(url,options);
+  }
+
+  
+
+  uploadImageInChat(file:File):Observable<HttpResponse<{imageName: string}>>{
+    
+    const url = `${this.baseURL}/files/`;
+    const formData: FormData = new FormData();
+    formData.append('file', file, file.name);
+    return this.http.post<{imageName: string}>(url, formData,  { observe: 'response' });
+    }
+
+  
 }

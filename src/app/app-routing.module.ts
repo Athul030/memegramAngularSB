@@ -7,7 +7,6 @@ import { AdminDashboardComponent } from './admin/components/admin-dashboard/admi
 import { OauthCallbackComponent } from './components/oauth-callback/oauth-callback.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ChatComponent } from './components/chat/chat.component';
-import { ChatDemoComponent } from './components/chat-demo/chat-demo.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -20,7 +19,6 @@ const routes: Routes = [
   { path: 'callback',component:OauthCallbackComponent ,pathMatch:'full'},
   { path: 'profile',component:ProfileComponent ,pathMatch:'full'},
   { path: 'chat',component:ChatComponent ,pathMatch:'full'},
-  { path: 'app/chat2',component:ChatDemoComponent ,pathMatch:'full'},
 
 ];
 

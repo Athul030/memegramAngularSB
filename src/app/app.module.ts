@@ -39,7 +39,6 @@ import { CommentmodalComponent } from './components/commentmodal/commentmodal.co
 import { MatMenuModule } from '@angular/material/menu';
 import { ChatLeftSectionComponent } from './components/chat-left-section/chat-left-section.component';
 import { ChatRightSectionComponent } from './components/chat-right-section/chat-right-section.component';
-import { ChatDemoComponent } from './components/chat-demo/chat-demo.component';
 
 @NgModule({
   declarations: [
@@ -63,8 +62,7 @@ import { ChatDemoComponent } from './components/chat-demo/chat-demo.component';
     ChatComponent,
     CommentmodalComponent,
     ChatLeftSectionComponent,
-    ChatRightSectionComponent,
-    ChatDemoComponent
+    ChatRightSectionComponent
   ],
   imports: [
     BrowserModule,

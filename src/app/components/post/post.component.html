@@ -1,6 +1,10 @@
 
-<mat-card>
-    <mat-card-header>
+
+<div class="main-div">
+
+
+<mat-card class="mat-card instagram-post-card">
+  <mat-card-header>
     <div class="profile-section">
       <div class="profile-thumbnail">
         <img *ngIf="postData.user?.profilePicUrl" class="profile-pic" [src]="postData.user?.profilePicUrl" alt="profile">
@@ -11,38 +15,40 @@
       </div>
     </div>
 
-      <button mat-icon-button [matMenuTriggerFor]="menu" class="menu-button">
-        <mat-icon>more_vert</mat-icon>
+    <button mat-icon-button [matMenuTriggerFor]="menu" class="menu-button">
+      <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-        <button mat-menu-item >Report User</button>
+      <button mat-menu-item>Report User</button>
+      <button mat-menu-item>Block User</button>
     </mat-menu>
-        
-    </mat-card-header>
 
-    <img  mat-card-image src="{{postData.imageUrl}}" alt="post" style="width: 100%; height: 100%; object-fit: cover;">
-    <mat-card-content>
-        {{postData.content}}
-    </mat-card-content>
-    <mat-card-actions >
-        <span class="like-count">{{postData.likes?.length}}</span>  
-        <mat-icon *ngIf="isLikedByUser(postData)"
-          (click)="unlikePost(postData)"
-          class="action-item" 
-          color="warn">
-            favorite 
-        </mat-icon>
+  </mat-card-header>
 
-    <mat-icon *ngIf="!isLikedByUser(postData)"
-          (click)="likePost(postData)"
-          class="action-item" 
-          color="warn">
-            favorite_border
+  <img mat-card-image 
+  class="postImage" 
+  *ngIf="postData.imageUrl" 
+  src="{{postData.imageUrl}}" 
+  alt="post" 
+  (click)="postData.imageUrl && openImageModal(postData.imageUrl)"
+  >
+  <mat-card-content class="custom-post-content">
+    {{postData.content}}
+    <span class="post-date-time">{{postData.addedDate | date:'short'}}</span>
+  </mat-card-content>
+  <mat-card-actions class="post-actions custom-post-actions">
+    <span class="like-count">{{postData.likes?.length}}</span>
+    <mat-icon *ngIf="isLikedByUser(postData)" (click)="unlikePost(postData)" class="action-item" color="warn">
+      favorite
     </mat-icon>
 
-    
+    <mat-icon *ngIf="!isLikedByUser(postData)" (click)="likePost(postData)" class="action-item" color="warn">
+      favorite_border
+    </mat-icon>
+    <mat-icon (click)="openCommentModal()" class="comment-action-item" color="warn">comment</mat-icon>
 
-        <mat-icon (click)="openCommentModal()" class="action-item" color="warn">comment</mat-icon>
-
-    </mat-card-actions>
+  </mat-card-actions>
 </mat-card>
+
+</div>
+

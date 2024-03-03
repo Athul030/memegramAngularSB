@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { UrlSegment } from '@angular/router';
 import { AdminService } from 'src/app/admin/service/admin.service';
 import { FollowRequestBody } from 'src/app/model/followDetails';
 import { UserDTO } from 'src/app/model/user';
@@ -13,14 +14,15 @@ import { StorageService } from 'src/app/services/storage.service';
 })
 export class RightSideBarComponent {
 
-  userList:UserDTO[]=[];
+  userList: UserDTO[] = [];
   displayedSuggestions: UserDTO[] = [];
-  suggestionsToShow = 5;
+
+  suggestionsToShow = 3;
   currentIndex = 0;
 
-
-  constructor(private service:AdminService, private storageSer:StorageService, private followSer:FollowService, private matSnack: MatSnackBar){}
+  constructor(private service: AdminService, private storageSer: StorageService, private followSer: FollowService, private matSnack: MatSnackBar) { }
   currentUserId = this.storageSer.getUserId();
+
   ngOnInit(): void {
     this.fetchUsers();
   }
@@ -31,107 +33,125 @@ export class RightSideBarComponent {
 
   loadMoreSuggestions() {
     const totalSuggestions = this.userList.length;
-    
+
     if (totalSuggestions > 0) {
+      const userListWithoutCurrentUser = this.userList.filter(user => user.id !== this.currentUserId);
+
+      if (userListWithoutCurrentUser.length === 0) {
+        // If no users to display, reset currentIndex to 0
+        this.currentIndex = 0;
+        return;
+      }
+
       const endIndex = this.currentIndex + this.suggestionsToShow;
-      this.displayedSuggestions = this.userList.slice(this.currentIndex, endIndex)
-                      .filter(user => user.id !== this.currentUserId);
+      const newSuggestions = userListWithoutCurrentUser.slice(this.currentIndex, endIndex);
+
+      this.displayedSuggestions = [...newSuggestions].slice(0, this.suggestionsToShow);
 
       this.currentIndex += this.suggestionsToShow;
+      console.log("part4: ", this.currentIndex);
 
       if (this.currentIndex >= totalSuggestions) {
         this.currentIndex = 0;
       }
     }
   }
-  fetchUsers(){
+
+  async fetchUsers() {
     this.service.getAllUsersForDashboard().subscribe(users => {
-      this.userList = users;
-      console.log(users)
-      this.loadMoreSuggestions(); 
+      this.userList = users.filter((user) => !user.followers.some(follow => follow.id === this.currentUserId));
+      this.loadMoreSuggestions();
     });
   }
 
-  toggleFollow(user:UserDTO):void{
-    if(user.following){
-      this.unfollow(user.id)
-    }else{
-      this.follow(user.id);
+  async toggleFollow(user: UserDTO): Promise<void> {
+    const isFollowing = user.followers.some(follower => follower.id === this.currentUserId);
+
+    if (isFollowing) {
+      await this.unfollow(user);
+    } else {
+      await this.follow(user);
+      this.removeFromDisplayedSuggestions(user);
+      this.fetchUsers();
     }
   }
 
-  follow(id:number | undefined){
-    if (id === undefined) {
-      console.log("Follower ID is undefined");
-      return;
-    }
-    const userId = this.storageSer.getUserId();
-    const followRequestBody:FollowRequestBody={
-      
-      followerId: userId,
-      followingId : id
-    }
-    this.followSer.follow(followRequestBody).subscribe(
-      response =>{
-        if(response === true){
-          this.matSnack.open(
-            'Followed Successfully','Ok',{
-              duration:3000,
-              panelClass: 'custom-snack-bar-container'
-            }
-          )
-          
-          
-        }
-      },error=>{
-        this.matSnack.open(
-          'Follower not added sue to error','Ok',{
-            duration:3000,
-            panelClass: 'custom-snack-bar-container'
-          }
-        )
-        console.log("Following is unsuccessful",error);
+  async follow(user: UserDTO): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+      const id = user.id;
+      if (id === undefined) {
+        console.log("Follower ID is undefined");
+        return;
       }
-    )
+
+      const userId = this.storageSer.getUserId();
+      const followRequestBody: FollowRequestBody = {
+        followerId: userId,
+        followingId: id
+      };
+
+      this.followSer.follow(followRequestBody).subscribe(
+        response => {
+          if (response === true) {
+            this.matSnack.open(
+              'Followed Successfully', 'Ok', {
+              duration: 3000,
+              panelClass: 'custom-snack-bar-container'
+            });
+          }
+        },
+        error => {
+          this.matSnack.open(
+            'Follower not added due to error', 'Ok', {
+            duration: 3000,
+            panelClass: 'custom-snack-bar-container'
+          });
+          console.log("Following is unsuccessful", error);
+        }
+      );
+
+      resolve();
+    });
   }
-  
-  unfollow(id:number | undefined){
+
+  async unfollow(user: UserDTO): Promise<void> {
+    const id = user.id;
     if (id === undefined) {
       console.log("Follower ID is undefined");
       return;
     }
+
     const userId = this.storageSer.getUserId();
-    const followRequestBody:FollowRequestBody={
-      
+    const followRequestBody: FollowRequestBody = {
       followerId: userId,
-      followingId : id
-    }
+      followingId: id
+    };
+
     this.followSer.unfollow(followRequestBody).subscribe(
-      response =>{
-        if(response === true){
+      response => {
+        if (response === true) {
           this.matSnack.open(
-            'Unfollowed Successfully','Ok',{
-              duration:3000,
-              panelClass: 'custom-snack-bar-container'
-            }
-          )
-          
-          
-        }
-      },error=>{
-        this.matSnack.open(
-          'Follower not removed due to error','Ok',{
-            duration:3000,
+            'Unfollowed Successfully', 'Ok', {
+            duration: 3000,
             panelClass: 'custom-snack-bar-container'
-          }
-        )
-        console.log("Unfollowing is unsuccessful",error);
+          });
+        }
+      },
+      error => {
+        this.matSnack.open(
+          'Follower not removed due to error', 'Ok', {
+          duration: 3000,
+          panelClass: 'custom-snack-bar-container'
+        });
+        console.log("Unfollowing is unsuccessful", error);
       }
-    )
+    );
   }
 
-
+  removeFromDisplayedSuggestions(user: UserDTO): void {
+    const index = this.displayedSuggestions.findIndex(suggestedUser => suggestedUser.id === user.id);
+    if (index > -1) {
+      this.displayedSuggestions.splice(index, 1);
+    }
+  }
 }
-
-
-

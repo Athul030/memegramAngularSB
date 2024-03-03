@@ -1,16 +1,16 @@
 
 #post-button{
     position: fixed;
-    bottom: 5%;
+    bottom: 1%;
     right: 23%;
 }
 
 #post-feed {
-    max-width: 550px;
-    margin-top: 5em;
+    max-width: 70%;
+    margin-top: 0.5em;
     margin-left: auto;
     margin-right: auto;
-
+    
 }
 
 .scrollable-container {

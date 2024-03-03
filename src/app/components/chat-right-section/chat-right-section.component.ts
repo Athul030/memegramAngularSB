@@ -1,9 +1,11 @@
 import { AfterViewChecked, ChangeDetectorRef, Component, ElementRef, Input, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { Message, MessageType } from 'src/app/model/message';
 import { UserDTO } from 'src/app/model/user';
 import { ChatService } from 'src/app/services/chat.service';
 import { StorageService } from 'src/app/services/storage.service';
+import { FullSizeImageComponent } from '../full-size-image/full-size-image.component';
 
 @Component({
   selector: 'app-chat-right-section',
@@ -20,7 +22,7 @@ export class ChatRightSectionComponent implements OnInit, OnDestroy, AfterViewCh
   private messageSubscription!: Subscription;
   @ViewChild('messagesContainer') private messagesContainer!: ElementRef;
 
-  constructor(private storageSer: StorageService, private chatSer: ChatService, private ngZone: NgZone, private cdr: ChangeDetectorRef) {}
+  constructor(private storageSer: StorageService, private chatSer: ChatService, private ngZone: NgZone, private cdr: ChangeDetectorRef, public dialog:MatDialog) {}
 
   ngOnInit(): void {
     this.messageSubscription = this.chatSer.getMessageSubject().subscribe((messages: Message[]) => {
@@ -55,14 +57,22 @@ export class ChatRightSectionComponent implements OnInit, OnDestroy, AfterViewCh
   sendMessage(): void {
     let messageText: string = this.newMessage;
     let currentUserId = this.storageSer.getUserId();
-    this.chatSer.sendMessage(this.roomId, messageText, currentUserId);
+    this.chatSer.sendMessage(this.roomId, messageText, currentUserId,'');
     
     this.newMessage = '';
   }
 
   calculateScrollHeight(): number {
-   const messageHeight = 50; // Adjust this value based on your message height
-    return this.messages.length * messageHeight;
+   if(this.messagesContainer){
+    const messageElements =this.messagesContainer.nativeElement.getElementsByClassName('message');
+    let totalHeight=0;
+    for(let i=0;i<messageElements.length;i++){
+      totalHeight+=messageElements[i].clientHeight;
+
+    }
+    return totalHeight;
+   }
+   return 0;
   }
   
   startCall(){}
@@ -72,29 +82,32 @@ export class ChatRightSectionComponent implements OnInit, OnDestroy, AfterViewCh
   sendImage(event: any): void {
     const fileInput = event.target;
     const files = fileInput.files;
-
     if (files && files.length > 0) {
       const imageFile = files[0];
+
       this.chatSer.uploadImageInChat(imageFile).subscribe(imageUrl => {
-        const currentUserId = this.storageSer.getUserId();
         
-        const imageMessage: Message = {
-          chatId: this.roomId,
-          senderId: currentUserId,
-          messageType: MessageType.IMAGE,
-          imageName: imageUrl.body?.imageName,
-        };
 
-        // Send the image message through the chat service
-        this.chatSer.sendMessage(this.roomId, '', currentUserId);
-        this.messages.unshift(imageMessage);
+        const currentUserId = this.storageSer.getUserId();
+        let imageUrlName= imageUrl.body?.fileUrl;
+        if(imageUrlName){
 
+          this.chatSer.sendMessage(this.roomId, '', currentUserId,imageUrlName);
+        }
         // Clear the file input
         fileInput.value = '';
       });
     }
   }
 
+  openImageModal(imageUrl:string):void{
+    const dialogRef = this.dialog.open(FullSizeImageComponent,{
+      data:{imageUrl},
+    })
+    dialogRef.afterClosed().subscribe((result)=>{
+      console.log("The image modal is closed");
+    });
+  }
 
-
+  
 }

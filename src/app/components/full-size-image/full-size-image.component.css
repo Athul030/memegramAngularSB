@@ -1,0 +1,14 @@
+/* full-size-image.component.css */
+
+:host {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-height: 100vh; 
+    
+  }
+  
+  img {
+    max-height: 100vh; 
+  }
+  

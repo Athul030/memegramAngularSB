@@ -39,6 +39,7 @@ import { CommentmodalComponent } from './components/commentmodal/commentmodal.co
 import { MatMenuModule } from '@angular/material/menu';
 import { ChatLeftSectionComponent } from './components/chat-left-section/chat-left-section.component';
 import { ChatRightSectionComponent } from './components/chat-right-section/chat-right-section.component';
+import { FullSizeImageComponent } from './components/full-size-image/full-size-image.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { ChatRightSectionComponent } from './components/chat-right-section/chat-
     ChatComponent,
     CommentmodalComponent,
     ChatLeftSectionComponent,
-    ChatRightSectionComponent
+    ChatRightSectionComponent,
+    FullSizeImageComponent
   ],
   imports: [
     BrowserModule,

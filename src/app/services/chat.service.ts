@@ -33,17 +33,32 @@ export class ChatService {
     })
   }
 
-  sendMessage(roomId: string, content: string , senderId:number) {
+  sendMessage(roomId: string, content: string , senderId:number,imageName:string) {
     if(!this.stompClient.connected){
       console.error('WebSocket connection not established. Please reconnect');
       return;
     }
-    const chatMessage:Message = {
-      chatId: roomId,
-      senderId: senderId,
-      messageType: MessageType.TEXT,
-      content: content
+    console.log("inside send message in chat service");
+    let chatMessage:Message;
+    if(imageName==null || imageName === ''){
+      chatMessage = {
+        chatId: roomId,
+        senderId: senderId,
+        messageType: MessageType.TEXT,
+        content: content
+  
+      }
+    }else{
+      console.log("inside send message in chat service IN ELSE");
 
+      chatMessage = {
+        chatId: roomId,
+        senderId: senderId,
+        messageType: MessageType.IMAGE,
+        content: content,
+        imageName:imageName
+  
+      }
     }
     this.stompClient.send(`/app/chat/${roomId}`, {}, JSON.stringify(chatMessage))
   }
@@ -67,13 +82,18 @@ export class ChatService {
 
   
 
-  uploadImageInChat(file:File):Observable<HttpResponse<{imageName: string}>>{
+  uploadImageInChat(file:File):Observable<HttpResponse<{fileUrl: string}>>{
     
-    const url = `${this.baseURL}/files/`;
+    const url = `${this.baseURL}/files/chat`;
     const formData: FormData = new FormData();
     formData.append('file', file, file.name);
-    return this.http.post<{imageName: string}>(url, formData,  { observe: 'response' });
+    return this.http.post<{fileUrl: string}>(url, formData,  { observe: 'response' });
     }
 
+    updateUserPresence(userId:number,status:boolean):Observable<void>{
+      const url=`${this.baseURL}/userPresence/${userId}/${status}`;
+      return this.http.post<void>(url,{});
+
+    }
   
 }

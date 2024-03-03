@@ -4,6 +4,7 @@ import { LikeCommentService } from 'src/app/services/like-comment.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { CommentmodalComponent } from '../commentmodal/commentmodal.component';
 import { MatDialog } from '@angular/material/dialog';
+import { FullSizeImageComponent } from '../full-size-image/full-size-image.component';
 
 
 @Component({
@@ -67,6 +68,16 @@ export class PostComponent {
 
   }
 
+
+  openImageModal(imageUrl:string):void{
+    if(imageUrl!=undefined){
+      const dialogRef = this.dialog.open(FullSizeImageComponent,{data:{imageUrl},
+      })
+      dialogRef.afterClosed().subscribe((result)=>{
+        console.log("The image modal is closed");
+      })
+    }
+  }
 
   
 

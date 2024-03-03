@@ -1,0 +1,119 @@
+:host {
+    vertical-align: middle;
+    align-self: center;
+    text-align: center;
+    width: 30%;
+  }
+  
+  .friends-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+     align-items: center;
+    width: 90%; /* Increase the width */
+    margin-right: 10px;
+    border: 2px solid #3498db; /* Add a stylish border */
+    border-radius: 12px; /* Round the corners */
+    padding: 10px; /* Add padding for spacing */
+  }
+
+  .friend-details {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .friend-name {
+    font-weight: bold;
+    font-size: 18px;
+  }
+  
+  .friend-handle {
+    color: #888;
+    font-size: 16px;
+  }
+  
+
+  
+  
+  .section-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  
+  .header-text {
+    font-size: 16px; /* Increase the font size */
+    font-weight: bold;
+    color: #3498db; /* Adjust the color */
+  }
+  
+  .friend-suggestions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+  
+  .friend-card {
+    width: 150%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+    border: 2px solid #ddd; /* Add a stylish border */
+    border-radius: 10px; /* Round the corners */
+    padding: 15px; /* Add padding for spacing */
+}
+  
+  /* Rest of your existing styles */
+  
+  .profile-pic {
+    width: 50px;
+    height: 50px;
+    background-color: #ddd;
+    border-radius: 50%;
+    margin-right: 15px;
+  }
+  
+  .friend-name {
+    font-weight: bold;
+    font-size: 18px; /* Increase the font size */
+  }
+  
+  .friend-handle {
+    color: #888;
+    font-size: 16px; /* Increase the font size */
+  }
+  
+  .follow-button {
+    background-color: #ff7979;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 16px; /* Adjust padding */
+    font-size: 14px; /* Increase the font size */
+  }
+  
+  .more-button {
+    color: #3498db;
+    margin-top: 20px;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    background: none;
+    font-size: 18px; /* Increase the font size */
+  }
+  
+  .followButtonClass{
+    text-align: end;
+    align-items: end;
+    justify-content: end;
+  }
+
+  .profilePicAndName{
+    text-align: left;
+    align-items: baseline;
+    justify-content: baseline;
+    width: 100%;
+  }

@@ -11,7 +11,7 @@
     </div>
   </div>
 
-   <!-- Messages -->
+   <!-- Messages
    <div class="message-area-container">
     <div #messagesContainer class="messages">
       <div *ngFor="let message of messages.slice().reverse()" class="message">
@@ -20,25 +20,46 @@
         </div>
       </div>
     </div>
+  </div> -->
+
+  <!-- Messages -->
+<div class="message-area-container">
+  <div #messagesContainer class="messages">
+    <div *ngFor="let message of messages.slice().reverse()" class="message">
+      <div [ngClass]="{'sent-message': message.senderId === selectedUser.id, 'received-message': message.senderId !== selectedUser.id}" class="message-sender-reciever-container">
+        <ng-container *ngIf="message.messageType === 'TEXT'; else imageContent">
+          <div class="message-content">{{ message.content }}</div>
+        </ng-container>
+        <ng-template #imageContent id="imageThumb" >
+          <!-- Assuming your server provides a base URL for the images -->
+          <img *ngIf="message.imageName" [src]="message.imageName" alt="Image" id="thumbnail-image" (click)="openImageModal(message.imageName)" >
+        </ng-template>
+      </div>
+    </div>
   </div>
+</div>
+
 
   <div class="text-area-container">
     <!-- Text area for new message -->
     <textarea [(ngModel)]="newMessage" placeholder="Type your message..."></textarea>
   
-    <!-- Send button for text message -->
-    
-  
-    <!-- Input for sending images -->
-    
-    <div class="image-icon-container">
-      <button mat-raised-button color="primary" (click)="sendMessage()">Send</button>
-      <input type="file" accept="image/*" (change)="sendImage($event)"  id="imageInput">
-      <label for="imageInput">
-        <mat-icon class="image-icon">image</mat-icon>
-      </label>
+      <!-- Container for send button and image icon -->
+      <div class="button-container">
+        <!-- Send button for text message -->
+        <button mat-raised-button color="primary" (click)="sendMessage()" class="send-button">
+            <mat-icon class="send-icon">send</mat-icon>
+        </button>
+        
+        <!-- Input for sending images -->
+        <div class="image-icon-container">
+            <input type="file" accept="image/*" (change)="sendImage($event)" id="imageInput">
+            <label for="imageInput">
+                <mat-icon class="image-icon">image</mat-icon>
+            </label>
+        </div>
     </div>
-  </div>
+</div>
   
   
   

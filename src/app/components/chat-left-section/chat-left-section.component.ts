@@ -45,4 +45,8 @@ export class ChatLeftSectionComponent  {
     }
   }
 
+  updateUserPresence(isOnline:boolean):void{
+    
+  }
+
 }

@@ -1,4 +1,4 @@
-<aside class="flex flex-col  w-96 h-screen px-4 py-8 overflow-y-auto bg-white border-l rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700">
+<!-- <aside class="flex flex-col  w-96 h-screen px-4 py-8 overflow-y-auto bg-white border-l rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700">
     
     
     <div class="flex  flex-col justify-between flex-1 mt-6">
@@ -9,13 +9,9 @@
                     <span class="mx-6 text-red-900  font-medium">Recommended Friends</span>
                 </div>
             </div>
-            <!-- Friend Suggestions Card -->
             <div class="bg-white border  rounded-lg shadow-md p-4 mt-4 dark:bg-gray-800 dark:border-gray-700">
-                <!-- Loop through friend suggestions -->
                 <div *ngFor="let user of displayedSuggestions"  class=" bg-white flex items-center border-b pb-2 mb-2">
-                    <!-- Friend Profile Pic (Replace with actual image) -->
                     <div class="w-10 h-10 bg-gray-300  rounded-full"><img [src]="user.profilePicUrl" alt="profile_dp"></div>
-                    <!-- Friend Details -->
                     <div class="flex flex-col ml-4 ">
                         <span class="font-medium">{{user.fullName}}</span>
                         <span class="text-gray-500">@{{user.userHandle}}</span>
@@ -26,7 +22,6 @@
                     
 
                 </div>
-                <!-- More Button -->
                 <button *ngIf="suggestionsToShow < userList.length" (click)="loadMoreSuggestions()" class="text-blue-500 mt-2  cursor-pointer focus:outline-none">
                     More
                 </button>
@@ -36,4 +31,29 @@
 
 
 </aside>
+ -->
 
+ <aside class="friends-section">
+  <div class="section-header">
+    <span class="header-text">Recommended Friends</span>
+  </div>
+
+  <div class="friend-suggestions">
+    <div *ngFor="let user of displayedSuggestions" class="friend-card">
+        <div class="profilePicAndName">
+            <div class="profile-pic"><img [src]="user.profilePicUrl" alt="profile_dp"></div>
+            <div class="friend-details">
+              <span class="friend-handle">@{{user.userHandle}}</span>
+        </div>
+      </div>
+      <div class="followButtonClass">
+        <button type="button" (click)="toggleFollow(user)" class="follow-button">{{ getButtonText(user) }}</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- More Button -->
+  <button *ngIf="suggestionsToShow < userList.length" (click)="loadMoreSuggestions()" class="more-button">
+    More
+  </button>
+</aside>

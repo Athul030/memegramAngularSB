@@ -1,26 +1,27 @@
 
 <div class="sidebar-container">
-    <!-- Sidebar Header -->
-    <div class="sidebar-header">
-      <h2 class="titleClass">Memegram Chat</h2>
-    </div>
-  
-    <!-- Followers Section -->
-    <div class="sidebar-section">
-      <h3 class="formargin">Followers</h3>
-      <div *ngFor="let follower of followersList" class="user-item" (click)="onSelectUser(follower)">
-        <img [src]="follower.profilePicUrl" alt="Profile Thumbnail">
-        <span>{{follower.fullName}}</span>
-      </div>
-    </div>
-  
-    <!-- Following Section -->
-    <div class="sidebar-section">
-      <h3 class="formargin">Following</h3>
-      <div *ngFor="let followingUser of followingList" class="user-item" (click)="onSelectUser(followingUser)">
-        <img [src]="followingUser.profilePicUrl" alt="Profile Thumbnail">
-        <span>{{followingUser.fullName}}</span>
-      </div>
+  <!-- Sidebar Header -->
+  <div class="sidebar-header">
+    <h2 class="titleClass">Memegram Chat</h2>
+  </div>
+
+  <!-- Followers Section -->
+  <div class="sidebar-section">
+    <h3 class="formargin">Followers</h3>
+    <div *ngFor="let follower of followersList" class="user-item" (click)="onSelectUser(follower)">
+      <img [src]="follower.profilePicUrl" alt="Profile Thumbnail">
+      <span>{{follower.fullName}}</span>
     </div>
   </div>
-  
+
+  <!-- Following Section -->
+  <div class="sidebar-section">
+    <h3 class="formargin">Following</h3>
+    <div *ngFor="let followingUser of followingList" class="user-item" (click)="onSelectUser(followingUser)">
+      <img [src]="followingUser.profilePicUrl" alt="Profile Thumbnail">
+      <span>{{followingUser.fullName}}</span>
+    </div>
+  </div>
+</div>
+
+

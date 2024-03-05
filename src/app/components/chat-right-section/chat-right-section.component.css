@@ -58,8 +58,6 @@
   max-height: 100%;
   overflow-y: auto;
   width: 100%;
-  
-  
 }
 
 .message {
@@ -67,29 +65,36 @@
   display: flex;
 }
 
-.message-sender-reciever-container {
-  display: flex;
-  justify-content: space-between;
-}
+/* .message:nth-child(even){
+  justify-content: flex-start;
+} */
 
-.sent-message {
-  background-color: #9cc39c; /* Green background for sent messages */
-  color: #fff; /* White text for sent messages */
+ .message-sender-reciever-container {
+  display: flex;
+  flex: 1;
+} 
+
+.sent-message,
+.received-message {
   padding: 10px;
   border-radius: 8px;
-  max-width: 80%; /* Limit the width of the sent message box */
-  
-
+}
+.sent-message {
+  background-color: #f0f0f0; 
+  color: #0b3104; 
+  justify-content: flex-start;
+  border-style:outset;
+  border-width:0px 0px 0px 5px ;
+  border-color: #3e8918
 }
 
 .received-message {
-  background-color: #f8e3e3; /* Light gray background for received messages */
-  color: #333; /* Dark text for received messages */
-  padding: 10px;
-  border-radius: 8px;
-  width: 80%; /* Limit the width of the received message box */
- justify-content: flex-start;
-
+  background-color: #f0f0f0;
+  color: #100536; 
+  justify-content: flex-end;
+  border-style:outset;
+  border-width:0px 5px 0px 0px ;
+  border-color: #2b30c9
 }
 
 

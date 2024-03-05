@@ -149,8 +149,11 @@ export class UserService {
   }
 
   unBlockUser(userBlockRequest:UserBlockRequest):Observable<UserDTO>{
-    return this.http.post<UserDTO>(`${this.baseURL}/api/user/userUnBlock`,userBlockRequest)
+    return this.http.post<UserDTO>(`${this.baseURL}/api/user/userUnBlock`,userBlockRequest);
   }
 
+  reportUser(userId:number,postId:number,reason:string):Observable<boolean>{
+    return this.http.post<boolean>(`${this.baseURL}/api/user/reportUser/${postId}/${userId}`,reason);
+  }
   
 }

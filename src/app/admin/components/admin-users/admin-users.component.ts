@@ -22,7 +22,7 @@ export class AdminUsersComponent implements OnInit {
   // @ViewChild(MatPaginator,{static:true}) paginator!:MatPaginator;
   // datasource =new MatTableDataSource<any>();
   userList:UserDTO[]=[];
-  displayedColumns: string[] = ['fullName','email','userHandle','blockAction','provider'];
+  displayedColumns: string[] = ['fullName','email','userHandle','blockAction','reportedCount','provider'];
   ngOnInit() {
     
 

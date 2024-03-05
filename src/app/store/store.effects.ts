@@ -7,6 +7,7 @@ import { StorageService } from "../services/storage.service";
 import { Router } from "@angular/router";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Role } from "../model/user";
+import { HttpErrorResponse } from "@angular/common/http";
 
 
 @Injectable()
@@ -35,15 +36,12 @@ this.action$.pipe(
 )
 
     userlogin = createEffect(()=>{
-        console.log("effect1")
         return this.action$.pipe(
             ofType(beginLogin),
             mergeMap((action)=>{
-                console.log("effect2")
 
                 return this.userService.login(action.usercred).pipe(
                     switchMap((data)=>{
-                        console.log("effect3")
 
                         console.log("data"+data.accessToken,data.refreshToken,data.username);
                         if(data.user!==null){
@@ -73,9 +71,19 @@ this.action$.pipe(
                     }),
                     
                     catchError((_error)=>{
-                        return of(showalert({message:'Login failed due to:'+_error.error.message,resulttype:"fail"
-                    }));
-                })
+                        if(_error instanceof HttpErrorResponse && _error.status === 423){
+                            this.snackbar.open(
+                                'You are blocked from acessing Memegram', 'Ok', {
+                                duration: 3000,
+                                panelClass: 'custom-snack-bar-container'
+                              });
+                              return of(showalert({message:'You are blocked from acessing Memegram',resulttype:"fail"}));
+                        }else{
+                            return of(showalert({message:'Login failed due to:'+_error.error.message,resulttype:"fail"}));
+                        }
+                        
+                    })
+
                 )
             })
         )

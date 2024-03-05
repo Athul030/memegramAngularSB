@@ -291,7 +291,7 @@ export class ProfileContentComponent implements OnInit {
       }
     );
   }
-
+  
   checkFollowingAlready(){
     if(this.otherUser && this.otherUser.followers.some(x=>x.id===this.currentUser.id)){
       this.followingAlready=true;

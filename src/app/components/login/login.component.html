@@ -13,7 +13,7 @@
       <div>
         <label for="email" class="block text-2sm font-medium leading-6 text-gray-900">Email address</label>
         <div class="mt-2">
-          <input id="username" formControlName="username"  type="email"  autocomplete="email" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+          <input aria-label="input" id="username" formControlName="username"  type="email"  autocomplete="email" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
 
           <div *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched">
             <small class="text-danger" *ngIf="loginForm.get('username')?.errors?.['required']">UserName is Required</small>
@@ -41,7 +41,7 @@
       </div>
 
       <div class="flex items-center justify-center  dark:bg-gray-800 rounded">
-        <button (click)="signInWithGoogle()" class="px-4 py-2  flex gap-2   text-slate-100 dark:text-slate-100 hover:border-slate-100 dark:hover:border-slate-100 hover:text-slate-100 dark:hover:text-slate-100 hover:shadow transition duration-150">
+        <button type="button" (click)="signInWithGoogle()" class="px-4 py-2  flex gap-2   text-slate-100 dark:text-slate-100 hover:border-slate-100 dark:hover:border-slate-100 hover:text-slate-100 dark:hover:text-slate-100 hover:shadow transition duration-150">
           <img class="w-6 h-6" src="https://www.svgrepo.com/show/475656/google-color.svg" loading="lazy" alt="google logo">
           
             <span>Sign in with Google</span>

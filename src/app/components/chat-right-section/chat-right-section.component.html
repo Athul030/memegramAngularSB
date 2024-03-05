@@ -25,12 +25,12 @@
   <!-- Messages -->
 <div class="message-area-container">
   <div #messagesContainer class="messages">
-    <div *ngFor="let message of messages.slice().reverse()" class="message">
+    <div *ngFor="let message of messages?.slice()?.reverse()" class="message">
       <div [ngClass]="{'sent-message': message.senderId === selectedUser.id, 'received-message': message.senderId !== selectedUser.id}" class="message-sender-reciever-container">
         <ng-container *ngIf="message.messageType === 'TEXT'; else imageContent">
           <div class="message-content">{{ message.content }}</div>
         </ng-container>
-        <ng-template #imageContent id="imageThumb" >
+        <ng-template #imageContent id="imageThumb" >  
           <!-- Assuming your server provides a base URL for the images -->
           <img *ngIf="message.imageName" [src]="message.imageName" alt="Image" id="thumbnail-image" (click)="openImageModal(message.imageName)" >
         </ng-template>

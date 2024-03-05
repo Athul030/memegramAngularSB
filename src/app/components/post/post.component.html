@@ -20,9 +20,14 @@
     <button mat-icon-button [matMenuTriggerFor]="menu" class="menu-button">
       <mat-icon>more_vert</mat-icon>
     </button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item>Report User</button>
-      <button mat-menu-item>Block User</button>
+    <mat-menu  #menu="matMenu">
+     
+      <button *ngIf="postData.user" 
+      (click)="reportUser(postData.user.id,postData)" 
+      [disabled]="isSameUser(postData.user.id)"
+      mat-menu-item
+      >Report User</button>
+
     </mat-menu>
 
   </mat-card-header>

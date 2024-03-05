@@ -7,6 +7,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { FullSizeImageComponent } from '../full-size-image/full-size-image.component';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 @Component({
@@ -21,7 +23,7 @@ export class PostComponent {
   @Input() postData!:Post;
   creatorName:string='';
   constructor(private likeSer:LikeCommentService,private storageSer:StorageService, private dialog:MatDialog, private router:Router,
-    private userSer:UserService){
+    private userSer:UserService, private matSnack:MatSnackBar){
 
   }
   getCreatorInfo(){
@@ -103,6 +105,45 @@ export class PostComponent {
     )
   }
 
-  
+  reportUser(id:number | undefined,postData:Post | undefined){
+    if(id === undefined || postData?.postId === undefined){
+      return;
+    }
+    if(postData.user?.id === this.userId){
+      console.log("same user");
+      return;
+    }
+    const reason="Spam"
+    this.userSer.reportUser(id,postData.postId,reason).subscribe(
+      (response)=>{
+        if(response === true){
+          this.matSnack.open(
+            'User Reported','Ok',{
+              duration:3000,
+              panelClass: 'custom-snack-bar-container'
+            }
+          )
+        }
+      },(error)=>{
+        console.log(error);
+        if(error instanceof HttpErrorResponse && error.status===409){
+        this.matSnack.open(
+          'You have already reported this user', 'Ok', {
+          duration: 3000,
+          panelClass: 'custom-snack-bar-container'
+        });
+      }
+        console.log("User reporting is unsuccessful", error);
+      }
+    )
+  }
+
+  isSameUser(id:number | undefined){
+    if(id === undefined){
+      return;
+    }
+    return id === this.userId;
+
+  }
 
 }

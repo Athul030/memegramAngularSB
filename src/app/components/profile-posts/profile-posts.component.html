@@ -1,34 +1,36 @@
-<div class="container">
-
+<div class="container" *ngIf="isOwnProfileValueInPostComp">
     <div class="gallery" >
-
         <div class="gallery-item" *ngFor="let post of postsList" tabindex="0">
-
-            
-            <img src="{{post.imageUrl}}" class="gallery-image" alt="post">
+            <img src="{{post.imageUrl}}" class="gallery-image" alt="post" (click)="post.imageUrl && openImageModal(post.imageUrl)">
             <div class="gallery-item-info">
-
                 <ul>
-                    <li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="material-icons" aria-hidden="true">favorite</i> 56</li>
-                    <li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="material-icons" aria-hidden="true">comment</i> 2</li>
+                    <li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="material-icons" aria-hidden="true">favorite</i>{{post.likes?.length}}</li>
+                    <li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="material-icons" aria-hidden="true">comment</i>{{post.comments?.length}}</li>
                 </ul>
-
             </div>
-
         </div>
-
-        
-
-        
-
-        
-
-       
-
     </div>
-    <!-- End of gallery -->
-
     <div class="loader"></div>
-
 </div>
-<!-- End of container -->
+
+<div class="container" *ngIf="!isOwnProfileValueInPostComp">
+    <div class="gallery" >
+        <div class="gallery-item" *ngFor="let post of otherUserPostsList" tabindex="0">
+            <div (click)="post.imageUrl && openImageModal(post.imageUrl)">
+            <img src="{{post.imageUrl}}" class="gallery-image" alt="post" >
+            <div class="gallery-item-info">
+                <ul>
+                    <li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="material-icons" aria-hidden="true">favorite</i>{{post.likes?.length}}</li>
+                    <li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="material-icons" aria-hidden="true">comment</i>{{post.comments?.length}}</li>
+                </ul>
+            </div>
+        </div>
+        </div>
+    </div>
+    
+    <!-- Display message when there are no posts -->
+    <div *ngIf="!otherUserPostsList || otherUserPostsList.length === 0" class="no-posts-message">
+        <p>No posts available.</p>
+    </div>
+    <div class="loader" *ngIf="otherUserPostsList"></div>
+</div>

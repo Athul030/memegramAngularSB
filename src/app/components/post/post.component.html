@@ -9,9 +9,11 @@
       <div class="profile-thumbnail">
         <img *ngIf="postData.user?.profilePicUrl" class="profile-pic" [src]="postData.user?.profilePicUrl" alt="profile">
       </div>
-      <div>
-        <mat-card-title>{{postData.user?.fullName}}</mat-card-title>
-        <mat-card-subtitle>{{postData.user?.userHandle}}</mat-card-subtitle>
+      <div class="forCursor" *ngIf="postData.user"  (click)="postData.user.id && navigateToUserProfile(postData.user.id)">
+        <div>
+          <mat-card-title>{{postData.user.fullName}}</mat-card-title>
+          <mat-card-subtitle>{{postData.user.userHandle}}</mat-card-subtitle>
+        </div>
       </div>
     </div>
 

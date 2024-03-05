@@ -1,58 +1,73 @@
-
-
-	<div class="container ">
-
+<div *ngIf="isOwnProfileValue">
+<div class="container ">
 		<div class="profile">
-
 			<div class="profile-image" *ngIf="currentUser">
-
-				
-
 				<img class="object-cover w-32 h-32 mx-2 custom-rounded-top " mat-card-image 
 				[src]="currentUser.profilePicUrl" alt="profile_dp" />
-
 			</div>
-
 			<div class="profile-user-settings" *ngIf="currentUser">
-
 				<h1 class="profile-user-name">{{currentUser.fullName}}</h1>
-
-				<button class="btn profile-edit-btn">Edit Profile</button>
-
+				<!-- <button class="btn profile-edit-btn">Edit Profile</button> -->
+				<div *ngIf="!isOwnProfileValue">
+					<button (click)="toggleFollow(otherUserIdValue)" *ngIf="followingAlready" class="btn profile-edit-btn">UnFollow</button>
+					<button (click)="toggleFollow(otherUserIdValue)" *ngIf="!followingAlready" class="btn profile-edit-btn">Follow</button>
+				</div>
+				
 				<button class="btn profile-settings-btn" aria-label="profile settings"><mat-icon>settings</mat-icon></button>
-
 			</div>
-
-            
-
 			<div class="profile-stats" >
-
 				<ul>
 					<li (click)="handleClick('posts')" ><span class="profile-stat-count">{{totalnumberOfPosts}}</span> posts</li>
 					<li (click)="handleClick('followers')"><span class="profile-stat-count">{{totalnumberOfFollowers}}</span> followers</li>
 					<li (click)="handleClick('following')"><span class="profile-stat-count">{{totalnumberOfFollowing}}</span> following</li>
 				</ul>
-
 			</div>
-
 			<div class="profile-bio" *ngIf="currentUser">
-
-				<!-- <p class="profile-real-name">Jane Doe</p> -->
-            
                 <p>{{currentUser.bio}}</p>
-
 			</div>
-
 		</div>
-		<!-- End of profile section -->
-
 	</div>
-	<!-- End of container -->
-
-
 
 	<ng-container *ngIf="currentComponent === 'posts'"><app-profile-posts></app-profile-posts></ng-container>
-	<ng-container *ngIf="currentComponent === 'followers'"><app-profile-followers></app-profile-followers></ng-container>
-	<ng-container *ngIf="currentComponent === 'following'"><app-profile-following></app-profile-following></ng-container>
-
+	<ng-container *ngIf="isOwnProfileValue && currentComponent === 'followers'"><app-profile-followers></app-profile-followers></ng-container>
+	<ng-container *ngIf="isOwnProfileValue && currentComponent === 'following'"><app-profile-following></app-profile-following></ng-container>
+</div>
 	
+
+<div *ngIf="!isOwnProfileValue">
+<div class="container" >
+	<div class="profile">
+		<div class="profile-image" *ngIf="otherUser">
+			<img class="object-cover w-32 h-32 mx-2 custom-rounded-top " mat-card-image 
+			[src]="otherUser.profilePicUrl" alt="profile_dp" />
+		</div>
+		<div class="profile-user-settings" *ngIf="otherUser">
+			<h1 class="profile-user-name">{{otherUser.fullName}}</h1>
+			<!-- <button class="btn profile-edit-btn">Edit Profile</button> -->
+				<button (click)="toggleFollow(otherUserIdValue)" *ngIf="followingAlready" class="btn profile-edit-btn">UnFollow</button>
+				<button (click)="toggleFollow(otherUserIdValue)" *ngIf="!followingAlready" class="btn profile-edit-btn">Follow</button>
+				<!-- block or unblock -->
+				<button (click)="toggleBlock(otherUserIdValue)" *ngIf="blockedAlready" class="btn profile-edit-btn">Unblock</button>
+				<button (click)="toggleBlock(otherUserIdValue)" *ngIf="!blockedAlready" class="btn profile-edit-btn">Block</button>
+			
+			<button class="btn profile-settings-btn" aria-label="profile settings"><mat-icon>settings</mat-icon></button>
+		</div>
+		<div class="profile-stats2" >
+			<ul>
+				<li (click)="handleClick('posts')" ><span class="profile-stat-count2">{{otherTotalnumberOfPosts}}</span> posts</li>
+				<li ><span class="profile-stat-count">{{otherTotalnumberOfFollowers}}</span> followers</li>
+				<li ><span class="profile-stat-count">{{otherTotalnumberOfFollowing}}</span> following</li>
+			</ul>
+		</div>
+		<div class="profile-bio" *ngIf="otherUser">
+			<p>{{otherUser.bio}}</p>
+		</div>
+	</div>
+</div>
+
+<ng-container *ngIf="isOwnProfileValueValue !== undefined && currentComponent === 'posts'"><app-profile-posts [otherUserPostsInput]="otherUserPosts" 
+	[isOwnProfileValues]="isOwnProfileValueValue" ></app-profile-posts></ng-container>
+<ng-container *ngIf="isOwnProfileValueValue !== undefined && currentComponent === 'followers'"><app-profile-followers></app-profile-followers></ng-container>
+<ng-container *ngIf="isOwnProfileValueValue !== undefined && currentComponent === 'following'"><app-profile-following></app-profile-following></ng-container>
+
+</div>

@@ -18,8 +18,18 @@ export class PostService {
     return this.http.get<number>(`${this.baseURL}/api/postCountOfUser`);
   }
 
+  public getPostCountForOtherUser(userId:number):Observable<number>{
+    
+    return this.http.get<number>(`${this.baseURL}/api/postCountOfUser/${userId}`);
+  }
+
   public getPostsByUser():Observable<PostDTO[]>{
     
     return this.http.get<PostDTO[]>(`${this.baseURL}/api/user/posts`);
+  }
+
+  public getPostsByOtherUser(userId:number):Observable<PostDTO[]>{
+    
+    return this.http.get<PostDTO[]>(`${this.baseURL}/api/user/posts/${userId}`);
   }
 }

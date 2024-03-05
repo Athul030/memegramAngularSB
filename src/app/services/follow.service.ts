@@ -17,6 +17,12 @@ export class FollowService {
     return this.http.get<FollowerFollowingCount>(`${this.baseURL}/followerAndFollowingDetails`);
   }
 
+  public getFollowerFollowingCountOfOtherUser(userId:number):Observable<FollowerFollowingCount>{
+    return this.http.get<FollowerFollowingCount>(`${this.baseURL}/followerAndFollowingDetails/${userId}`);
+  }
+
+  
+
   public getFollowerFollowingDetails():Observable<FollowerFollowingDetails>{
     return this.http.get<FollowerFollowingDetails>(`${this.baseURL}/followerAndFollowingDetails`);
   }

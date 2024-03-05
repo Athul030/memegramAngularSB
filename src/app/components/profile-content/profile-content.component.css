@@ -136,6 +136,26 @@ img {
     margin-right: 0;
 }
 
+.profile-stats2 {
+    margin-top: 1rem;
+    margin-bottom: 0.6rem;
+}
+
+.profile-stats2 li {
+    display: inline-block;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    margin-right: 4rem;
+    
+}
+
+.profile-stats2 li:last-of-type {
+    margin-right: 0;
+}
+
+
+
+
 .profile-bio {
     font-size: 1.6rem;
     font-weight: 400;
@@ -155,6 +175,10 @@ img {
 .profile-real-name,
 .profile-stat-count,
 .profile-edit-btn {
+    font-weight: 600;
+}
+
+.profile-stat-count2 {
     font-weight: 600;
 }
 
@@ -311,6 +335,10 @@ img {
 
     .profile-stat-count {
         display: block;
+    }
+    .profile-stat-count2 {
+        display: block;
+        cursor: pointer;
     }
 }
 

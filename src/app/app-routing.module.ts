@@ -18,6 +18,7 @@ const routes: Routes = [
 
   { path: 'callback',component:OauthCallbackComponent ,pathMatch:'full'},
   { path: 'profile',component:ProfileComponent ,pathMatch:'full'},
+  { path: 'profile/:userId',component:ProfileComponent ,pathMatch:'full'},
   { path: 'chat',component:ChatComponent ,pathMatch:'full'},
 
 ];

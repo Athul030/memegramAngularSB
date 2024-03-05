@@ -1,10 +1,12 @@
 import { Component, Input } from '@angular/core';
-import { Post } from 'src/app/model/user';
+import { Post, UserBlockRequest } from 'src/app/model/user';
 import { LikeCommentService } from 'src/app/services/like-comment.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { CommentmodalComponent } from '../commentmodal/commentmodal.component';
 import { MatDialog } from '@angular/material/dialog';
 import { FullSizeImageComponent } from '../full-size-image/full-size-image.component';
+import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 
 
 @Component({
@@ -18,7 +20,8 @@ export class PostComponent {
   
   @Input() postData!:Post;
   creatorName:string='';
-  constructor(private likeSer:LikeCommentService,private storageSer:StorageService, private dialog:MatDialog){
+  constructor(private likeSer:LikeCommentService,private storageSer:StorageService, private dialog:MatDialog, private router:Router,
+    private userSer:UserService){
 
   }
   getCreatorInfo(){
@@ -79,7 +82,27 @@ export class PostComponent {
     }
   }
 
-  
+  navigateToUserProfile(userId:number):void{
+    if(userId===this.userId){
+      return;
+    }
+    this.router.navigate(['/profile',userId]);
+  }
 
+  blockUser(blockedId:number){
+    const userblockRequest:UserBlockRequest={
+      blockingUserId: this.userId,
+      blockedUserId : blockedId
+    }
+    this.userSer.blockUser(userblockRequest).subscribe(
+      (response)=>{
+        console.log(response);
+      },(error)=>{
+        console.log("Error in blocking User, error")
+      }
+    )
+  }
+
+  
 
 }

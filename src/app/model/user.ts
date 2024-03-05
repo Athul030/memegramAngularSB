@@ -80,6 +80,7 @@ export interface Post {
     isDeleted?:boolean;
     likes?:LikeDTO[];
     lastComment?:CommentDTO;
+    comments?:CommentDTO[];
   }
 
   export interface PostDTO {
@@ -94,6 +95,7 @@ export interface Post {
     isDeleted?:boolean;
     likes?:LikeDTO[];
     lastComment?: CommentDTO;
+    comments?:CommentDTO[];
 
   }
 

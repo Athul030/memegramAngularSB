@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -8,9 +8,20 @@ import { Router } from '@angular/router';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private router:Router){}
-
+  isOwnProfile:boolean  = false;
+  otherUserId!:number;
+  constructor(private router:Router, private route:ActivatedRoute){}
   ngOnInit(): void {
+    
+
+    this.route.params.subscribe( params => {
+      if(params['userId']){
+        this.isOwnProfile = false;
+        this.otherUserId = params['userId'];
+      }else{
+        this.isOwnProfile = true;
+      }
+    })
 
   }
 
@@ -20,5 +31,9 @@ export class ProfileComponent implements OnInit {
   isLoginOrRegisterRoute(): boolean {
     const currentRoute = this.router.url;
     return currentRoute.includes('/login') || currentRoute.includes('/register');
+  }
+
+  navigateToUserProfile(userId:number):void{
+    this.router.navigate(['/profile',userId]);
   }
 }

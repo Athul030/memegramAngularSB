@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { CustomToken, JwtAuthResponse, Post, User, UserCred } from '../model/user';
+import { CustomToken, JwtAuthResponse, Post, User, UserBlockRequest, UserCred, UserDTO } from '../model/user';
 import { Observable, catchError, map, tap, throwError } from 'rxjs';
 import { StorageService } from './storage.service';
 
@@ -68,8 +68,12 @@ export class UserService {
   //   );
   // }
 
-  public getCurrentUser():Observable<User>{
-    return this.http.get<User>(`${this.baseURL}/api/user/currentUser`);
+  public getCurrentUser():Observable<UserDTO>{
+    return this.http.get<UserDTO>(`${this.baseURL}/api/user/currentUser`);
+  }
+
+  public getOtherUser(userId:number):Observable<UserDTO>{
+    return this.http.get<UserDTO>(`${this.baseURL}/api/user/${userId}`);
   }
 
   public testMethod():Observable<string>{
@@ -139,4 +143,14 @@ export class UserService {
   getAllPostsForFeed():Observable<Post[]>{
     return this.http.get<Post[]>(`${this.baseURL}/api/getAllPosts`);
   }
+
+  blockUser(userBlockRequest:UserBlockRequest):Observable<UserDTO>{
+    return this.http.post<UserDTO>(`${this.baseURL}/api/user/userBlock`,userBlockRequest);
+  }
+
+  unBlockUser(userBlockRequest:UserBlockRequest):Observable<UserDTO>{
+    return this.http.post<UserDTO>(`${this.baseURL}/api/user/userUnBlock`,userBlockRequest)
+  }
+
+  
 }

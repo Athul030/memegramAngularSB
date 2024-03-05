@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { UrlSegment } from '@angular/router';
+import { Router, UrlSegment } from '@angular/router';
 import { AdminService } from 'src/app/admin/service/admin.service';
 import { FollowRequestBody } from 'src/app/model/followDetails';
 import { UserDTO } from 'src/app/model/user';
@@ -20,7 +20,7 @@ export class RightSideBarComponent {
   suggestionsToShow = 3;
   currentIndex = 0;
 
-  constructor(private service: AdminService, private storageSer: StorageService, private followSer: FollowService, private matSnack: MatSnackBar) { }
+  constructor(private service: AdminService, private storageSer: StorageService, private followSer: FollowService, private matSnack: MatSnackBar, private router:Router) { }
   currentUserId = this.storageSer.getUserId();
 
   ngOnInit(): void {
@@ -153,5 +153,9 @@ export class RightSideBarComponent {
     if (index > -1) {
       this.displayedSuggestions.splice(index, 1);
     }
+  }
+
+  navigateToUserProfile(userId:number):void{
+    this.router.navigate(['/profile',userId]);
   }
 }

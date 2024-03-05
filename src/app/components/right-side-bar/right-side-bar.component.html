@@ -40,10 +40,10 @@
 
   <div class="friend-suggestions">
     <div *ngFor="let user of displayedSuggestions" class="friend-card">
-        <div class="profilePicAndName">
-            <div class="profile-pic"><img [src]="user.profilePicUrl" alt="profile_dp"></div>
+        <div class="profilePicAndName" *ngIf="user.id !==undefined ">
+            <div class="profile-pic"><img [src]="user.profilePicUrl" alt="profile_dp"  (click)="navigateToUserProfile(user!.id)"></div>
             <div class="friend-details">
-              <span class="friend-handle">@{{user.userHandle}}</span>
+              <span  (click)="navigateToUserProfile(user!.id)" class="friend-handle">@{{user.userHandle}}</span>
         </div>
       </div>
       <div class="followButtonClass">

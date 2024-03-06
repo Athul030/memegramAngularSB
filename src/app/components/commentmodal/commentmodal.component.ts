@@ -15,7 +15,8 @@ export class CommentmodalComponent implements OnInit {
   imageUrl: string = '';
   comment: string = '';
   comments: CommentDTO[] = [];
-
+  currentUserId!:number;
+  
 
   constructor(public dialogRef: MatDialogRef<CommentmodalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { imageUrl: string, postId: number, lastComment?: CommentDTO }, private likeComSer: LikeCommentService, private strgSer: StorageService) {
@@ -25,7 +26,7 @@ export class CommentmodalComponent implements OnInit {
   ngOnInit(): void {
     this.imageUrl = this.data.imageUrl;
     this.postId = this.data.postId;
-
+    this.currentUserId = this.strgSer.getUserId();
     this.likeComSer.getAllComments(this.postId).subscribe((allComments) => {
       console.log("all comments", allComments);
 
@@ -49,7 +50,6 @@ export class CommentmodalComponent implements OnInit {
 
       // Refresh comments after adding a new comment
       this.likeComSer.getAllComments(this.postId).subscribe((allComments) => {
-        console.log("all comments", allComments);
 
         if (allComments) {
           this.comments = allComments;
@@ -58,4 +58,24 @@ export class CommentmodalComponent implements OnInit {
     });
     this.comment = ''; // Clear the input field
   }
+
+  deleteComment(comment:CommentDTO){
+    
+    this.likeComSer.deleteComment(comment.commentId).subscribe(
+      ()=>{
+       this.comments = this.comments.filter((x)=>x.commentId!==comment.commentId);
+      },(error)=>{
+        console.log("not deleted");
+      }
+    )
+  }
+
+  isSameUser(id:number | undefined){
+    if(id === undefined){
+      return;
+    }
+    return id !== this.currentUserId;
+
+  }
+
 }

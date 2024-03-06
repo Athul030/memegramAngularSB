@@ -30,9 +30,9 @@ export class LikeCommentService {
     return this.http.post<CommentDTO>(`${this.baseURL}/addComment`, addCommentRequest);
   }
 
-  deleteComment(commentId: number): Observable<ApiResponseCustom> {
-    const commentDTO = { commentId };
-    return this.http.post<ApiResponseCustom>(`${this.baseURL}/deleteComment`, commentDTO);
+  deleteComment(commentId: number): Observable<void> {
+    
+    return this.http.delete<void>(`${this.baseURL}/deleteComment/${commentId}`);
   }
 
   getAllComments(postId: number): Observable<CommentDTO[]>{

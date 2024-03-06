@@ -108,4 +108,7 @@
   }
   
   
-  
+  .delete-button{
+    margin-left: auto;
+    vertical-align: middle;
+  }

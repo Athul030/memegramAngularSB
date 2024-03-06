@@ -14,6 +14,11 @@
           <span class="comment-date">{{ comment.commentedDate | date: 'short' }}</span>
         </div>
       </div>
+
+      <div class="delete-button">
+        <button mat-icon-button color="primary" (click)="deleteComment(comment)" [disabled]="isSameUser(comment.user.id)"><mat-icon>delete</mat-icon>
+        </button>
+      </div>
     </div>
   </div>
 

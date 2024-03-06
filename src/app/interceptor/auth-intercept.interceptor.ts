@@ -16,7 +16,7 @@ import { CustomToken } from '../model/user';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 
-const MAX_REFRESH_ATTEMPTS = 5; 
+const MAX_REFRESH_ATTEMPTS = 10; 
 
 @Injectable()
 export class AuthInterceptInterceptor implements HttpInterceptor {
@@ -50,7 +50,6 @@ export class AuthInterceptInterceptor implements HttpInterceptor {
 
             return this.service.refreshToken().pipe(
               mergeMap((response) => {
-                console.log('22222222222');
                 console.log("resp" + response);
                 console.log("respAcces" + response.accessToken);
                 this.storage.saveAccessToken(response.accessToken);

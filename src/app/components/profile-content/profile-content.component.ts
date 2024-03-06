@@ -39,15 +39,33 @@ export class ProfileContentComponent implements OnInit {
   constructor(private postSer:PostService, private followSer:FollowService, private userSer:UserService, private eventService:EventService, private storageSer:StorageService, private matSnack:MatSnackBar){
     this.showPosts();
     this.eventService.followerRemoved$.subscribe(()=>{
+      console.log("enter event subs")
       this.getCountOfPostAndFollowers();
+      if(!this.isOwnProfileValueValue){
+
+      this.otherUsergetCountOfPostAndFollowers(this.otherUserIdValue);
+      }
+      console.log("got the count")
+      console.log(this.otherTotalnumberOfFollowers)
+      console.log(this.otherTotalnumberOfFollowing)
     });
+    this.eventService.followerAdded$.subscribe(()=>{
+      this.getCountOfPostAndFollowers();
+      if(!this.isOwnProfileValueValue){
+
+      this.otherUsergetCountOfPostAndFollowers(this.otherUserIdValue);
+      }
+    })
   }
   ngOnInit(): void {
+    
+    this.checkFollowingAlready();
     this.isOwnProfileValueValue  = this.isOwnProfileValue;
-
+    console.log("1"+this.followingAlready);
+    console.log("2"+this.isOwnProfileValueValue);
     this.getUserDetails();
     this.getCountOfPostAndFollowers();
-    if(!this.isOwnProfileValue){
+    if(!this.isOwnProfileValueValue){
       this.otherUserDetails(this.otherUserIdValue);
       this.otherUsergetCountOfPostAndFollowers(this.otherUserIdValue);
       this.otherUserPostsList(this.otherUserIdValue);
@@ -239,11 +257,14 @@ export class ProfileContentComponent implements OnInit {
           if (response === true) {
             this.followingAlready=true;
             this.updateFollowerCount(1);
+            this.eventService.emitFollowerAdded();
             this.matSnack.open(
               'Followed Successfully', 'Ok', {
               duration: 3000,
               panelClass: 'custom-snack-bar-container'
             });
+            this.getCountOfPostAndFollowers();
+
           }
         },
         error => {
@@ -274,11 +295,14 @@ export class ProfileContentComponent implements OnInit {
         if (response === true) {
           this.followingAlready=false;
           this.updateFollowerCount(-1);
+          this.eventService.emitFollowerRemoved();
+
           this.matSnack.open(
             'Unfollowed Successfully', 'Ok', {
             duration: 3000,
             panelClass: 'custom-snack-bar-container'
           });
+          this.getCountOfPostAndFollowers();
         }
       },
       error => {
@@ -293,7 +317,7 @@ export class ProfileContentComponent implements OnInit {
   }
   
   checkFollowingAlready(){
-    if(this.otherUser && this.otherUser.followers.some(x=>x.id===this.currentUser.id)){
+    if(this.otherUser && this.currentUser && this.otherUser.followers.some(x=>x.id===this.currentUser.id)){
       this.followingAlready=true;
     }else{
       this.followingAlready=false;
@@ -310,5 +334,6 @@ export class ProfileContentComponent implements OnInit {
 
   updateFollowerCount(change: number): void {
     this.totalnumberOfFollowers += change;
+    console.log("total"+this.totalnumberOfFollowers);
   }
 }

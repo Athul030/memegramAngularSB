@@ -128,7 +128,7 @@ export class PostComponent {
         console.log(error);
         if(error instanceof HttpErrorResponse && error.status===409){
         this.matSnack.open(
-          'You have already reported this user', 'Ok', {
+          'You have already reported this user and this post', 'Ok', {
           duration: 3000,
           panelClass: 'custom-snack-bar-container'
         });

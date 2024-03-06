@@ -6,13 +6,13 @@
   
     <div class="flex flex-1 ">
       <!-- Sidebar component -->
-        <app-sidebar></app-sidebar>
+        <app-sidebar class="leftSideBar"></app-sidebar>
 
       <!-- Router outlet for other content -->
       <router-outlet ></router-outlet>
       <app-feeds *ngIf="!isProfilePage()" class="flex-grow p-2 appFeed"></app-feeds>
       <app-profile *ngIf="isProfilePage()" ></app-profile>
-      <app-right-side-bar class="ml-auto"></app-right-side-bar>
+      <app-right-side-bar class="ml-auto rightSideBar"></app-right-side-bar>
 
 
     </div>

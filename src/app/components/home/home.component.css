@@ -1,6 +1,15 @@
 
 .appFeed{
-    flex-grow: 1;
-
+    flex-grow: 1 0;
+    
 }
 
+.rightSideBar{
+    flex-basis: 22%;
+    flex-shrink: 0;
+}
+
+.leftSideBar{
+    flex-basis: 18%;
+    
+}

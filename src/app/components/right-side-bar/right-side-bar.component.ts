@@ -98,6 +98,7 @@ export class RightSideBarComponent {
               duration: 3000,
               panelClass: 'custom-snack-bar-container'
             });
+            this.followSer.followUser();
           }
         },
         error => {

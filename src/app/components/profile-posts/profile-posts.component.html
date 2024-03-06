@@ -15,7 +15,7 @@
 
 <div class="container" *ngIf="!isOwnProfileValueInPostComp">
     <div class="gallery" >
-        <div class="gallery-item" *ngFor="let post of otherUserPostsList" tabindex="0">
+        <div class="gallery-item" *ngFor="let post of otherUserPostsList?.reverse()" tabindex="0">
             <div (click)="post.imageUrl && openImageModal(post.imageUrl)">
             <img src="{{post.imageUrl}}" class="gallery-image" alt="post" >
             <div class="gallery-item-info">

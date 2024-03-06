@@ -17,7 +17,33 @@
     height: 690px;
     overflow-y: auto;
     scrollbar-width: none;
+    
 }
 
 
+.colorful{
 
+    font-size: 2rem;
+    background: linear-gradient(to right, #ff4081, #3f51b5); 
+    -webkit-background-clip: text; 
+    color: transparent;
+    font-family: 'YourFont', sans-serif;
+    text-align: center;
+    padding: 10px; 
+    display: inline-block; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+
+    
+  }
+  
+  .no-posts-message {
+    margin-top: 40%;
+    padding: 20px;
+    text-align: center; 
+    justify-content: center;
+    vertical-align:middle;
+    align-items: center;
+    
+  }
+  

@@ -41,7 +41,7 @@ export class ProfilePostsComponent implements OnInit {
       
       if (this.isOwnProfileValueInPostComp) {
         this.getPostsOfUser();
-      this.otherUserPostsList = this.postsList;
+      this.otherUserPostsList = this.postsList.reverse();
       }
     });
   }
@@ -49,7 +49,7 @@ export class ProfilePostsComponent implements OnInit {
   getPostsOfUser(){
     this.postSer.getPostsByUser().subscribe(
       (posts: PostDTO[])=>{
-        this.postsList = posts;
+        this.postsList = posts.reverse();
       },(error)=>{
         console.log("Error fetching posts by the User",error);
       }

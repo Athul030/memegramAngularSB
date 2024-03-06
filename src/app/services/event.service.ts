@@ -15,4 +15,13 @@ export class EventService {
   emitFollowerRemoved():void{
     this.followerRemovedSubject.next();
   }
+
+  //custom for follower added
+  private followerAddedSubject = new Subject<void>();
+
+  followerAdded$ = this.followerAddedSubject.asObservable();
+
+  emitFollowerAdded():void{
+    this.followerAddedSubject.next();
+  }
 }

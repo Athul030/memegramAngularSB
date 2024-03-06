@@ -1,6 +1,11 @@
 <div id="post-feed" class="scrollable-container">
-    <app-post *ngFor = "let post of feedPosts" [postData]="post" >
-    </app-post>
+    <ng-container *ngIf="feedPosts && feedPosts.length > 0; else noPostsMessage">
+        <app-post *ngFor = "let post of feedPosts" [postData]="post" ></app-post>
+    </ng-container>
+    <ng-template #noPostsMessage>
+        <div class="no-posts-message">
+            <p class="colorful">Follow other users to see exciting Memes!......................</p>
+        </div>
+    </ng-template>
 </div>
-<button (click)="onCreatePostClick()"
- mat-fab color="warn" id="post-button"><mat-icon>add</mat-icon></button>
+<button (click)="onCreatePostClick()" mat-fab color="warn" id="post-button"><mat-icon>add</mat-icon></button>

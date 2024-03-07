@@ -53,7 +53,11 @@
   </div>
 
   <!-- More Button -->
-  <button *ngIf="suggestionsToShow < userList.length" (click)="loadMoreSuggestions()" class="more-button">
+  <div *ngIf="displayedSuggestions.length === 0">
+    <p>Click "More" to view suggestions again.</p>
+  </div>
+
+  <button *ngIf="displayedSuggestions.length < (userList.length-1)" (click)="loadMoreSuggestions()" class="more-button">
     More
   </button>
 </aside>

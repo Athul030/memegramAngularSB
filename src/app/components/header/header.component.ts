@@ -1,7 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { AdminService } from 'src/app/admin/service/admin.service';
 import { StorageService } from 'src/app/services/storage.service';
+// import { removeUserFromPresence } from 'src/app/store/store.actions';
 
 @Component({
   selector: 'app-header',
@@ -10,11 +12,11 @@ import { StorageService } from 'src/app/services/storage.service';
 })
 export class HeaderComponent {
 
-  constructor(private adSservice:AdminService, private serviceNow: StorageService,private router:Router){  }
+  constructor(private adSservice:AdminService, private serviceNow: StorageService,private router:Router, private store:Store){  }
 
   showHeader:boolean = true;
   
-  
+  currentUserId:number=this.serviceNow.getUserId();
 
   isLoginOrRegisterRoute(): boolean {
     const currentRoute = this.router.url;
@@ -23,6 +25,9 @@ export class HeaderComponent {
 
   logout():void{
     console.log("logout clicked");
+    // if(this.currentUserId !== undefined){
+    //   this.store.dispatch(removeUserFromPresence({userId:this.currentUserId}));
+    // }
     localStorage.removeItem('accessToken')
     localStorage.removeItem('refreshToken')
     localStorage.removeItem('user')

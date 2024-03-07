@@ -1,4 +1,4 @@
-<div *ngIf="isOwnProfileValue">
+<div *ngIf="isOwnProfileValue ">
 <div class="container ">
 		<div class="profile">
 			<div class="profile-image" *ngIf="currentUser">
@@ -34,7 +34,7 @@
 </div>
 	
 
-<div *ngIf="!isOwnProfileValue">
+<div *ngIf="!isOwnProfileValue ">
 <div class="container" >
 	<div class="profile">
 		<div class="profile-image" *ngIf="otherUser">
@@ -46,10 +46,10 @@
 			<!-- <button class="btn profile-edit-btn">Edit Profile</button> -->
 				<button (click)="toggleFollow(otherUserIdValue)" *ngIf="followingAlready" class="btn profile-edit-btn">UnFollow</button>
 				<button (click)="toggleFollow(otherUserIdValue)" *ngIf="!followingAlready" class="btn profile-edit-btn">Follow</button>
+				
 				<!-- block or unblock -->
-				<button (click)="toggleBlock(otherUserIdValue)" *ngIf="blockedAlready" class="btn profile-edit-btn">Unblock</button>
-				<button (click)="toggleBlock(otherUserIdValue)" *ngIf="!blockedAlready" class="btn profile-edit-btn">Block</button>
-			
+				<button (click)="toggleBlock(otherUserIdValue)" *ngIf="isBlockedAlready" class="btn profile-edit-btn">Unblock</button>
+				<button (click)="toggleBlock(otherUserIdValue)" *ngIf="!isBlockedAlready" class="btn profile-edit-btn">Block</button>
 			<button class="btn profile-settings-btn" aria-label="profile settings"><mat-icon>settings</mat-icon></button>
 		</div>
 		<div class="profile-stats2" >

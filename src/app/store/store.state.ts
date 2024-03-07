@@ -30,3 +30,14 @@ export const intitalState:StoreState = UserAdapter.getInitialState({
     }
     
 }); 
+
+
+//userPresence
+export interface UserPresenceState{
+    userIds:number[];
+}
+
+export const initialUserPrsesenceState: UserPresenceState={
+    userIds:[],
+}
+

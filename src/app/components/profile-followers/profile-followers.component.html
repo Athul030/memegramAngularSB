@@ -1,13 +1,13 @@
 <div class="followers-container">
     <h1 class="followers-header">Followers</h1>
-    <div class="follower" *ngFor="let follower of allFollowerList">
-        <div class="thumbnail-container">
-            <div class="thumbnail"><img src="{{follower.profilePicUrl}}" alt="thumbnail" ></div>
-        </div>
-        <div class="info">
-            <div class="username">{{follower.userHandle}}</div>
-            <div class="full-name">{{follower.fullName}}</div>
-        </div>
+    <div class="follower" *ngFor="let follower of allFollowerList" >
+            <div class="thumbnail-container" *ngIf="follower.id" (click)="navigateToUserProfile(follower!.id)">
+                <div class="thumbnail"><img src="{{follower.profilePicUrl}}" alt="thumbnail" ></div>
+            </div>
+            <div class="info" *ngIf="follower.id" (click)="navigateToUserProfile(follower!.id)">
+                <div class="username">{{follower.userHandle}}</div>
+                <div class="full-name">{{follower.fullName}}</div>
+            </div>
         <button (click)="removeFollower(follower.id)" class="remove-btn">REMOVE</button>
     </div>
 </div>

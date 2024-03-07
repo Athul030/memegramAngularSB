@@ -24,6 +24,8 @@
 	border-radius: 50%;
 	overflow: hidden;
 	margin-right: 10px;
+	cursor: pointer;
+
 }
 
 .thumbnail {
@@ -34,6 +36,8 @@
 
 .info {
 	flex: 1;
+	cursor: pointer;
+
 }
 
 .username {

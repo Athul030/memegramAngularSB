@@ -40,6 +40,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { ChatLeftSectionComponent } from './components/chat-left-section/chat-left-section.component';
 import { ChatRightSectionComponent } from './components/chat-right-section/chat-right-section.component';
 import { FullSizeImageComponent } from './components/full-size-image/full-size-image.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { PickerComponent } from '@ctrl/ngx-emoji-mart'
 
 @NgModule({
   declarations: [
@@ -64,7 +66,8 @@ import { FullSizeImageComponent } from './components/full-size-image/full-size-i
     CommentmodalComponent,
     ChatLeftSectionComponent,
     ChatRightSectionComponent,
-    FullSizeImageComponent
+    FullSizeImageComponent,
+  
   ],
   imports: [
     BrowserModule,
@@ -79,7 +82,8 @@ import { FullSizeImageComponent } from './components/full-size-image/full-size-i
     MatButtonModule,
     MatCardModule,
     MatMenuModule,
-
+    MatFormFieldModule,
+    PickerComponent,
     StoreModule.forRoot({dp:dpReducer}, {}),
     EffectsModule.forRoot([storeEffects])
     

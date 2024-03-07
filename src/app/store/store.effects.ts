@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { beginLogin, beginRegister, emptyaction, showalert } from "./store.actions";
+import {  beginLogin, beginRegister, emptyaction, showalert } from "./store.actions";
 import { catchError, exhaustMap, map, mergeMap, of, switchMap } from "rxjs";
 import { UserService } from "../services/user.service";
 import { StorageService } from "../services/storage.service";
@@ -8,13 +8,14 @@ import { Router } from "@angular/router";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Role } from "../model/user";
 import { HttpErrorResponse } from "@angular/common/http";
+import { Store } from "@ngrx/store";
 
 
 @Injectable()
 export class storeEffects{
     
     constructor( private action$:Actions, private userService:UserService, private storage:StorageService,
-        private route:Router, private snackbar:MatSnackBar){
+        private route:Router, private snackbar:MatSnackBar, private store:Store){
 
     }
 
@@ -55,6 +56,9 @@ this.action$.pipe(
                                           if (item.name === 'ROLE_ADMIN') {
                                             this.route.navigate(['admin']);
                                           } else {
+                                            // if(data.user.id !==undefined){
+                                            //     this.store.dispatch(addUserToPresence({userId:data.user.id}));
+                                            // }
                                             this.route.navigate(['home']);
                                           }
                                         

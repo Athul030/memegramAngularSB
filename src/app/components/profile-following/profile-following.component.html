@@ -2,10 +2,10 @@
 <div class="following-container">
     <h1 class="following-header">Following</h1>
     <div class="following" *ngFor="let following of allFollowingList">
-        <div class="thumbnail-container">
+        <div class="thumbnail-container" *ngIf="following.id" (click)="navigateToUserProfile(following!.id)">
             <div class="thumbnail"><img src="{{following.profilePicUrl}}" alt="thumbnail" ></div>
         </div>
-        <div class="info">
+        <div class="info" *ngIf="following.id" (click)="navigateToUserProfile(following!.id)">
             <div class="username">{{following.userHandle}}</div>
             <div class="full-name">{{following.fullName}}</div>
         </div>

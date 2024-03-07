@@ -31,7 +31,6 @@
           <div class="message-content">{{ message.content }}</div>
         </ng-container>
         <ng-template #imageContent id="imageThumb" >  
-          <!-- Assuming your server provides a base URL for the images -->
           <img *ngIf="message.imageName" [src]="message.imageName" alt="Image" id="thumbnail-image" (click)="openImageModal(message.imageName)" >
         </ng-template>
       </div>
@@ -41,25 +40,30 @@
 
 
   <div class="text-area-container">
-    <!-- Text area for new message -->
     <textarea [(ngModel)]="newMessage" placeholder="Type your message..."></textarea>
-  
-      <!-- Container for send button and image icon -->
+    <button title="any" (click)="isEmojiPickerVisible = !isEmojiPickerVisible;"><img src="assets/icons/smile-success-32.png"
+      width="24" height="24" alt=""></button>
+      <emoji-mart class="emoji-mart" *ngIf="isEmojiPickerVisible" (emojiSelect)="addEmoji($event)"
+      title="Choose your emoji"></emoji-mart>
+      
       <div class="button-container">
-        <!-- Send button for text message -->
         <button mat-raised-button color="primary" (click)="sendMessage()" class="send-button">
             <mat-icon class="send-icon">send</mat-icon>
         </button>
         
-        <!-- Input for sending images -->
         <div class="image-icon-container">
             <input type="file" accept="image/*" (change)="sendImage($event)" id="imageInput">
             <label for="imageInput">
                 <mat-icon class="image-icon">image</mat-icon>
             </label>
         </div>
+
+        
+
     </div>
 </div>
+
+    
   
   
   

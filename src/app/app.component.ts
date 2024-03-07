@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
-
+import { Picker } from 'emoji-picker-element'
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

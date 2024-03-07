@@ -6,6 +6,9 @@ import { UserDTO } from 'src/app/model/user';
 import { ChatService } from 'src/app/services/chat.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { FullSizeImageComponent } from '../full-size-image/full-size-image.component';
+import { MatFormFieldModule } from '@angular/material/form-field'
+import Picker from 'emoji-picker-element/picker';
+
 
 @Component({
   selector: 'app-chat-right-section',
@@ -109,5 +112,16 @@ export class ChatRightSectionComponent implements OnInit, OnDestroy, AfterViewCh
     });
   }
 
+  isEmojiPickerVisible!:boolean;
+  
+  addEmoji(event:{emoji:{native:any;};}){
+    this.newMessage = `${this.newMessage}${event.emoji.native}`;
+    this.isEmojiPickerVisible = false;
+
+  }
+
+  emojiPreventClose($event:any){
+    $event.stopPropagation();
+  }
   
 }

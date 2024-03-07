@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { FollowRequestBody } from 'src/app/model/followDetails';
 import { UserDTO } from 'src/app/model/user';
 import { EventService } from 'src/app/services/event.service';
@@ -15,7 +16,7 @@ export class ProfileFollowingComponent implements OnInit {
   allFollowingList!:UserDTO[];
 
   constructor(private followSer:FollowService, private storageSer:StorageService,private matSnack:MatSnackBar,
-    private eventService:EventService){}
+    private eventService:EventService, private router:Router){}
 
     ngOnInit(): void {
       this.getFollowerDetails();
@@ -67,4 +68,7 @@ export class ProfileFollowingComponent implements OnInit {
     }
   
 
+    navigateToUserProfile(userId:number):void{
+      this.router.navigate(['/profile',userId]);
+    }
 }

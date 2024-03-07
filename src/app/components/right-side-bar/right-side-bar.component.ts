@@ -49,7 +49,6 @@ export class RightSideBarComponent {
       this.displayedSuggestions = [...newSuggestions].slice(0, this.suggestionsToShow);
 
       this.currentIndex += this.suggestionsToShow;
-      console.log("part4: ", this.currentIndex);
 
       if (this.currentIndex >= totalSuggestions) {
         this.currentIndex = 0;

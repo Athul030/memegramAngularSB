@@ -46,8 +46,6 @@ export class LoginComponent {
 
     this.store.dispatch(beginLogin({usercred:obj}))
    }
-
-   
   }
 
     signInWithGoogle() {

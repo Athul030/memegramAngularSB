@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { DpState } from 'src/app/store/store.reducer';
 import {  Store, select } from '@ngrx/store';
 import { selectImageUrl } from 'src/app/store/store.selectors';
+// import { removeUserFromPresence } from 'src/app/store/store.actions';
 
 @Component({
   selector: 'app-sidebar',
@@ -39,6 +40,9 @@ export class SidebarComponent implements OnInit {
 
   logout():void{
     console.log("logout clicked");
+    // if(this.currentUser.id !== undefined){
+    //   this.store.dispatch(removeUserFromPresence({userId:this.currentUser.id}));
+    // }
     localStorage.removeItem('accessToken')
     localStorage.removeItem('refreshToken')
     localStorage.removeItem('user')

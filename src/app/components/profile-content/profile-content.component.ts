@@ -8,6 +8,7 @@ import { PostService } from 'src/app/services/post.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { UserService } from 'src/app/services/user.service';
 import { ProfilePostsComponent } from '../profile-posts/profile-posts.component';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-profile-content',
@@ -28,41 +29,41 @@ export class ProfileContentComponent implements OnInit {
   otherTotalnumberOfFollowers!:number ;
   otherTotalnumberOfFollowing!:number ;  
   followingAlready!:boolean;
-  blockedAlready!:boolean;
-
+  isBlockedAlready!:boolean;
   @Input() isOwnProfileValue!:boolean;
   @Input() otherUserIdValue!:number;
   isOwnProfileValueValue!:boolean;
 
   @ViewChild(ProfilePostsComponent) profilePostsComponent?: ProfilePostsComponent;
   
+  blockedAlreadySubject:BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  blockedAlready$= this.blockedAlreadySubject.asObservable();
+
   constructor(private postSer:PostService, private followSer:FollowService, private userSer:UserService, private eventService:EventService, private storageSer:StorageService, private matSnack:MatSnackBar){
+   
     this.showPosts();
+
     this.eventService.followerRemoved$.subscribe(()=>{
-      console.log("enter event subs")
       this.getCountOfPostAndFollowers();
       if(!this.isOwnProfileValueValue){
-
       this.otherUsergetCountOfPostAndFollowers(this.otherUserIdValue);
       }
-      console.log("got the count")
-      console.log(this.otherTotalnumberOfFollowers)
-      console.log(this.otherTotalnumberOfFollowing)
     });
+
     this.eventService.followerAdded$.subscribe(()=>{
       this.getCountOfPostAndFollowers();
       if(!this.isOwnProfileValueValue){
-
       this.otherUsergetCountOfPostAndFollowers(this.otherUserIdValue);
       }
     })
   }
+
+
   ngOnInit(): void {
     
     this.checkFollowingAlready();
+    this.checkBlockedAlready()
     this.isOwnProfileValueValue  = this.isOwnProfileValue;
-    console.log("1"+this.followingAlready);
-    console.log("2"+this.isOwnProfileValueValue);
     this.getUserDetails();
     this.getCountOfPostAndFollowers();
     if(!this.isOwnProfileValueValue){
@@ -70,7 +71,11 @@ export class ProfileContentComponent implements OnInit {
       this.otherUsergetCountOfPostAndFollowers(this.otherUserIdValue);
       this.otherUserPostsList(this.otherUserIdValue);
       
+      
     }
+    this.checkBlockedAlready();
+
+    
   }
 
   private otherUserPostsList(userId:number):void{
@@ -175,7 +180,7 @@ export class ProfileContentComponent implements OnInit {
   }
 
   toggleBlock(otherUserId:number){
-    if(this.blockedAlready){
+    if(this.isBlockedAlready){
       this.unblock(otherUserId);
     }else{
       this.block(otherUserId);
@@ -194,13 +199,14 @@ export class ProfileContentComponent implements OnInit {
     }
     this.userSer.blockUser(userblockRequest).subscribe(
       (response)=>{
-        this.blockedAlready = true;
+        this.isBlockedAlready = true;  
         this.matSnack.open(
           'Blocked Successfully', 'Ok', {
           duration: 3000,
           panelClass: 'custom-snack-bar-container'
         });
       },error=>{
+        
         this.matSnack.open(
           'Follower not added due to error', 'Ok', {
           duration: 3000,
@@ -224,7 +230,7 @@ export class ProfileContentComponent implements OnInit {
     }
     this.userSer.unBlockUser(userblockRequest).subscribe(
       (response)=>{
-        this.blockedAlready = false;
+        this.isBlockedAlready = false;  
         this.matSnack.open(
           'Unblocked Successfully', 'Ok', {
           duration: 3000,
@@ -317,19 +323,24 @@ export class ProfileContentComponent implements OnInit {
   }
   
   checkFollowingAlready(){
+    console.log("reached at checkFollowingAlready")
     if(this.otherUser && this.currentUser && this.otherUser.followers.some(x=>x.id===this.currentUser.id)){
       this.followingAlready=true;
     }else{
       this.followingAlready=false;
     }
+    console.log("followingAlready is: ", this.followingAlready)
   }
 
   checkBlockedAlready(){
+    console.log("reached at checkBlockedAlready")
     if(this.otherUser && this.currentUser && this.currentUser.blockedUsers.some(x=>x.id===this.otherUser.id)){
-      this.blockedAlready=true;
+      this.isBlockedAlready = true;
     }else{
-      this.blockedAlready=false;
+      this.isBlockedAlready = false;
     }
+    console.log("Blocked Already Value: ", this.isBlockedAlready);
+
   }
 
   updateFollowerCount(change: number): void {

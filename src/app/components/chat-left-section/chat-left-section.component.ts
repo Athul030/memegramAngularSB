@@ -1,8 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable, map } from 'rxjs';
 import { ChatRoomDTO } from 'src/app/model/message';
 import { UserDTO } from 'src/app/model/user';
 import { ChatService } from 'src/app/services/chat.service';
-import { FollowService } from 'src/app/services/follow.service';
 import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
@@ -10,14 +11,31 @@ import { StorageService } from 'src/app/services/storage.service';
   templateUrl: './chat-left-section.component.html',
   styleUrls: ['./chat-left-section.component.css']
 })
-export class ChatLeftSectionComponent  {
+export class ChatLeftSectionComponent implements OnInit  {
 
   @Input() followersList!:UserDTO[];
   @Input() followingList!:UserDTO[];
-  constructor(private chatService: ChatService,private storgSer:StorageService) {}
+  constructor(private chatService: ChatService,private storgSer:StorageService, private store:Store) {}
   @Output() userSelected:EventEmitter<{user:UserDTO,chatRoomId:string}> = new EventEmitter();
   
+  userPresence$!: Observable<boolean>;
+  OnlineUsers$!: Observable<number[]>;
 
+  ngOnInit(): void {
+      // this.OnlineUsers$ = this.store.select(selectUserIds);
+      
+  }
+
+  // isUserOnline(userId:number):boolean{
+  //   let onlineUserIds: number[] | undefined=[]  ;
+  //   const subscription = this.OnlineUsers$.subscribe((ids:number[] | undefined)=>{
+  //     onlineUserIds = ids;
+  //   })
+  //   const isOnline = onlineUserIds.includes(userId);
+  //   subscription.unsubscribe();
+  //   return isOnline;
+  // }
+  
   onSelectUser(user: UserDTO): void {
     
     //emit the user

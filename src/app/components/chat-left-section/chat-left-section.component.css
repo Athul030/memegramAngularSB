@@ -46,3 +46,49 @@
   color: #333; 
   margin-bottom: 20px; 
 }
+
+
+
+/* folowers and following*/
+/* Followers Item Styles */
+.followers-item {
+  background: linear-gradient(to right, #FF6B6B, #d1caca);
+  border: 1px solid #FF6B6B;
+  padding: 10px;
+  margin-bottom: 5px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.followers-item .full-name {
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Following Item Styles */
+.following-item {
+  background: linear-gradient(to right, #4CAF50, #c7cdc8);
+  border: 1px solid #4CAF50;
+  padding: 10px;
+  margin-bottom: 5px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.following-item .full-name {
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+  font-family: 'Arial', sans-serif;
+}
+
+.online {
+  background-color: #4CAF50; 
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-left: 5px;
+}

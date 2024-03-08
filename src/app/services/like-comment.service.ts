@@ -41,4 +41,9 @@ export class LikeCommentService {
     return this.http.get<CommentDTO[]>(`${this.baseURL}/getAllComments/${postId}`);
   }
 
+  editComment(commentId:number,commentText:string):Observable<CommentDTO>{
+    const addCommentRequest = {commentText};
+    return this.http.patch<CommentDTO>(`${this.baseURL}/editComment/${commentId}`,addCommentRequest);
+  }
+
 }

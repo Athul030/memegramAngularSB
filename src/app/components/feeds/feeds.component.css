@@ -1,3 +1,23 @@
+:host{
+    
+    background-image: url('../../../assets/images/wallpaper5.jpeg');
+    
+}
+
+:host::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../../../assets/images/wallpaper5.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.5; 
+    z-index: -1;
+}
 
 #post-button{
     position: fixed;
@@ -6,15 +26,14 @@
 }
 
 #post-feed {
-    max-width: 70%;
-    margin-top: 0.5em;
+    max-width: 80%;
     margin-left: auto;
     margin-right: auto;
     
 }
 
 .scrollable-container {
-    height: 690px;
+    height: 800px;
     overflow-y: auto;
     scrollbar-width: none;
     
@@ -24,6 +43,7 @@
 .colorful{
 
     font-size: 2rem;
+   
     background: linear-gradient(to right, #ff4081, #3f51b5); 
     -webkit-background-clip: text; 
     color: transparent;
@@ -44,6 +64,10 @@
     justify-content: center;
     vertical-align:middle;
     align-items: center;
-    
+    background-color: white;
+
+    padding: 10px; 
+    border-radius: 8px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
   }
   

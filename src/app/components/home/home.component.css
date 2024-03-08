@@ -1,15 +1,24 @@
 
-.appFeed{
-    flex-grow: 1 0;
-    
-}
 
-.rightSideBar{
-    flex-basis: 22%;
-    flex-shrink: 0;
-}
-
-.leftSideBar{
-    flex-basis: 18%;
+.appFeed {
+    flex-grow: 1;
+  }
+  
+  .rightSideBar {
+    flex: 0 0 15%; 
     
-}
+    
+    background-color: #fef5f7;
+
+    display: flex;
+  justify-content: center; /* Center the content horizontally */
+  align-items: center; /* Center the content vertically */
+  padding-right: 20px;
+  padding-left: 20px;
+
+  }
+  
+  .leftSideBar {
+    flex: 0 0 15%; 
+  }
+  

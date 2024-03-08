@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/internal/Observable';
 import { Page, Post, PostDTO, User, UserDTO } from 'src/app/model/user';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class AdminService {
 
   private baseUrl:string="http://localhost:8080";
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient, private service:StorageService) { }
 
   // getAllUsers():Observable<User[]>{
   //   return this.http.get<User[]>(`${this.baseUrl}/api/user/getAll`);
@@ -39,7 +40,19 @@ export class AdminService {
   }
 
   logout(): Observable<any> {
+    
     return this.http.post<any>(`${this.baseUrl}/api/v1/auth/logout`,{});
+  }
+
+  removePresence(userId: number): void {
+    this.http.post<void>(`${this.baseUrl}/api/v1/auth/removeUserPresence/${userId}`, {}).subscribe(
+      () => {
+        console.log(`Successfully removed presence for user with ID ${userId}`);
+      },
+      (error) => {
+        console.error('Error removing user presence:', error);
+      }
+    );
   }
 
   // toggleBlock(id:number):Observable<any>{

@@ -28,6 +28,7 @@ export class HeaderComponent {
     // if(this.currentUserId !== undefined){
     //   this.store.dispatch(removeUserFromPresence({userId:this.currentUserId}));
     // }
+    this.adSservice.removePresence(this.serviceNow.getUserId());
     localStorage.removeItem('accessToken')
     localStorage.removeItem('refreshToken')
     localStorage.removeItem('user')

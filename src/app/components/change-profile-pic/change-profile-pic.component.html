@@ -4,7 +4,7 @@
     </mat-card-header>
 
     
-    <div *ngIf="selectedImageFile" id="post-preview"><img id="post-preview-image"/></div>
+    <div *ngIf="selectedImageFile" id="post-preview"><img title="image" id="post-preview-image"/></div>
     <mat-card-actions align="end">
         <button mat-button color="warn"><label for="photo-upload">
             <input  #photoSelector (change) = "onPhotoSelected(photoSelector)"

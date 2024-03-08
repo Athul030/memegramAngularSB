@@ -70,6 +70,26 @@ export class CommentmodalComponent implements OnInit {
     )
   }
 
+  startEditingComment(comment:CommentDTO):void{
+    comment.isEditing = true;
+    comment.editedText = comment.commentText;
+  }
+  cancelEditing(comment:CommentDTO):void{
+    comment.isEditing=false;
+  }
+
+  saveEditing(comment:CommentDTO){
+    if(comment.editedText!==undefined)
+    this.likeComSer.editComment(comment.commentId,comment.editedText).subscribe(
+      (editedComment:CommentDTO)=>{
+        comment.commentText = editedComment.commentText;
+        comment.isEditing=false;
+      },(error)=>{
+        console.log("comment not edited because error:",error);
+      }
+    )
+  }
+
   isSameUser(id:number | undefined){
     if(id === undefined){
       return;

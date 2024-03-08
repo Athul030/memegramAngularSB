@@ -8,6 +8,8 @@ import { Observable } from 'rxjs';
 import { DpState } from 'src/app/store/store.reducer';
 import {  Store, select } from '@ngrx/store';
 import { selectImageUrl } from 'src/app/store/store.selectors';
+import { Router } from '@angular/router';
+import { StorageService } from 'src/app/services/storage.service';
 // import { removeUserFromPresence } from 'src/app/store/store.actions';
 
 @Component({
@@ -19,8 +21,8 @@ export class SidebarComponent implements OnInit {
 
   imageUrl:Observable<string | null>;
 
-  constructor(private adSservice:AdminService,private usService:UserService,
-    private dialog:MatDialog, private store:Store<DpState>){
+  constructor(private adSservice:AdminService,private usService:UserService, private strgService:StorageService,
+    private dialog:MatDialog, private store:Store<DpState>,private router:Router){
     this.imageUrl = store.pipe(select(selectImageUrl));
     
   }
@@ -40,14 +42,14 @@ export class SidebarComponent implements OnInit {
 
   logout():void{
     console.log("logout clicked");
-    // if(this.currentUser.id !== undefined){
-    //   this.store.dispatch(removeUserFromPresence({userId:this.currentUser.id}));
-    // }
+    
+    this.adSservice.removePresence(this.strgService.getUserId());
     localStorage.removeItem('accessToken')
     localStorage.removeItem('refreshToken')
     localStorage.removeItem('user')
     this.adSservice.logout().subscribe(
       (respones)=>{
+        this.router.navigate(['login'])
         console.log("respone"+respones);
       },(error) => {
         console.error('Logout failed', error);

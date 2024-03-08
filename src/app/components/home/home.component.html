@@ -10,7 +10,7 @@
 
       <!-- Router outlet for other content -->
       <router-outlet ></router-outlet>
-      <app-feeds *ngIf="!isProfilePage()" class="flex-grow p-2 appFeed"></app-feeds>
+      <app-feeds *ngIf="!isProfilePage()" class="flex-grow appFeed"></app-feeds>
       <app-profile *ngIf="isProfilePage()" ></app-profile>
       <app-right-side-bar class="ml-auto rightSideBar"></app-right-side-bar>
 

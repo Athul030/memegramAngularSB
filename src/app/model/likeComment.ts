@@ -31,6 +31,8 @@ export interface CommentDTO{
     commentedDate:string;
     user:UserDTO;
     post:PostDTO;
+    isEditing?:boolean;
+    editedText?:string;
 }
 
 export interface ApiResponseCustom{

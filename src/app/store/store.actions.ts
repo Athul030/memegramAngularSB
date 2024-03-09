@@ -9,7 +9,7 @@ export const BEGIN_LOGIN = '[auth] begin login'
 export const LOGIN_SUCCESS = '[auth] login success'
 
 export const setProfilePicture = createAction('[Profile Picture] Set',props<{imageUrl:string}>())
-
+export const resetProfilePicture = createAction('[Profile Picture] Reset')
 // export const addUserToPresence = createAction('[User Presence] Add User', props<{userId:number}>())
 // export const removeUserFromPresence = createAction('[User Presence] Remove User',props<{userId:number}>())
 

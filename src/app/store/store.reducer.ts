@@ -16,7 +16,11 @@ export const dpReducer = createReducer(
         StoreActions.setProfilePicture,(state,{imageUrl})=>({
             ...state,
             imageUrl
-        }))
+        })
+        ),
+    on(
+        StoreActions.resetProfilePicture,()=> initialState
+    )
 );
 
 // export const userPresenceReducer = createReducer(

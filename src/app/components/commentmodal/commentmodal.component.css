@@ -33,6 +33,11 @@
     width: 40%; /* Set the width to match the image */
     margin-bottom: 10px;
   }
+
+  .comment-textarea2 {
+    width: 80%; /* Set the width to match the image */
+    margin-bottom: 10px;
+  }
   
   .button-container {
     display: flex;

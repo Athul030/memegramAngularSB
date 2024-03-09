@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AdminService } from 'src/app/admin/service/admin.service';
 import { StorageService } from 'src/app/services/storage.service';
+import { resetProfilePicture } from 'src/app/store/store.actions';
 // import { removeUserFromPresence } from 'src/app/store/store.actions';
 
 @Component({
@@ -24,14 +25,15 @@ export class HeaderComponent {
   }
 
   logout():void{
+    window.location.reload()
     console.log("logout clicked");
-    // if(this.currentUserId !== undefined){
-    //   this.store.dispatch(removeUserFromPresence({userId:this.currentUserId}));
-    // }
+    this.store.dispatch(resetProfilePicture())
+
     this.adSservice.removePresence(this.serviceNow.getUserId());
     localStorage.removeItem('accessToken')
     localStorage.removeItem('refreshToken')
     localStorage.removeItem('user')
+    this.store.dispatch(resetProfilePicture())
     this.adSservice.logout().subscribe(
       (respones)=>{
         this.router.navigate(['login'])

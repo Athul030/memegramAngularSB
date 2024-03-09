@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
@@ -13,7 +13,7 @@ import * as StoreActions from 'src/app/store/store.actions'
 })
 export class ChangeProfilePicComponent {
   selectedImageFile :File | undefined;
-  constructor(private service:UserService, private snackBar:MatSnackBar, private dialog:MatDialogRef<ChangeProfilePicComponent>, private store:Store){}
+  constructor(private service:UserService, private snackBar:MatSnackBar, private dialog:MatDialogRef<ChangeProfilePicComponent>, private store:Store, private changeDetectorRef:ChangeDetectorRef){}
 
   onPhotoSelected(photoSelector:HTMLInputElement){
     if (photoSelector && photoSelector.files && photoSelector.files.length > 0) {
@@ -48,7 +48,8 @@ export class ChangeProfilePicComponent {
 
           if (fileUrl) {
 
-            this.store.dispatch(StoreActions.setProfilePicture({ imageUrl: fileUrl }))
+            this.store.dispatch(StoreActions.setProfilePicture({ imageUrl: fileUrl }));
+            this.changeDetectorRef.detectChanges();
           }
             this.snackBar.open('DP Changed','Close',{
               duration:3000, panelClass: 'custom-snack-bar-container',

@@ -11,7 +11,7 @@
       <div class="comment-content">
         <div class="comment-text" *ngIf="!comment.isEditing">{{ comment.commentText }}</div>
         <div *ngIf="comment.isEditing">
-          <textarea title="commentEdit" [(ngModel)]="comment.editedText" class="comment-textarea"></textarea>
+          <textarea title="commentEdit" [(ngModel)]="comment.editedText" class="comment-textarea2"></textarea>
         </div>
         <div class="button-container" *ngIf="comment.isEditing">
           <button class="cancel-button" (click)="cancelEditing(comment)">Cancel</button>

@@ -10,6 +10,7 @@ import {  Store, select } from '@ngrx/store';
 import { selectImageUrl } from 'src/app/store/store.selectors';
 import { Router } from '@angular/router';
 import { StorageService } from 'src/app/services/storage.service';
+import { resetProfilePicture } from 'src/app/store/store.actions';
 // import { removeUserFromPresence } from 'src/app/store/store.actions';
 
 @Component({
@@ -29,10 +30,16 @@ export class SidebarComponent implements OnInit {
   currentUser!:User ;
 
   ngOnInit(): void {
+    this.getCurrentUserDetails();
+  }
+
+  getCurrentUserDetails(){
     this.usService.getCurrentUser().subscribe(
       (response)=>{
         this.currentUser = response;
         console.log("profilepic",this.currentUser.profilePicUrl )
+        console.log("profilepic",response.profilePicUrl )
+
         this.currentUser.profilePicUrl = response.profilePicUrl;
       },(error)=>{
         console.log("unable to access the current user", error);
@@ -41,12 +48,16 @@ export class SidebarComponent implements OnInit {
   }
 
   logout():void{
+    window.location.reload()
     console.log("logout clicked");
-    
+    this.store.dispatch(resetProfilePicture())
+
     this.adSservice.removePresence(this.strgService.getUserId());
     localStorage.removeItem('accessToken')
     localStorage.removeItem('refreshToken')
     localStorage.removeItem('user')
+    this.store.dispatch(resetProfilePicture())
+
     this.adSservice.logout().subscribe(
       (respones)=>{
         this.router.navigate(['login'])
@@ -61,7 +72,11 @@ export class SidebarComponent implements OnInit {
   
 
   onChangeProfilePicClick(){
-    this.dialog.open(ChangeProfilePicComponent);
+    this.dialog.open(ChangeProfilePicComponent).afterClosed().subscribe(
+      ()=>{
+        this.getCurrentUserDetails();
+      }
+    );
   }
 
 

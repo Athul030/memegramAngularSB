@@ -85,7 +85,10 @@ import { PickerComponent } from '@ctrl/ngx-emoji-mart'
     MatFormFieldModule,
     PickerComponent,
     StoreModule.forRoot({dp:dpReducer}, {}),
-    EffectsModule.forRoot([storeEffects])
+    EffectsModule.forRoot([storeEffects]),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, 
+    }),
     
     ],
   providers: [{

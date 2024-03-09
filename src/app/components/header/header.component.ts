@@ -25,7 +25,6 @@ export class HeaderComponent {
   }
 
   logout():void{
-    window.location.reload()
     console.log("logout clicked");
     this.store.dispatch(resetProfilePicture())
 

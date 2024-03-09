@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpErrorResponse } from '@angular/common/http';
+import { LikeDTO } from 'src/app/model/likeComment';
 
 
 @Component({
@@ -30,10 +31,11 @@ export class PostComponent {
     this.postData.user?.fullName
   }
   isLikedByUser(postData: Post): boolean {
+    console.log(postData.likes)
     if(postData.likes===undefined) {
       return false;
     }
-    return postData.likes.some((like: any) => like.userDTO && like.userDTO.id === this.userId);
+    return postData.likes.some((like: LikeDTO) => like.user && like.user.id === this.userId);
   }
 
 

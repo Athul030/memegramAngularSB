@@ -14,8 +14,8 @@ export interface LikeResponse{
 
 export interface LikeDTO{
     likeId : number;
-    postDTO : PostDTO;
-    userDTO: UserDTO;
+    post : PostDTO;
+    user: UserDTO;
     likedDate: string;
 }
 

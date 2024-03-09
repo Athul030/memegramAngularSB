@@ -77,7 +77,7 @@ export interface Post {
     imageUrl?: string;
     addedDate?: Date;
     category?:Category;
-    user?:User;
+    user?:UserDTO;
     isDeleted?:boolean;
     likes?:LikeDTO[];
     lastComment?:CommentDTO;

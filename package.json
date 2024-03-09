@@ -25,6 +25,7 @@
     "@ngrx/effects": "^16.3.0",
     "@ngrx/entity": "^16.3.0",
     "@ngrx/store": "^16.3.0",
+    "@ngrx/store-devtools": "^16.3.0",
     "@popperjs/core": "^2.11.8",
     "@stomp/stompjs": "^7.0.0",
     "@types/sockjs-client": "^1.5.3",

@@ -42,6 +42,7 @@ import { ChatRightSectionComponent } from './components/chat-right-section/chat-
 import { FullSizeImageComponent } from './components/full-size-image/full-size-image.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { PickerComponent } from '@ctrl/ngx-emoji-mart'
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [

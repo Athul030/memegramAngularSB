@@ -18,6 +18,7 @@ export interface User {
     userPresence?:boolean;
     roles?:Role[];
     reportedCount?:number;
+    publicProfile?:boolean;
     
 }
 
@@ -44,7 +45,7 @@ export interface UserDTO {
   blocked?:boolean;
   userPresence?:boolean;
   reportedCount?:number;
-
+  publicProfile?:boolean;
   
 }
 

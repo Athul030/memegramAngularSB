@@ -31,7 +31,6 @@ export class PostComponent {
     this.postData.user?.fullName
   }
   isLikedByUser(postData: Post): boolean {
-    console.log(postData.likes)
     if(postData.likes===undefined) {
       return false;
     }

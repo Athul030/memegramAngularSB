@@ -33,6 +33,7 @@ export class ProfileContentComponent implements OnInit {
   @Input() isOwnProfileValue!:boolean;
   @Input() otherUserIdValue!:number;
   isOwnProfileValueValue!:boolean;
+  publicProfile!:boolean;
 
   @ViewChild(ProfilePostsComponent) profilePostsComponent?: ProfilePostsComponent;
   
@@ -110,7 +111,8 @@ export class ProfileContentComponent implements OnInit {
     this.userSer.getCurrentUser().subscribe(
       (response)=>{
         this.currentUser = response;
-
+        if(this.currentUser.publicProfile)
+        this.publicProfile = this.currentUser.publicProfile;
       },(error)=>{
         console.error('Error fetching user details')
       }
@@ -322,7 +324,7 @@ export class ProfileContentComponent implements OnInit {
     );
   }
   
-  checkFollowingAlready(){
+    checkFollowingAlready(){
     console.log("reached at checkFollowingAlready")
     if(this.otherUser && this.currentUser && this.otherUser.followers.some(x=>x.id===this.currentUser.id)){
       this.followingAlready=true;
@@ -346,5 +348,19 @@ export class ProfileContentComponent implements OnInit {
   updateFollowerCount(change: number): void {
     this.totalnumberOfFollowers += change;
     console.log("total"+this.totalnumberOfFollowers);
+  }
+
+  toggleProfileType(){
+    this.publicProfile = !this.publicProfile;
+    console.log("sending to servie the publicprofile value as", this.publicProfile)
+    this.userSer.toggleProfileType(this.publicProfile).subscribe(
+      (response)=>{
+        console.log("Profile is now ",response);
+        this.publicProfile = response;
+        this.getUserDetails();
+      },(error)=>{
+        console.log("error toggling profile",error);
+      }
+    )
   }
 }

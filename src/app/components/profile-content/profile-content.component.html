@@ -12,8 +12,14 @@
 					<button (click)="toggleFollow(otherUserIdValue)" *ngIf="followingAlready" class="btn profile-edit-btn">UnFollow</button>
 					<button (click)="toggleFollow(otherUserIdValue)" *ngIf="!followingAlready" class="btn profile-edit-btn">Follow</button>
 				</div>
-				
-				<button class="btn profile-settings-btn" aria-label="profile settings"><mat-icon>settings</mat-icon></button>
+				<div class="profile-visibility">
+					
+					<label class="styled-checkbox">
+					  <input title="input" type="checkbox" id="styledCheckbox" [(ngModel)]="publicProfile" (click)="toggleProfileType()">
+					  <span class="slider"></span>
+					</label>
+					<span class="visibility-icon">{{ publicProfile ? '🌐' : '🔒' }}</span>
+				  </div>
 			</div>
 			<div class="profile-stats" >
 				<ul>
@@ -50,7 +56,12 @@
 				<!-- block or unblock -->
 				<button (click)="toggleBlock(otherUserIdValue)" *ngIf="isBlockedAlready" class="btn profile-edit-btn">Unblock</button>
 				<button (click)="toggleBlock(otherUserIdValue)" *ngIf="!isBlockedAlready" class="btn profile-edit-btn">Block</button>
-			<button class="btn profile-settings-btn" aria-label="profile settings"><mat-icon>settings</mat-icon></button>
+				<div class="profile-visibility">
+					
+					<label class="styled-checkbox">
+					</label>
+					<span class="visibility-icon">{{ otherUser.publicProfile ? '🌐' : '🔒' }}</span>
+				  </div>
 		</div>
 		<div class="profile-stats2" >
 			<ul>
@@ -65,9 +76,13 @@
 	</div>
 </div>
 
+<div *ngIf="otherUser">
+<div *ngIf="otherUser.publicProfile || followingAlready">
+	
 <ng-container *ngIf="isOwnProfileValueValue !== undefined && currentComponent === 'posts'"><app-profile-posts [otherUserPostsInput]="otherUserPosts" 
 	[isOwnProfileValues]="isOwnProfileValueValue" ></app-profile-posts></ng-container>
 <ng-container *ngIf="isOwnProfileValueValue !== undefined && currentComponent === 'followers'"><app-profile-followers></app-profile-followers></ng-container>
 <ng-container *ngIf="isOwnProfileValueValue !== undefined && currentComponent === 'following'"><app-profile-following></app-profile-following></ng-container>
-
+</div>
+</div>
 </div>

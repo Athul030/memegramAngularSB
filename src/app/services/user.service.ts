@@ -152,6 +152,10 @@ export class UserService {
     return this.http.post<UserDTO>(`${this.baseURL}/api/user/userUnBlock`,userBlockRequest);
   }
 
+  toggleProfileType(publicProfile:boolean):Observable<boolean>{
+    return this.http.patch<boolean>(`${this.baseURL}/api/user/toggleProfileType?publicProfile=${publicProfile}`,{})
+  }
+
   reportUser(userId:number,postId:number,reason:string):Observable<boolean>{
     return this.http.post<boolean>(`${this.baseURL}/api/user/reportUser/${postId}/${userId}`,reason);
   }

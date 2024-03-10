@@ -376,6 +376,9 @@ Remove or comment-out the code block below to see how the browser will fall-back
         grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
         grid-gap: 2rem;
     }
+    .profile-user-settings{
+        display: flex;
+    }
 
     .profile-image,
     .profile-user-settings,
@@ -418,3 +421,73 @@ Remove or comment-out the code block below to see how the browser will fall-back
         }
     }
 }
+
+
+.settingsButton{
+    display:flex;
+}
+
+.profile-visibility {
+    display: flex;
+    align-items: center;
+    margin-top: 10px; /* Add some spacing between the name and the visibility toggle */
+    margin-left: 10%;
+  }
+
+  .visibility-icon{
+    font-size: 40px;
+  }
+
+  /*checkbox style*/
+  /* CSS */
+.styled-checkbox {
+    display: flex;
+    align-items: center;
+  }
+  
+  .styled-checkbox input {
+    position: absolute;
+    opacity: 0;
+  }
+  
+  .styled-checkbox .slider {
+    position: relative;
+    width: 40px;
+    height: 20px;
+    background-color: #ccc; /* Background color when unchecked */
+    border-radius: 15px;
+    margin-left: 10px; /* Adjust spacing from the label */
+    cursor: pointer;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .styled-checkbox input:checked + .slider {
+    background-color: #79b8eb; /* Background color when checked */
+  }
+  
+  .styled-checkbox .slider:before {
+    content: "";
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 2px;
+    background-color: white;
+    border-radius: 50%;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .styled-checkbox input:checked + .slider:before {
+    -webkit-transform: translateX(20px);
+    transform: translateX(20px);
+  }
+  
+  /* Optional: Add styles for the label */
+  .styled-checkbox label {
+    font-size: 16px;
+    color: #333;
+}
+  
+  

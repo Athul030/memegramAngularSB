@@ -11,7 +11,8 @@
     <div *ngFor="let follower of followersList" class="user-item followers-item" (click)="onSelectUser(follower)">
       <img [src]="follower.profilePicUrl" alt="Profile Thumbnail">
       <span class="full-name" >{{follower.fullName}}</span>
-      <!-- <span class="online" *ngIf="follower.id && isUserOnline(follower.id)"></span> -->
+      <span class="online" *ngIf="follower.userPresence"></span>
+      {{follower.userPresence | json}}
     </div>
   </div>
 
@@ -21,7 +22,8 @@
     <div *ngFor="let followingUser of followingList" class="user-item following-item" (click)="onSelectUser(followingUser)">
       <img [src]="followingUser.profilePicUrl" alt="Profile Thumbnail">
       <span class="full-name" >{{followingUser.fullName}}</span>
-      <!-- <span class="online" *ngIf="followingUser.id && isUserOnline(followingUser.id)"></span> -->
+      <span class="online" *ngIf="followingUser.userPresence"></span>
+      {{followingUser.userPresence | json}}
     </div>
   </div>
 </div>

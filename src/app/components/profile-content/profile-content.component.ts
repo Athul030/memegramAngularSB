@@ -62,8 +62,6 @@ export class ProfileContentComponent implements OnInit {
 
   ngOnInit(): void {
     
-    this.checkFollowingAlready();
-    this.checkBlockedAlready()
     this.isOwnProfileValueValue  = this.isOwnProfileValue;
     this.getUserDetails();
     this.getCountOfPostAndFollowers();
@@ -74,6 +72,7 @@ export class ProfileContentComponent implements OnInit {
       
       
     }
+    this.checkFollowingAlready();
     this.checkBlockedAlready();
 
     
@@ -325,23 +324,19 @@ export class ProfileContentComponent implements OnInit {
   }
   
     checkFollowingAlready(){
-    console.log("reached at checkFollowingAlready")
-    if(this.otherUser && this.currentUser && this.otherUser.followers.some(x=>x.id===this.currentUser.id)){
+      if(this.otherUser && this.currentUser && this.otherUser.followers.some(x=>x.id===this.currentUser.id)){
       this.followingAlready=true;
     }else{
       this.followingAlready=false;
     }
-    console.log("followingAlready is: ", this.followingAlready)
   }
 
   checkBlockedAlready(){
-    console.log("reached at checkBlockedAlready")
     if(this.otherUser && this.currentUser && this.currentUser.blockedUsers.some(x=>x.id===this.otherUser.id)){
       this.isBlockedAlready = true;
     }else{
       this.isBlockedAlready = false;
     }
-    console.log("Blocked Already Value: ", this.isBlockedAlready);
 
   }
 

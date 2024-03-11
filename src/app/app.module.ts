@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -43,6 +43,13 @@ import { FullSizeImageComponent } from './components/full-size-image/full-size-i
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { PickerComponent } from '@ctrl/ngx-emoji-mart'
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import * as LogRocket from 'logrocket';
+
+//initlaize log rocket
+export function initializeLogRocket(){
+  return ()=>LogRocket.init('u65bs3/memegram');
+
+}
 
 @NgModule({
   declarations: [
@@ -92,7 +99,13 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     }),
     
     ],
-  providers: [{
+  providers: [
+    {
+      provide:APP_INITIALIZER,
+      useFactory:initializeLogRocket,
+      multi:true,
+    },
+    {
     provide:HTTP_INTERCEPTORS,
     useClass:AuthInterceptInterceptor,
     multi:true

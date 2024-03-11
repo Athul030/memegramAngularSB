@@ -3,6 +3,7 @@ import { ChatRoomDTO, Message } from 'src/app/model/message';
 import { UserDTO } from 'src/app/model/user';
 import { ChatService } from 'src/app/services/chat.service';
 import { FollowService } from 'src/app/services/follow.service';
+import { ChatLeftSectionComponent } from '../chat-left-section/chat-left-section.component';
 
 @Component({
   selector: 'app-chat',
@@ -18,7 +19,11 @@ export class ChatComponent implements OnInit {
   messagesData!:Message[];
   roomId!: string;
 
-  constructor(private followSer:FollowService, private chatSer:ChatService){}
+  constructor(private followSer:FollowService, private chatSer:ChatService){
+    // this.chatLeft.userSelected$.subscribe((event)=>{
+    //   this.getFollowerFollowingDetails();
+    // })
+  }
   ngOnInit(): void {
     this.getFollowerFollowingDetails();
   }

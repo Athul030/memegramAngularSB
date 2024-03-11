@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { ChatRoomDTO } from 'src/app/model/message';
@@ -18,12 +18,20 @@ export class ChatLeftSectionComponent implements OnInit  {
   constructor(private chatService: ChatService,private storgSer:StorageService, private store:Store) {}
   @Output() userSelected:EventEmitter<{user:UserDTO,chatRoomId:string}> = new EventEmitter();
   
+  //event emit after selecting user
+  // userSelected$ = new EventEmitter<{}>();
+
   userPresence$!: Observable<boolean>;
   OnlineUsers$!: Observable<number[]>;
 
+  userPresenceOfCurrentUser!:boolean;
+  userPresenceOfOtherUserInChat!:boolean;
+
+  isOnline!:boolean;
+
   ngOnInit(): void {
       // this.OnlineUsers$ = this.store.select(selectUserIds);
-      
+      this.hasNetwork(navigator.onLine)
   }
 
   // isUserOnline(userId:number):boolean{
@@ -43,9 +51,10 @@ export class ChatLeftSectionComponent implements OnInit  {
     //create or get a chatroom
     if(user.id){
       let currentUserId =  this.storgSer.getUserId()
-      const userIds:number[]= [currentUserId,user.id]
-      console.log("userIds",userIds);
+      const userIds:number[]= [currentUserId,user.id];
 
+      console.log("userIds",userIds);
+      this.updateUsersPresence(userIds);
       this.chatService.createChatRoom(userIds).subscribe(
         (chatRoom:ChatRoomDTO)=>{
           if (chatRoom.id) {
@@ -61,10 +70,38 @@ export class ChatLeftSectionComponent implements OnInit  {
         }
       )
     }
+    // this.userSelected$.emit(event);
   }
 
-  updateUserPresence(isOnline:boolean):void{
+  updateUsersPresence(userIds:number[]):void{
+    this.chatService.checkUserPresence(userIds[0]).subscribe(
+      (response)=>{
+        this.userPresenceOfCurrentUser = response;
+      }
+    )
+
+    this.chatService.checkUserPresence(userIds[1]).subscribe(
+      (response)=>{
+        this.userPresenceOfOtherUserInChat = response;
+      }
+    )
     
   }
 
+
+
+  @HostListener('window:online',['$event'])
+  onOnline(event:Event):void{
+    this.hasNetwork(true);
+  }
+
+  @HostListener('window:offline',['$event'])
+  onOffline(event:Event):void{
+    this.hasNetwork(false);
+  }
+
+
+  private hasNetwork(online:boolean):void{
+    this.isOnline = online;
+  }
 }

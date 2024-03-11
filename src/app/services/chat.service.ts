@@ -95,5 +95,9 @@ export class ChatService {
       return this.http.post<void>(url,{});
 
     }
-  
+    checkUserPresence(userId:number):Observable<boolean>{
+      const url=`${this.baseURL}/api/user/userPresenceCheck/${userId}`;
+      return this.http.get<boolean>(url);
+
+    }
 }

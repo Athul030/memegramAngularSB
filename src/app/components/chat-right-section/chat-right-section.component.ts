@@ -2,12 +2,14 @@ import { AfterViewChecked, ChangeDetectorRef, Component, ElementRef, Input, NgZo
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { Message, MessageType } from 'src/app/model/message';
-import { UserDTO } from 'src/app/model/user';
+import { User, UserDTO } from 'src/app/model/user';
 import { ChatService } from 'src/app/services/chat.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { FullSizeImageComponent } from '../full-size-image/full-size-image.component';
 import { MatFormFieldModule } from '@angular/material/form-field'
 import Picker from 'emoji-picker-element/picker';
+import { NavigationExtras, Router } from '@angular/router';
+import { VideocallService } from 'src/app/services/videocall.service';
 
 
 @Component({
@@ -21,11 +23,14 @@ export class ChatRightSectionComponent implements OnInit, OnDestroy, AfterViewCh
   @Input() roomId!: string;
 
   newMessage: string = '';
-
+  userId:number = this.storageSer.getUserId();
   private messageSubscription!: Subscription;
   @ViewChild('messagesContainer') private messagesContainer!: ElementRef;
 
-  constructor(private storageSer: StorageService, private chatSer: ChatService, private ngZone: NgZone, private cdr: ChangeDetectorRef, public dialog:MatDialog) {}
+  constructor(private storageSer: StorageService, private chatSer: ChatService, private ngZone: NgZone, private cdr: ChangeDetectorRef, public dialog:MatDialog, private router:Router, private videoCallSer:VideocallService) {
+    
+    
+  }
 
   ngOnInit(): void {
     this.messageSubscription = this.chatSer.getMessageSubject().subscribe((messages: Message[]) => {
@@ -122,6 +127,23 @@ export class ChatRightSectionComponent implements OnInit, OnDestroy, AfterViewCh
 
   emojiPreventClose($event:any){
     $event.stopPropagation();
+  }
+
+  navigateToVideoCall(userId:number):void{
+    const navigationExtras:NavigationExtras = {
+      state:{
+        userId: userId
+      }
+    }
+    
+    
+    this.router.navigate(['/webRtcVideoCall'],navigationExtras);
+    this.videoCallSer.setUserIdForWebRTC(userId);
+
+  }
+
+  navigateToVideo(otherUserId:number):void{
+    this.router.navigate(['/videoCall',this.userId,otherUserId]);
   }
   
 }

@@ -5,12 +5,13 @@
       <img [src]="selectedUser.profilePicUrl" alt="User Thumbnail">
       <span>{{selectedUser.fullName}}</span>
     </div>
-    <div class="call-icons">
+    <div class="call-icons" *ngIf="selectedUser.id">
       <mat-icon class="call-icon" (click)="startCall()">call</mat-icon>
-      <mat-icon class="video-chat-icon" (click)="startVideoChat()">videocam</mat-icon>
-    </div>
-  </div>
+      <mat-icon class="video-chat-icon" (click)="navigateToVideoCall(selectedUser.id)">videocam</mat-icon>
+      <mat-icon class="video-chat-icon" (click)="navigateToVideo(selectedUser.id)">videocam</mat-icon>
 
+  </div>
+</div>
    <!-- Messages
    <div class="message-area-container">
     <div #messagesContainer class="messages">

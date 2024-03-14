@@ -44,6 +44,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { PickerComponent } from '@ctrl/ngx-emoji-mart'
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import * as LogRocket from 'logrocket';
+import { VideocallComponent } from './components/videocall/videocall.component';
+import { WebrtcVideoCallComponent } from './components/webrtc-video-call/webrtc-video-call.component';
 
 //initlaize log rocket
 export function initializeLogRocket(){
@@ -75,6 +77,8 @@ export function initializeLogRocket(){
     ChatLeftSectionComponent,
     ChatRightSectionComponent,
     FullSizeImageComponent,
+    VideocallComponent,
+    WebrtcVideoCallComponent,
   
   ],
   imports: [

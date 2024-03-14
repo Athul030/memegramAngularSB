@@ -29,6 +29,7 @@
     "@popperjs/core": "^2.11.8",
     "@stomp/stompjs": "^7.0.0",
     "@types/sockjs-client": "^1.5.3",
+    "agora-rtc-sdk-ng": "^4.20.1",
     "autoprefixer": "^10.4.17",
     "bootstrap": "^5.2.3",
     "emoji-picker-element": "^1.21.1",

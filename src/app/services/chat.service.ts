@@ -33,6 +33,16 @@ export class ChatService {
     })
   }
 
+  joinVideoCall() {
+    this.stompClient.connect({}, () => {
+      this.stompClient.subscribe(`/topic/video/`, (videoMessages: any) => {
+        const videoContent = JSON.parse(videoMessages.body);
+        
+      });
+    });
+  }
+  
+
   sendMessage(roomId: string, content: string , senderId:number,imageName:string) {
     if(!this.stompClient.connected){
       console.error('WebSocket connection not established. Please reconnect');

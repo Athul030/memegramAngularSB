@@ -46,6 +46,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import * as LogRocket from 'logrocket';
 import { VideocallComponent } from './components/videocall/videocall.component';
 import { WebrtcVideoCallComponent } from './components/webrtc-video-call/webrtc-video-call.component';
+import { MemegeneratorComponent } from './components/memegenerator/memegenerator.component';
 
 //initlaize log rocket
 export function initializeLogRocket(){
@@ -79,6 +80,7 @@ export function initializeLogRocket(){
     FullSizeImageComponent,
     VideocallComponent,
     WebrtcVideoCallComponent,
+    MemegeneratorComponent,
   
   ],
   imports: [

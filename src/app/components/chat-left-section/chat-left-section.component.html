@@ -12,7 +12,6 @@
       <img [src]="follower.profilePicUrl" alt="Profile Thumbnail">
       <span class="full-name" >{{follower.fullName}}</span>
       <span class="online" *ngIf="follower.userPresence"></span>
-      {{follower.userPresence | json}}
     </div>
   </div>
 

@@ -55,7 +55,6 @@ export class VideocallComponent implements OnInit {
         
 
         
-        
 
         if(mediaType ==='video'){
           const remoteVideoTrack = user.videoTrack;

@@ -1,0 +1,37 @@
+<div class="flex flex-col h-screen overflow-hidden mainClass">
+  <header class="bg-blue-300" *ngIf="!isLoginOrRegisterRoute()">
+      <app-header></app-header>
+  </header>
+  <div class="container mx-auto my-8 flex"> <!-- Add margin on top and bottom -->
+      <div class="row flex"> <!-- Make the row a flex container -->
+          <div class="col-md-3 textController">
+              <div class="card">
+                  <div class="card-body">
+                      <form>
+                          <div class="form-group">
+                              <label for="">Upload an image</label>
+                              <input title="image" type="file" class="form-control file-input" accept="image/*" (change)="preview($event)" /> 
+                          </div>
+                          <div class="form-group">
+                              <label for="">Line 1</label>
+                              <input title="line-1" type="text" class="form-control line-input" name="line-1" [(ngModel)]="lineOneText" (keyup)="updateLineText()" />
+                          </div>
+                          <div class="form-group">
+                              <label for="">Line 2</label>
+                              <input title="line-2" type="text" class="form-control line-input" name="line-2" [(ngModel)]="lineTwoText" (keyup)="updateLineText()" />
+                          </div>
+                          <div class="form-group">
+                              <label for="">Comment for the Post</label>
+                              <textarea #commentInput type="text" class="form-control comment-input"  placeholder="Type comment..."></textarea>
+                          </div>
+                          <button type="button" class="btn btn-primary btn-block mt-5" (click)="uploadImage(commentInput)">POST</button>
+                      </form>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-9 flex justify"> 
+              <canvas #designerCanvas width="700" height="800"></canvas>
+          </div>
+      </div>
+  </div>
+</div>

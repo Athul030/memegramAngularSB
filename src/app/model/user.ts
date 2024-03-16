@@ -173,3 +173,12 @@ export interface UserBlockRequest{
   blockingUserId:number,
   blockedUserId:number
 }
+
+// for admin dashboard
+export interface ProviderChartData{
+  [key:string]:number;
+}
+
+export interface PostsGraphData{
+  [date:string]:number;
+}

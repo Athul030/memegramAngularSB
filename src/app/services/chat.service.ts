@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Stomp } from '@stomp/stompjs';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, async } from 'rxjs';
 import { ChatRoomDTO, Message, MessageType } from '../model/message';
 import { HttpClient, HttpResponse } from '@angular/common/http';
+import { NotificationType, NotificationsDTO } from '../model/notification';
 @Injectable({
   providedIn: 'root'
 })
@@ -70,7 +71,17 @@ export class ChatService {
   
       }
     }
-    this.stompClient.send(`/app/chat/${roomId}`, {}, JSON.stringify(chatMessage))
+
+    let notificationsDTO:NotificationsDTO;
+    notificationsDTO={
+      notTimeStamp:Date.now().toString(),
+      notificationType:NotificationType.MESSAGE,
+      notificationFrom: senderId,
+      read:false,
+      chatRoomId: roomId
+    }
+    this.stompClient.send(`/app/chat/${roomId}`, {}, JSON.stringify(chatMessage));
+    this.stompClient.send(`/app/notifications`,{},JSON.stringify(notificationsDTO));
   }
 
   getMessageSubject(){
@@ -90,6 +101,19 @@ export class ChatService {
     return this.http.get<Message[]>(url,options);
   }
 
+  private getCurrentDate():string{
+    const currentDate = new Date();
+    const options :  Intl.DateTimeFormatOptions = {
+      month:'short',
+      day:"2-digit",
+      hour:"numeric",
+      minute:"2-digit",
+      hour12:true
+
+    };
+    const formattedDate = currentDate.toLocaleString('en-US',options);
+    return formattedDate;
+  }
   
 
   uploadImageInChat(file:File):Observable<HttpResponse<{fileUrl: string}>>{
@@ -110,4 +134,10 @@ export class ChatService {
       return this.http.get<boolean>(url);
 
     }
+
+    
 }
+
+
+
+

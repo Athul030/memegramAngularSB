@@ -12,7 +12,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { DateTimeFormatPipe } from './pipe/pipe';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { FormsModule } from '@angular/forms';
-
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { AdminPiechartComponent } from './components/admin-piechart/admin-piechart.component';
+import { AdminGraphComponent } from './components/admin-graph/admin-graph.component'
 
 
 
@@ -23,7 +25,9 @@ import { FormsModule } from '@angular/forms';
     AdminSidebarComponent,
     AdminUsersComponent,
     AdminPostsComponent,
-    DateTimeFormatPipe
+    DateTimeFormatPipe,
+    AdminPiechartComponent,
+    AdminGraphComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +36,8 @@ import { FormsModule } from '@angular/forms';
     MatTableModule,
     MatButtonModule,
     MatPaginatorModule,
-    FormsModule
+    FormsModule,
+    NgxChartsModule
   ],
 })
 export class AdminModule { }

@@ -7,7 +7,7 @@
   flex-direction: row; 
 }
 /* Sidebar styling */
-#sidebar {
+#sidebar1 {
   display: flex;
   flex-direction: column;
   height: 100%;

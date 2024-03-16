@@ -21,6 +21,7 @@ h1 {
 .horizontal-cards {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 20px;
 }
 
 .card {
@@ -42,4 +43,34 @@ h3 {
   font-size: 1.5em;
 }
 
+/* 
+.pieChart{
+  height: 200px;
+  width: 100px;
+}
 
+.lineChart{
+  height: 400px;
+
+} */
+
+.pieChart,
+.lineChart {
+  flex: 1; 
+  height: 400px;
+}
+
+.title{
+  padding-left: 13%;
+  padding-bottom: 2%;
+  padding-top: 1%;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  text-transform: uppercase;
+}
+
+.horizontal-charts {
+  display: flex;
+  justify-content: space-between;
+}

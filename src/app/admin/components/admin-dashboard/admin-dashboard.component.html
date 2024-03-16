@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <div style="min-height: 500px;">
+  <div  style="min-height: 500px;">
     <div>
       <h1>Admin Dashboard</h1>
     </div>
@@ -23,13 +23,19 @@
           <h3>{{ totalPostsNumber }}</h3>
         </div>
       </div>
-
     </div>
 
-    <div>
-      
-    </div>
+    <div class="horizontal-charts">
+      <div class="pieChart">
+          <h2 class="title">Types of User Sign-in</h2>
+          <app-admin-piechart></app-admin-piechart>
+      </div>
 
+      <div class="lineChart">
+          <h2 class="title">Posts Uploaded</h2>
+          <app-admin-graph></app-admin-graph>
+      </div>
+    </div>
   </div>
 </div>
 

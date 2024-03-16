@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/internal/Observable';
-import { Page, Post, PostDTO, User, UserDTO } from 'src/app/model/user';
+import { Page, Post, PostDTO, PostsGraphData, ProviderChartData, User, UserDTO } from 'src/app/model/user';
 import { StorageService } from 'src/app/services/storage.service';
 
 @Injectable({
@@ -28,6 +28,14 @@ export class AdminService {
 
   getAllUsersForDashboard():Observable<UserDTO[]>{
     return this.http.get<UserDTO[]>(`${this.baseUrl}/api/user/getAllUsers`);
+  }
+
+  getProviderChartData():Observable<ProviderChartData>{
+    return this.http.get<ProviderChartData>(`${this.baseUrl}/api/admin/providerChartData`);
+  }
+
+  getPostsChartData():Observable<PostsGraphData>{
+    return this.http.get<PostsGraphData>(`${this.baseUrl}/api/admin/postsChartData`);
   }
 
   getAllPostsForDashboard():Observable<PostDTO[]>{

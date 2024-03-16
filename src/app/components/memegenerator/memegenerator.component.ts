@@ -37,7 +37,12 @@ export class MemegeneratorComponent {
       img.src = e.target.result as string;
 
       img.onload = () =>{
-        context.drawImage(img,30,150,600,500);
+        context.drawImage(img,50,125,600,500);
+        const borderWidth = 1; 
+        context.strokeStyle = '#a5a8ac'; 
+        context.lineWidth = borderWidth;
+        context.strokeRect(0, 0,canvas.width, canvas.height);
+    
       }
     }
   }

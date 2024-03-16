@@ -7,6 +7,7 @@
           <div class="col-md-3 textController">
               <div class="card">
                   <div class="card-body">
+                    <h1 class="meme-heading">MEME GENERATOR</h1>
                       <form>
                           <div class="form-group">
                               <label for="">Upload an image</label>
@@ -24,13 +25,13 @@
                               <label for="">Comment for the Post</label>
                               <textarea #commentInput type="text" class="form-control comment-input"  placeholder="Type comment..."></textarea>
                           </div>
-                          <button type="button" class="btn btn-primary btn-block mt-5" (click)="uploadImage(commentInput)">POST</button>
+                          <button type="submit" class="btn btn-upload btn-block mt-5" (click)="uploadImage(commentInput)">POST</button>
                       </form>
                   </div>
               </div>
           </div>
           <div class="col-md-9 flex justify"> 
-              <canvas #designerCanvas width="700" height="800"></canvas>
+              <canvas #designerCanvas width="700" height="760"></canvas>
           </div>
       </div>
   </div>

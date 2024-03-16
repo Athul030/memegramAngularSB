@@ -13,6 +13,8 @@ import { resetProfilePicture } from 'src/app/store/store.actions';
 })
 export class HeaderComponent {
 
+  showNotifications:boolean=false;
+
   constructor(private adSservice:AdminService, private serviceNow: StorageService,private router:Router, private store:Store){  }
 
   showHeader:boolean = true;
@@ -44,5 +46,8 @@ export class HeaderComponent {
     )
   }
 
+  toggleNotifications(){
+    this.showNotifications = !this.showNotifications;
+  }
   
 }

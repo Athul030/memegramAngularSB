@@ -1,12 +1,28 @@
+.mainClass {
+    background-image: url('../../../assets/images/wpaperopq3.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: #ffffff;
+}
+
+/* Global Font Styling */
+body {
+    font-family: 'Roboto', sans-serif; /* Use a stylish font */
+}
+
+/* Flexbox Utilities */
 .flex {
     display: flex;
 }
 
 .justify {
     justify-content: center;
+    background-color: #ffffff;
+    margin-left: 2%;
+    border: 2px solid #b2b5bc;
 }
 
-
+/* Container Styling */
 .container {
     display: flex;
     justify-content: center;
@@ -16,47 +32,84 @@
     background-position: center;
 }
 
+/* Card Styling */
 .card {
     max-width: 100%;
     background-color: white;
-    border-radius: 5px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
 }
 
-.file-input {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 10px;
-}
-
-.comment-input {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 10px;
-}
-
-.btn {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-
+/* Input Styling */
+.file-input,
+.comment-input,
 .line-input {
     width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 10px;
+    padding: 12px;
+    border: 2px solid #677381; /* Blue border */
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 16px; /* Larger font size */
+    color: #333; /* Dark text color */
 }
 
-.textController{
+.file-input::placeholder,
+.comment-input::placeholder,
+.line-input::placeholder {
+    color: #999; /* Placeholder text color */
+}
+
+/* Upload Button Styling */
+.btn-upload {
+    width: 100%;
+    padding: 12px;
+    background-color: #555a86;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px; /* Larger font size */
+    transition: background-color 0.3s ease; /* Smooth hover transition */
+}
+
+.btn-upload:hover {
+    background-color: #013062; /* Darker blue on hover */
+}
+
+/* Text Controller Styling */
+.textController {
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    margin-top: 0.8%;
+}
+
+/* Label Styling */
+label {
+    font-size: 18px; /* Larger font size for labels */
+    font-weight: bold; /* Bold font weight */
+    color: #333; /* Dark text color */
     padding-top: 5%;
+    padding-bottom: 5%;
+    margin-bottom: 20px;
+    margin-top: 20px;
+
+}
+
+
+.meme-heading {
+    font-size: 40px; /* Adjust font size as needed */
+    font-weight: bold;
+    color: transparent; /* Make text transparent to show gradient */
+    text-align: center; /* Center align the heading */
+    margin-bottom: 20px; /* Add space between the heading and canvas */
+    text-transform: uppercase; /* Convert text to uppercase */
+    letter-spacing: 2px; /* Adjust letter spacing */
+    background-image: linear-gradient(to right, #1a220e, #3fda51); /* Define gradient colors */
+    -webkit-background-clip: text; /* Apply text as background clip */
+    background-clip: text; /* Apply text as background clip */
+    -webkit-text-fill-color: transparent; /* Hide text fill color */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Add a subtle text shadow */
 }

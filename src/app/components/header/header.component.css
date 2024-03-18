@@ -3,3 +3,13 @@
     height: auto;
     cursor: pointer;
 }
+
+.notification-container {
+    z-index: 999; 
+    width: 22%; 
+   
+  }
+
+  .singleNotfItem{
+    cursor: pointer;
+  }

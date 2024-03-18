@@ -3,5 +3,15 @@
 }
 
 .cancelButton{
-    margin-left: 450px;
+    background-color: aqua;
+}
+
+.joinButton{
+    background-color: rgb(0, 0, 0);
+    color: #ffffff;
+}
+
+#start-button{
+    background-color: rgb(228, 71, 71);
+    color: #ffffff;
 }

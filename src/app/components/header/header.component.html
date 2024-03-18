@@ -5,11 +5,9 @@
             <div>
                 <img [routerLink]="['/home']" src="assets/images/mgram4.png" alt="Logo" class="logoHeader" style="width: 220px; height: auto;">
             </div>
-                      </div>
+            </div>
           <div class="flex items-center md:gap-12">
-            <div class="px-80">
-              
-          </div>
+            <div class="px-80"></div>
               <nav aria-label="Global" class="hidden md:block">
                   <ul class="flex items-center gap-6 text-sm">
                       <li>
@@ -27,60 +25,42 @@
                                 <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6"/>
                               </svg>
                             <!-- Add a badge to show the number of notifications -->
-                            <span class="absolute top-0 right-0 inline-flex items-center justify-center px-1 py-0.5 text-xs font-bold leading-none text-white bg-red-500 rounded-full">5</span>
+                            <span *ngIf="notificationCount>0" class="absolute top-0 right-0 inline-flex items-center justify-center px-1 py-0.5 text-xs font-bold leading-none text-white bg-red-500 rounded-full">{{getGroupedNotificationsCount()}}</span>
                         </button>
-
+                        
                         <!-- Notifications list started -->
 
-                        <div *ngIf="showNotifications" class="absolute right-50 mt-2 w-96 bg-white rounded-lg shadow-lg">
+                        <div *ngIf="showNotifications" class="absolute right-50 mt-2 w-96 bg-white rounded-lg shadow-lg notification-container">
+                            <div *ngFor="let key of getGroupedNotificationKeys()" class="notification-item">
+                            <ng-container *ngIf="groupedNotifications[key]!.length > 0 && groupedNotifications[key]!.length !== undefined">   
                             <!-- Notification items -->
-                            <div class="p-3 border-b">
-                                <!-- Example notification item -->
-                                <div class="flex items-center space-x-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-2 w-2 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                                    </svg>
-                                    <p class="text-lg text-gray-700">User 1 liked your Post with name</p>
-                                </div>
+                            <div class="p-3 border-b" *ngIf="groupedNotifications[key][0]?.chatRoomId !== undefined">
+                               
+                                    <!-- Example notification item -->
+                                    <div class="flex items-center space-x-2 singleNotfItem"
+                                    
+                                    (click)="navigateToChat(groupedNotifications[key][0].chatRoomId || '')"
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-2 w-2 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                        </svg>
+                                        <p class="text-lg text-gray-700">You have {{ groupedNotifications[key].length }} new messages from {{ getNotificationFullName(key) }}</p>
+                                    </div>
                                 
                             </div>
-
-                            <div class="p-3 border-b">
-                                <!-- Example notification item -->
-                                <div class="flex items-center space-x-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-2 w-2 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                                    </svg>
-                                    <p class="text-lg text-gray-700">User 1 liked your Post with name</p>
-                                </div>
-                                
-                            </div>
-                           
+                        </ng-container>
+                        </div>
                         </div>
                         <!-- Notifications list ended -->
-
                       </li>
-                      
                   </ul>
               </nav>
               <div class="flex items-center gap-4">
-
-                <!-- /* login and register */
-                  <div class="sm:flex sm:gap-4">
-                      <a [routerLink]="'/login'" class="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow dark:hover:bg-teal-500" href="/">Login</a>
-                      <div class="hidden sm:flex">
-                          <a [routerLink]="'/register'" class="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 dark:bg-gray-800 dark:text-white dark:hover:text-white/75" href="/">Register</a>
-                      </div>
-                  </div> -->
-
                   <div class="sm:flex sm:gap-4">
                     <button (click)="logout()"
                     class="rounded-md bg-teal-600 px-3 py-1.5 text-xs font-medium text-white shadow dark:hover:bg-teal-500 whitespace-nowrap"
-                    >Sign out</button>
-                    
+                    >Sign out</button> 
                 </div>
-
-
                   <div class="block md:hidden">
                       <button title="button"  class="rounded bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75 dark:bg-gray-800 dark:text-white dark:hover:text-white/75">
                           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">

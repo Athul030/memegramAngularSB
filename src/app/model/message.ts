@@ -30,3 +30,7 @@ export interface ChatRoomDTO{
 }
 
 
+export interface OtherUserRequest{
+    roomId:string;
+    currentUserId:number;
+}

@@ -45,6 +45,8 @@ export class WebrtcVideoCallComponent implements OnInit{
       this.otherUserId = userId;
 
     })
+    console.log("1");
+
     console.log("the other user id is",this.otherUserId);
     
 
@@ -52,18 +54,25 @@ export class WebrtcVideoCallComponent implements OnInit{
       this.startChat();
       this.connected = true;
     })
-    
+    console.log("2");
+
     this.signaling = new WebSocket('ws://localhost:8080/socket1');
     this.signaling.onopen = () => {
       console.log('WebSocket connection opened.');
       console.log('signaling',this.signaling);
+      console.log("3");
+
 
     };
 
     this.signaling.onerror = (error: any) => {
+      console.log("4");
+
       console.error('WebSocket error:', error);
     };
   this.signaling.onclose = (event: { code: any; reason: any; }) => {
+    console.log("5");
+
       console.log('WebSocket connection closed:', event.code, event.reason);
   };    
 
@@ -72,7 +81,7 @@ export class WebrtcVideoCallComponent implements OnInit{
   
 
   async startChat(){
-    console.log("inside startChat")
+    console.log("6");
     this.userMediaStream = await navigator.mediaDevices.getUserMedia({audio:true,video:true});
     this.showChatRoom();
     this.peerConnection = this.createPeerConnection();
@@ -96,20 +105,24 @@ export class WebrtcVideoCallComponent implements OnInit{
     // };
     // this.sendMessage(newMemberMessage);
 
-    this.addMessageHandler();
+    await this.addMessageHandler();
     this.userMediaStream.getTracks().forEach((track: any)=>this.senders.push(this.peerConnection.addTrack(track,this.userMediaStream)));
     this.video1.nativeElement.srcObject = this.userMediaStream;
+    console.log("7");
 
-    
 
   }
 
   showChatRoom(){
     document.getElementById('start')!.style.display = 'none';
     document.getElementById('chat-room')!.style.display = 'flex';
+    console.log("8");
+
   }
   
   createPeerConnection(){
+    console.log("9");
+
     console.log('Inside createPeerConnection');
     const pc = new RTCPeerConnection({
       iceServers : [{ urls: 'stun:stun.l.google.com:19302'}]
@@ -120,8 +133,12 @@ export class WebrtcVideoCallComponent implements OnInit{
       await this.createAndSendOffer();
     };
 
+    console.log("10");
+
     pc.onicecandidate = (iceEvent)=>{
       if(iceEvent && iceEvent.candidate){
+        console.log("11");
+
         this.sendMessage({
           usersId: this.currentUserId.toString(),
           type: SignalType.Ice,
@@ -132,6 +149,8 @@ export class WebrtcVideoCallComponent implements OnInit{
     }
 
     pc.ontrack = (event) =>{
+      console.log("12");
+
       const _video2 = this.video2.nativeElement;
       _video2.srcObject = event.streams[0];
     }
@@ -139,10 +158,13 @@ export class WebrtcVideoCallComponent implements OnInit{
     return pc;
   }
 
-  addMessageHandler(){
+  async addMessageHandler(){
     console.log('Inside addMessageHandler');
+    console.log("13");
 
     this.signaling.onmessage = async (message: { data: string; }) =>{
+      console.log("Message received:", message.data);
+
       const data = JSON.parse(message.data);
       if(!data){
         return;
@@ -151,9 +173,13 @@ export class WebrtcVideoCallComponent implements OnInit{
 
       let {type, data: content} = data;
       if(type === SignalType.Ice && content){
+        console.log("15");
+
         await this.peerConnection.addIceCandidate(content);
       }else if(type === SignalType.offer){
         if(content.type === 'offer'){
+          console.log("16");
+ 
           await this.peerConnection.setRemoteDescription(content);
           const answer = await this.peerConnection.createAnswer();
           await this.peerConnection.setLocalDescription(answer);
@@ -168,12 +194,19 @@ export class WebrtcVideoCallComponent implements OnInit{
         else if(content.type === 'answer'){
           await this.peerConnection.setRemoteDescription(content);
           console.log('Offer accepted!');
+          console.log("17");
+
         }else{
           console.log('unsupported SDP type')
+          console.log("18");
+
         }
-      }else if(type === SignalType.UserId) { 
+      }else if(type === 'SignalType.UserId') { 
+        console.log("19");
+
         this.sessionId = content;
-        console.log('Received sessionId:', this.sessionId);
+        console.log("20",this.sessionId);
+
         
         
       }
@@ -181,12 +214,16 @@ export class WebrtcVideoCallComponent implements OnInit{
   }
 
   joinSession(sessionId: string) {
+    console.log("21");
+
     console.log('Joining session with ID:', this.sessionId);
     
     const webSocketUrl = 'ws://localhost:8080/' + this.sessionId;
     this.signaling = new WebSocket(webSocketUrl);
   
     this.signaling.onopen = () => {
+      console.log("22");
+
       console.log('WebSocket connection opened for session:', this.sessionId);
     };
   
@@ -202,11 +239,15 @@ export class WebrtcVideoCallComponent implements OnInit{
       console.log('Received message from session:', this.sessionId, 'data:', message.data);
     };
 
-    this.startChat();
+    // this.startChat();
+    console.log("23");
+
   }
   
 
     async createAndSendOffer(){
+      console.log("24");
+
       const offer  = await this.peerConnection.createOffer();
       await this.peerConnection.setLocalDescription(offer);
 
@@ -221,10 +262,15 @@ export class WebrtcVideoCallComponent implements OnInit{
 
 
   sendMessage( message: SignalDataDTO ){
+    console.log("25");
+
     this.signaling.send(JSON.stringify(message))
   }
 
   async endCall(){
+    console.log("26");
+    this.connected = !this.connected;
+
     this.userMediaStream.getTracks().forEach( (track: { stop: () => void; }) => {
       track.stop();
     });
@@ -234,8 +280,22 @@ export class WebrtcVideoCallComponent implements OnInit{
 
 
  
-  joinCall() {
-    console.log("Joining Video Call");
-    this.joinSession(this.sessionId)
+  async joinCall() {
+    this.connected = !this.connected;
+    console.log("27");
+    if (this.signaling.readyState === WebSocket.OPEN) {
+      console.log("28");
+
+      await this.startChat();
+      console.log("29");
+
+      if (this.sessionId) {
+          this.joinSession(this.sessionId);
+      } else {
+          console.error('Session ID is not available.');
+      }
+    } else {
+      console.error('WebSocket connection is not open.');
+    }
   }
 }

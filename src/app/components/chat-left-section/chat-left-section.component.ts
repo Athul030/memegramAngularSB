@@ -1,8 +1,9 @@
 import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { ChatRoomDTO } from 'src/app/model/message';
-import { UserDTO } from 'src/app/model/user';
+import { User, UserDTO } from 'src/app/model/user';
 import { ChatService } from 'src/app/services/chat.service';
 import { StorageService } from 'src/app/services/storage.service';
 
@@ -15,7 +16,7 @@ export class ChatLeftSectionComponent implements OnInit  {
 
   @Input() followersList!:UserDTO[];
   @Input() followingList!:UserDTO[];
-  constructor(private chatService: ChatService,private storgSer:StorageService, private store:Store) {}
+  constructor(private chatService: ChatService,private storgSer:StorageService, private store:Store,private route: ActivatedRoute) {}
   @Output() userSelected:EventEmitter<{user:UserDTO,chatRoomId:string}> = new EventEmitter();
   
   //event emit after selecting user
@@ -23,7 +24,7 @@ export class ChatLeftSectionComponent implements OnInit  {
 
   userPresence$!: Observable<boolean>;
   OnlineUsers$!: Observable<number[]>;
-
+  roomId!:string;
   userPresenceOfCurrentUser!:boolean;
   userPresenceOfOtherUserInChat!:boolean;
 
@@ -31,7 +32,14 @@ export class ChatLeftSectionComponent implements OnInit  {
 
   ngOnInit(): void {
       // this.OnlineUsers$ = this.store.select(selectUserIds);
-      this.hasNetwork(navigator.onLine)
+      this.hasNetwork(navigator.onLine);
+
+      this.route.params.subscribe( params => {
+        if(params['roomId']){
+          this.roomId = params['roomId'];
+          this.transitToOnSelectUser(this.roomId);
+        }
+      })
   }
 
   // isUserOnline(userId:number):boolean{
@@ -104,4 +112,18 @@ export class ChatLeftSectionComponent implements OnInit  {
   private hasNetwork(online:boolean):void{
     this.isOnline = online;
   }
+
+  transitToOnSelectUser(roomId:string):void{
+    let currentUserId =  this.storgSer.getUserId()
+    let user1:UserDTO;
+    this.chatService.getOtherUser(roomId,currentUserId).subscribe(
+      (user:UserDTO)=>{
+        user1= user;
+        this.onSelectUser(user1);
+      }
+    )
+  }
+
 }
+
+

@@ -23,6 +23,7 @@ const routes: Routes = [
   { path: 'profile',component:ProfileComponent ,pathMatch:'full'},
   { path: 'profile/:userId',component:ProfileComponent ,pathMatch:'full'},
   { path: 'chat',component:ChatComponent ,pathMatch:'full'},
+  { path: 'chat/:roomId',component:ChatComponent ,pathMatch:'full'},
   { path:'videoCall',component:VideocallComponent , pathMatch:'full'},
   { path:'videoCall/:userId/:otherUserId',component:VideocallComponent , pathMatch:'full'},
   { path:'webRtcVideoCall',component: WebrtcVideoCallComponent , pathMatch:'full'},

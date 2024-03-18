@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { StorageService } from './storage.service';
 import { Observable } from 'rxjs';
 import { PostDTO } from '../model/user';
+import { NotificationsDTO } from '../model/notification';
 
 @Injectable({
   providedIn: 'root'
@@ -32,4 +33,6 @@ export class PostService {
     
     return this.http.get<PostDTO[]>(`${this.baseURL}/api/user/posts/${userId}`);
   }
+
+  
 }

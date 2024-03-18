@@ -7,8 +7,12 @@
           
             <div class="gallery-item-info">
                 <ul>
-                    <li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="material-icons" aria-hidden="true">favorite</i>{{post.likes?.length}}</li>
-                    <li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="material-icons" aria-hidden="true">comment</i>{{post.comments?.length}}</li>
+                    <li *ngIf="isLikedByUser(post)" (click)="unlikePost(post)" class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="material-icons" aria-hidden="true">recommend</i>{{post.likes?.length}}</li>
+                    <li *ngIf="!isLikedByUser(post)" (click)="likePost(post)" class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="material-icons" aria-hidden="true">favorite</i>{{post.likes?.length}}</li>
+                    <li class="gallery-item-comments"
+                    *ngIf="post.postId !== undefined && post.imageUrl !== undefined && post.lastComment !== undefined" 
+                    (click)="openCommentModal(post.postId,post.imageUrl,post.lastComment)"
+                    ><span class="visually-hidden">Comments:</span><i class="material-icons" aria-hidden="true">comment</i>{{post.comments?.length}}</li>
                 </ul>
             </div>
            </div>
@@ -31,7 +35,8 @@
                    
                     <li class="gallery-item-comments"  
                     *ngIf="post.postId !== undefined && post.imageUrl !== undefined && post.lastComment !== undefined" 
-                    (click)="openCommentModal(post.postId,post.imageUrl,post.lastComment)"><span class="visually-hidden">Comments:</span><i class="material-icons" aria-hidden="true">comment</i></li>
+                    (click)="openCommentModal(post.postId,post.imageUrl,post.lastComment)">
+                    <span class="visually-hidden">Comments:</span><i class="material-icons" aria-hidden="true">comment</i></li>
                 </ul>
             </div>
         </div>

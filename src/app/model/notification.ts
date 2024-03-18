@@ -8,6 +8,13 @@ export interface NotificationsDTO{
     notificationTo?:number,
     read:boolean
     chatRoomId?:string
+
+    notificationFromUserId?:number;
+    notificationFromEmail?:string;
+    notificationFromFullName?:string;
+    notificationToUserId?:number;
+    notificationToEmail?:string;
+    notificationToFullName?:string;
     
 }
 

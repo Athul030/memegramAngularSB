@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Stomp } from '@stomp/stompjs';
 import { BehaviorSubject, Observable, async } from 'rxjs';
-import { ChatRoomDTO, Message, MessageType } from '../model/message';
+import { ChatRoomDTO, Message, MessageType, OtherUserRequest } from '../model/message';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { NotificationType, NotificationsDTO } from '../model/notification';
+import { User, UserDTO } from '../model/user';
 @Injectable({
   providedIn: 'root'
 })
@@ -74,14 +75,15 @@ export class ChatService {
 
     let notificationsDTO:NotificationsDTO;
     notificationsDTO={
-      notTimeStamp:Date.now().toString(),
       notificationType:NotificationType.MESSAGE,
       notificationFrom: senderId,
       read:false,
       chatRoomId: roomId
     }
     this.stompClient.send(`/app/chat/${roomId}`, {}, JSON.stringify(chatMessage));
-    this.stompClient.send(`/app/notifications`,{},JSON.stringify(notificationsDTO));
+    
+    this.stompClient.send(`/app/notifications`,{}, JSON.stringify(notificationsDTO));
+
   }
 
   getMessageSubject(){
@@ -133,6 +135,14 @@ export class ChatService {
       const url=`${this.baseURL}/api/user/userPresenceCheck/${userId}`;
       return this.http.get<boolean>(url);
 
+    }
+
+    getOtherUser(roomIds:string,currentUserIds:number):Observable<UserDTO>{
+      const otherUserRequest :OtherUserRequest={
+        roomId:roomIds,
+        currentUserId:currentUserIds
+      }
+      return this.http.post<UserDTO>(`${this.baseURL}/chat/getTheOtherUser`,otherUserRequest);
     }
 
     

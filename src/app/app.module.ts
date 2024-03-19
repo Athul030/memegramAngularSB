@@ -47,6 +47,9 @@ import * as LogRocket from 'logrocket';
 import { VideocallComponent } from './components/videocall/videocall.component';
 import { WebrtcVideoCallComponent } from './components/webrtc-video-call/webrtc-video-call.component';
 import { MemegeneratorComponent } from './components/memegenerator/memegenerator.component';
+import { VideoCall2Component } from './components/video-call2/video-call2.component';
+import { Socket, SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
+const config :SocketIoConfig = { url:'http://localhost:8080',options:{}};
 
 //initlaize log rocket
 export function initializeLogRocket(){
@@ -81,6 +84,7 @@ export function initializeLogRocket(){
     VideocallComponent,
     WebrtcVideoCallComponent,
     MemegeneratorComponent,
+    VideoCall2Component,
   
   ],
   imports: [
@@ -103,6 +107,7 @@ export function initializeLogRocket(){
     StoreDevtoolsModule.instrument({
       maxAge: 25, 
     }),
+    SocketIoModule.forRoot(config)
     
     ],
   providers: [

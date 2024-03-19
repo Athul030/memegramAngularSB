@@ -10,6 +10,7 @@ import { ChatComponent } from './components/chat/chat.component';
 import { VideocallComponent } from './components/videocall/videocall.component';
 import { WebrtcVideoCallComponent } from './components/webrtc-video-call/webrtc-video-call.component';
 import { MemegeneratorComponent } from './components/memegenerator/memegenerator.component';
+import { VideoCall2Component } from './components/video-call2/video-call2.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'chat/:roomId',component:ChatComponent ,pathMatch:'full'},
   { path:'videoCall',component:VideocallComponent , pathMatch:'full'},
   { path:'videoCall/:userId/:otherUserId',component:VideocallComponent , pathMatch:'full'},
+  { path:'videoCall2/:userId/:otherUserId',component:VideoCall2Component , pathMatch:'full'},
   { path:'webRtcVideoCall',component: WebrtcVideoCallComponent , pathMatch:'full'},
   // { path:'webRtcVideoCall/:userId',component: WebrtcVideoCallComponent , pathMatch:'full'}
   { path:'meme',component: MemegeneratorComponent , pathMatch:'full'}

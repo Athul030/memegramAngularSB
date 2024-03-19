@@ -135,8 +135,6 @@ export class ChatRightSectionComponent implements OnInit, OnDestroy, AfterViewCh
         userId: userId
       }
     }
-    
-    
     this.router.navigate(['/webRtcVideoCall'],navigationExtras);
     this.videoCallSer.setUserIdForWebRTC(userId);
 
@@ -144,6 +142,10 @@ export class ChatRightSectionComponent implements OnInit, OnDestroy, AfterViewCh
 
   navigateToVideo(otherUserId:number):void{
     this.router.navigate(['/videoCall',this.userId,otherUserId]);
+  }
+
+  navigateToVideoCall2(otherUserId:number):void{
+    this.router.navigate(['/videoCall2',this.userId,otherUserId]);
   }
   
 }

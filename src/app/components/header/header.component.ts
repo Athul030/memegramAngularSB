@@ -133,6 +133,11 @@ export class HeaderComponent implements OnInit {
     //   return;
     // }
     console.log("inside navigatetochat",chatRoomId);
+
+    // do it later to set the isread true
+    // for (const notification of this.groupedNotifications[key]) {
+    //   notification.isRead = true;
+    // }
     
     this.router.navigate(['/chat',chatRoomId]);
   }

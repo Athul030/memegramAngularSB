@@ -22,11 +22,12 @@ export class VideocallComponent implements OnInit {
 
     this.route.params.subscribe( params => {
       if (params['userId'] && params['otherUserId']) {
+
+        console.error("Data in params",this.userId,this.otherUserId)
         this.userId = params['userId'];
-        this.otherUserId = params['otherUserId'];
-        
-        
-        
+        this.otherUserId = params['otherUserId'];  
+        console.error("Data in params",this.userId,this.otherUserId)
+
       }else{
         console.error("Error, no datas in params")
       }

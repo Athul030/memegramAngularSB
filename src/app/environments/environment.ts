@@ -4,7 +4,7 @@ export const environment = {
     appId : 'c0fb952ba5814fa5b9db72b34a851591',
     channel: 'memegram',
     token : 
-    '007eJxTYNj/kOdT591nM5bPCc17Kbc7wkrORLl/2+S3d87//XJqzWo+BYZkg7QkS1OjpERTC0OTtETTJMuUJHOjJGOTRAtTQ1NLw+oD31MbAhkZojSWMTIyQCCIz8GQm5qbml6UmMvAAAD9fiSa'
+    '007eJxTYLi4Uigs7tMtrd5JC09f5+KN/tZUHPdZulbT32N/Ufcx3UwFhmSDtCRLU6OkRFMLQ5O0RNMky5Qkc6MkY5NEC1NDU0tDS+mfqQ2BjAwvP4kzMjJAIIjPwZCbmpuaXpSYy8AAAO9nIVQ='
 
   };
   

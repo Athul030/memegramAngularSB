@@ -19,27 +19,18 @@ export class VideocallComponent implements OnInit {
   otherUserId!:number;
 
   ngOnInit(): void {
-
     this.route.params.subscribe( params => {
       if (params['userId'] && params['otherUserId']) {
-
-        console.error("Data in params",this.userId,this.otherUserId)
         this.userId = params['userId'];
         this.otherUserId = params['otherUserId'];  
-        console.error("Data in params",this.userId,this.otherUserId)
-
       }else{
         console.error("Error, no datas in params")
       }
     })
 
-  
-
     if(Notification.permission !== 'granted' && Notification.permission !=='denied'){
       Notification.requestPermission();
     }
-    
-
       this.rtc.rtc.client = AgoraRTC.createClient({
         mode:'rtc',
         codec:'vp8',

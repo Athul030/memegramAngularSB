@@ -11,6 +11,8 @@ import { VideocallComponent } from './components/videocall/videocall.component';
 import { WebrtcVideoCallComponent } from './components/webrtc-video-call/webrtc-video-call.component';
 import { MemegeneratorComponent } from './components/memegenerator/memegenerator.component';
 import { VideoCall2Component } from './components/video-call2/video-call2.component';
+import { Videocall3Component } from './components/videocall3/videocall3.component';
+import { VideocallScreenComponent } from './components/videocall-screen/videocall-screen.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -25,12 +27,15 @@ const routes: Routes = [
   { path: 'profile/:userId',component:ProfileComponent ,pathMatch:'full'},
   { path: 'chat',component:ChatComponent ,pathMatch:'full'},
   { path: 'chat/:roomId',component:ChatComponent ,pathMatch:'full'},
-  { path:'videoCall',component:VideocallComponent , pathMatch:'full'},
-  { path:'videoCall/:userId/:otherUserId',component:VideocallComponent , pathMatch:'full'},
-  { path:'videoCall2/:userId/:otherUserId',component:VideoCall2Component , pathMatch:'full'},
+  { path:'videoCall',component:Videocall3Component , pathMatch:'full'},
+  { path:'videoCall/:userId/:otherUserId',component:Videocall3Component , pathMatch:'full'},
+  // { path:'videoCall2/:userId/:otherUserId',component:VideoCall2Component , pathMatch:'full'},
   { path:'webRtcVideoCall',component: WebrtcVideoCallComponent , pathMatch:'full'},
   // { path:'webRtcVideoCall/:userId',component: WebrtcVideoCallComponent , pathMatch:'full'}
-  { path:'meme',component: MemegeneratorComponent , pathMatch:'full'}
+  { path:'meme',component: MemegeneratorComponent , pathMatch:'full'},
+  { path:'videoScreen',component:VideocallScreenComponent, pathMatch:'full' },
+  { path:'videoScreen/:otherUserId',component:VideocallScreenComponent, pathMatch:'full' }
+
 
 
 

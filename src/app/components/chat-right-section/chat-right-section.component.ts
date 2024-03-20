@@ -140,6 +140,7 @@ export class ChatRightSectionComponent implements OnInit, OnDestroy, AfterViewCh
 
   }
 
+  //currently working
   navigateToVideo(otherUserId:number):void{
     this.router.navigate(['/videoCall',this.userId,otherUserId]);
   }

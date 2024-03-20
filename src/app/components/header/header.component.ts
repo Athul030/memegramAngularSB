@@ -1,14 +1,18 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Stomp } from '@stomp/stompjs';
 import { log } from 'logrocket';
 import { AdminService } from 'src/app/admin/service/admin.service';
-import { NotificationsDTO } from 'src/app/model/notification';
+import { NotificationType, NotificationsDTO } from 'src/app/model/notification';
 import { ChatService } from 'src/app/services/chat.service';
 import { NotificationsService } from 'src/app/services/notifications.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { resetProfilePicture } from 'src/app/store/store.actions';
+import { VideoCallerIdComponent } from '../video-caller-id/video-caller-id.component';
+import { VideocallService } from 'src/app/services/videocall.service';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 // import { removeUserFromPresence } from 'src/app/store/store.actions';
 
 @Component({
@@ -21,11 +25,14 @@ export class HeaderComponent implements OnInit {
   showNotifications:boolean=false;
   notificationList!:NotificationsDTO[];
   currentUserId:number = this.serviceNow.getUserId();
+  currentUser = StorageService.getUser();
+
+
   notificationCount:number=0;
   private stompClient: any
   groupedNotifications :{[key:string]:NotificationsDTO[]} = {}
   a:number=1;
-  constructor(private adSservice:AdminService, private serviceNow: StorageService,private router:Router, private store:Store, private chatSer:ChatService, private notfSer:NotificationsService){ 
+  constructor(private adSservice:AdminService, private serviceNow: StorageService,private router:Router, private store:Store, private chatSer:ChatService, private notfSer:NotificationsService,private dialog: MatDialog, private videoSer:VideocallService, private snackBar:MatSnackBar){ 
     this.initConnenctionSocket();
    }
   ngOnInit(): void {
@@ -50,24 +57,12 @@ export class HeaderComponent implements OnInit {
         
         if(senderId!==undefined && chatRoomId!==undefined){
           const key = `${senderId}_${chatRoomId}`;
-      
-
           if (!this.groupedNotifications[key]) {
           this.groupedNotifications[key] = [];
-
-          console.log("2.3");
-
         }
-
           this.groupedNotifications[key].push(notification)
-          console.log("the grouped not  is"+this.groupedNotifications);
-
-          console.log("2.4");
-
         }
-      })
-      console.log("2.5");
-      
+      })      
       this.notificationList = notifications;
       this.notificationCount = this.notificationList.length;
       this.calculateNotificationCount();
@@ -82,14 +77,68 @@ export class HeaderComponent implements OnInit {
 
     this.stompClient.connect({}, ()=>{     
       this.stompClient.subscribe(`/topic/notifications`, (notifications: NotificationsDTO[]) => {
+        this.getMessageNotificationDetails();
+
         this.notificationList = notifications;
         this.notificationCount = this.notificationList.length;
         
         if(this.notificationList.length === 0 || this.notificationList.length == undefined){
           this.notificationCount = 0;
         }
-        })
-      })
+        });
+      this.stompClient.subscribe(`/topic/videoCallTo`,(message: any)=>{
+        if (message.body) {
+          const notificationsDTO: NotificationsDTO = JSON.parse(message.body);
+          console.log("Inside  initConnenctionSocket  in header componenet");
+          console.log("notification type",notificationsDTO);
+
+
+          if( notificationsDTO.notificationTo===this.currentUser?.id && notificationsDTO.notificationType === NotificationType.VIDEOCALL){
+            const dialogRef = this.dialog.open(VideoCallerIdComponent, {
+              width: '400px',
+              data: { callerName: notificationsDTO.notificationFromFullName }
+            });
+          
+            dialogRef.afterClosed().subscribe(result => {
+              if (result === 'accept') {
+                if(notificationsDTO.videoCallRoomId)
+                this.handleJoinMeeting(notificationsDTO.videoCallRoomId);
+              } else if(result=='decline') {
+                if(this.currentUser && notificationsDTO && notificationsDTO.notificationTo !== undefined){
+                  this.videoSer.sendVideoCallDeclineNotification(this.currentUser,notificationsDTO.notificationFrom);
+                }
+                dialogRef.close();
+              }
+            });
+
+          }else if(notificationsDTO.notificationTo===this.currentUser?.id && notificationsDTO.notificationType === NotificationType.DECLINE){
+            console.log("Inside  initConnenctionSocket  in header componenet");
+
+            const config = new MatSnackBarConfig();
+            config.duration = 3000; // Duration in milliseconds (3 seconds in this example)
+            this.snackBar.open(`Your call to ${notificationsDTO.notificationFromFullName} is declined`, 'Dismiss', config);
+
+          }
+        }
+      } 
+        );
+
+      });
+  }
+
+  handleJoinMeeting(roomId:number): void {
+   
+    if(this.currentUser?.fullName){
+    const connectedUserName:string  = this.currentUser.fullName;
+    const url = this.router.createUrlTree(['/videoScreen'], {
+      queryParams: {
+        roomID: roomId,
+        username: connectedUserName
+      }
+    }).toString();
+    window.open(url, "_blank");
+    }
+    
   }
 
   isLoginOrRegisterRoute(): boolean {

@@ -8,7 +8,7 @@ export interface NotificationsDTO{
     notificationTo?:number,
     read:boolean
     chatRoomId?:string
-
+    videoCallRoomId?:number,
     notificationFromUserId?:number;
     notificationFromEmail?:string;
     notificationFromFullName?:string;
@@ -22,5 +22,6 @@ export interface NotificationsDTO{
 export enum NotificationType{
     MESSAGE = 'MESSAGE',
     AUDIOCALL = 'AUDIOCALL',
-    VIDEOCALL = 'VIDEOCALL'
+    VIDEOCALL = 'VIDEOCALL',
+    DECLINE='DECLINE'
 }

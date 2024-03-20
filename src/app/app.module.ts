@@ -49,6 +49,9 @@ import { WebrtcVideoCallComponent } from './components/webrtc-video-call/webrtc-
 import { MemegeneratorComponent } from './components/memegenerator/memegenerator.component';
 import { VideoCall2Component } from './components/video-call2/video-call2.component';
 import { Socket, SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
+import { Videocall3Component } from './components/videocall3/videocall3.component';
+import { VideocallScreenComponent } from './components/videocall-screen/videocall-screen.component';
+import { VideoCallerIdComponent } from './components/video-caller-id/video-caller-id.component';
 const config :SocketIoConfig = { url:'http://localhost:8080',options:{}};
 
 //initlaize log rocket
@@ -85,6 +88,9 @@ export function initializeLogRocket(){
     WebrtcVideoCallComponent,
     MemegeneratorComponent,
     VideoCall2Component,
+    Videocall3Component,
+    VideocallScreenComponent,
+    VideoCallerIdComponent,
   
   ],
   imports: [

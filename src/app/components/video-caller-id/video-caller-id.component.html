@@ -1,0 +1,11 @@
+<div class="video-call-dialog-container">
+    <h2 mat-dialog-title class="video-call-dialog-title">Incoming Video Call</h2>
+    <mat-dialog-content>
+      <p class="caller-info">{{ data.callerName }} is calling?</p>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end" class="video-call-dialog-actions">
+      <button mat-button color="primary" class="accept-button" (click)="onAccept()">Accept</button>
+      <button mat-button mat-dialog-close class="decline-button" (click)="onDecline()">Decline</button>
+    </mat-dialog-actions>
+  </div>
+  

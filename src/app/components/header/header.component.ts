@@ -13,6 +13,8 @@ import { resetProfilePicture } from 'src/app/store/store.actions';
 import { VideoCallerIdComponent } from '../video-caller-id/video-caller-id.component';
 import { VideocallService } from 'src/app/services/videocall.service';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { ChatLeftSectionComponent } from '../chat-left-section/chat-left-section.component';
+import { ChatRightSectionComponent } from '../chat-right-section/chat-right-section.component';
 // import { removeUserFromPresence } from 'src/app/store/store.actions';
 
 @Component({
@@ -21,6 +23,9 @@ import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+
+  // @ViewChild(ChatLeftSectionComponent) chatLeftSectionComponent!: ChatLeftSectionComponent;
+  // @ViewChild(ChatRightSectionComponent) chatRightSectionComponent!: ChatRightSectionComponent;
 
   showNotifications:boolean=false;
   notificationList!:NotificationsDTO[];
@@ -32,22 +37,47 @@ export class HeaderComponent implements OnInit {
   private stompClient: any
   groupedNotifications :{[key:string]:NotificationsDTO[]} = {}
   a:number=1;
-  constructor(private adSservice:AdminService, private serviceNow: StorageService,private router:Router, private store:Store, private chatSer:ChatService, private notfSer:NotificationsService,private dialog: MatDialog, private videoSer:VideocallService, private snackBar:MatSnackBar){ 
+  constructor(private adSservice:AdminService, private serviceNow: StorageService,private router:Router, private store:Store, private chatSer:ChatService, private notfSer:NotificationsService,private dialog: MatDialog, private videoSer:VideocallService, private snackBar:MatSnackBar, private notificationService:NotificationsService){ 
     this.initConnenctionSocket();
+
    }
   ngOnInit(): void {
 
     this.initConnenctionSocket();
     this.getMessageNotificationDetails();
+    this.subscribeToChatNotificationStatusUpdate();
+
+    // this.subscirbeToChatNotificationStatusUpdate();
+    console.log("Starts at navigateToChat8");
 
   }
 
   showHeader:boolean = true;
+
+  subscribeToChatNotificationStatusUpdate(): void {
+    this.notificationService.notificationStatusUpdated$.subscribe(() => {
+      this.getMessageNotificationDetails();
+    });
+  }
   
+  // subscirbeToChatNotificationStatusUpdate():void{
+  //   console.log("Starts at navigateToChat9");
+
+  //   this.chatLeftSectionComponent.chatNotificationStatusUpdated.subscribe(()=>{
+  //     console.log("Starts at navigateToChat10");
+
+  //     this.getMessageNotificationDetails();
+  //   });
+  //   this.chatRightSectionComponent.chatNotificationStatusUpdated.subscribe(()=>{
+  //     console.log("Starts at navigateToChat11");
+
+  //     this.getMessageNotificationDetails();
+  //   });
+  // }
+
   getMessageNotificationDetails(){
-
     this.notfSer.getMessageNotificationsDetails(this.currentUserId).subscribe((notifications:NotificationsDTO[])=>{
-
+      notifications = notifications.filter(e=>e.read===false);
       this.groupedNotifications = {};
       notifications.forEach(notification=>{
         const senderId = notification.notificationFromUserId?.toString();
@@ -101,8 +131,11 @@ export class HeaderComponent implements OnInit {
           
             dialogRef.afterClosed().subscribe(result => {
               if (result === 'accept') {
-                if(notificationsDTO.videoCallRoomId)
+                if(notificationsDTO.videoCallRoomId){
                 this.handleJoinMeeting(notificationsDTO.videoCallRoomId);
+                dialogRef.close();
+                }
+              
               } else if(result=='decline') {
                 if(this.currentUser && notificationsDTO && notificationsDTO.notificationTo !== undefined){
                   this.videoSer.sendVideoCallDeclineNotification(this.currentUser,notificationsDTO.notificationFrom);
@@ -177,7 +210,9 @@ export class HeaderComponent implements OnInit {
 
 
   navigateToChat(chatRoomId:string):void{
-
+    console.log("Starts at navigateToChat1");
+    
+    this.getMessageNotificationDetails();
     // if(chatRoomId === undefined){
     //   return;
     // }
@@ -189,6 +224,12 @@ export class HeaderComponent implements OnInit {
     // }
     
     this.router.navigate(['/chat',chatRoomId]);
+    console.log("Starts at navigateToChat2");
+
+    this.getMessageNotificationDetails();
+    console.log("Starts at navigateToChat3");
+
+
   }
 
   calculateNotificationCount():void{

@@ -106,7 +106,7 @@ export class VideocallScreenComponent implements OnInit,OnDestroy {
     });
   }
 
-  navigateToChat():void{
+  navigateToHome():void{
     this.router.navigate(['/home']);
   }
 

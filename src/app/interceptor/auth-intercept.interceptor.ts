@@ -50,8 +50,6 @@ export class AuthInterceptInterceptor implements HttpInterceptor {
 
             return this.service.refreshToken().pipe(
               mergeMap((response) => {
-                console.log("resp" + response);
-                console.log("respAcces" + response.accessToken);
                 this.storage.saveAccessToken(response.accessToken);
                 this.storage.saveRefreshToken(response.refreshToken);
 

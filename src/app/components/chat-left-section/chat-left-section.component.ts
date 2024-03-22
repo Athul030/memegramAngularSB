@@ -1,10 +1,12 @@
 import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { error } from 'logrocket';
 import { Observable, map } from 'rxjs';
 import { ChatRoomDTO } from 'src/app/model/message';
 import { User, UserDTO } from 'src/app/model/user';
 import { ChatService } from 'src/app/services/chat.service';
+import { NotificationsService } from 'src/app/services/notifications.service';
 import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
@@ -16,8 +18,11 @@ export class ChatLeftSectionComponent implements OnInit  {
 
   @Input() followersList!:UserDTO[];
   @Input() followingList!:UserDTO[];
-  constructor(private chatService: ChatService,private storgSer:StorageService, private store:Store,private route: ActivatedRoute) {}
+  constructor(private chatService: ChatService,private storgSer:StorageService, private store:Store,private route: ActivatedRoute, private notificationService:NotificationsService) {
+
+  }
   @Output() userSelected:EventEmitter<{user:UserDTO,chatRoomId:string}> = new EventEmitter();
+  // @Output() chatNotificationStatusUpdated:EventEmitter<void> = new EventEmitter<void>();
   
   //event emit after selecting user
   // userSelected$ = new EventEmitter<{}>();
@@ -40,6 +45,8 @@ export class ChatLeftSectionComponent implements OnInit  {
           this.transitToOnSelectUser(this.roomId);
         }
       })
+      this.updateNotificationStatus();
+      // this.chatNotificationStatusUpdated.emit();
   }
 
   // isUserOnline(userId:number):boolean{
@@ -51,9 +58,17 @@ export class ChatLeftSectionComponent implements OnInit  {
   //   subscription.unsubscribe();
   //   return isOnline;
   // }
+
+  updateNotificationStatus():void{
+    this.notificationService.updateNotificationStatus();
+  }
   
   onSelectUser(user: UserDTO): void {
-    
+    this.updateNotificationStatus();
+
+    // this.chatNotificationStatusUpdated.emit();
+    console.log("Starts at navigateToChat4Left");
+
     //emit the user
     // this.userSelected.emit(user);
     //create or get a chatroom
@@ -66,9 +81,22 @@ export class ChatLeftSectionComponent implements OnInit  {
       this.chatService.createChatRoom(userIds).subscribe(
         (chatRoom:ChatRoomDTO)=>{
           if (chatRoom.id) {
+            
             console.log("chatRoom",chatRoom.id);
             this.userSelected.emit({user,chatRoomId:chatRoom.id});
             this.chatService.joinRoom(chatRoom.id);
+            this.chatService.setReadStatusAsTrue(chatRoom.id).subscribe(
+              (response:boolean)=>{
+                console.log("Chat notification is updated",response);
+                this.updateNotificationStatus();
+
+                // this.chatNotificationStatusUpdated.emit();
+                console.log("Starts at navigateToChat5Left");
+
+              },(error:any)=>{
+                console.error("Failed to update the chat notification",error);
+              }
+            );
           } else {
             console.error('Error: Chat room ID is missing.');
           }
@@ -114,6 +142,8 @@ export class ChatLeftSectionComponent implements OnInit  {
   }
 
   transitToOnSelectUser(roomId:string):void{
+    // this.chatNotificationStatusUpdated.emit();
+
     let currentUserId =  this.storgSer.getUserId()
     let user1:UserDTO;
     this.chatService.getOtherUser(roomId,currentUserId).subscribe(

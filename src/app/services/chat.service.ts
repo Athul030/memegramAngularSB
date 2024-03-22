@@ -30,9 +30,14 @@ export class ChatService {
 
         const updatedMessages=[...currentMessages,messageContent];
         this.messageSubject.next(updatedMessages);
-        
       })
     })
+  }
+
+  setReadStatusAsTrue(roomId:string):Observable<boolean>{
+    
+    const url=`${this.baseURL}/notification/chatNotificationStatus/${roomId}`;
+    return this.http.post<boolean>(url,{});
   }
 
   joinVideoCall() {

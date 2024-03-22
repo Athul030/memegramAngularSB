@@ -1,4 +1,4 @@
-import { AfterViewChecked, ChangeDetectorRef, Component, ElementRef, Input, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewChecked, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, NgZone, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { Message, MessageType } from 'src/app/model/message';
@@ -10,6 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field'
 import Picker from 'emoji-picker-element/picker';
 import { NavigationExtras, Router } from '@angular/router';
 import { VideocallService } from 'src/app/services/videocall.service';
+import { NotificationsService } from 'src/app/services/notifications.service';
 
 
 @Component({
@@ -26,13 +27,20 @@ export class ChatRightSectionComponent implements OnInit, OnDestroy, AfterViewCh
   userId:number = this.storageSer.getUserId();
   private messageSubscription!: Subscription;
   @ViewChild('messagesContainer') private messagesContainer!: ElementRef;
+  // @Output() chatNotificationStatusUpdated:EventEmitter<void> = new EventEmitter<void>();
 
-  constructor(private storageSer: StorageService, private chatSer: ChatService, private ngZone: NgZone, private cdr: ChangeDetectorRef, public dialog:MatDialog, private router:Router, private videoCallSer:VideocallService) {
+  constructor(private storageSer: StorageService, private chatSer: ChatService, private ngZone: NgZone, private cdr: ChangeDetectorRef, public dialog:MatDialog, private router:Router, private videoCallSer:VideocallService, private notificationService:NotificationsService) {
     
-    
+
   }
 
   ngOnInit(): void {
+    console.log("Starts at navigateToChatRight6");
+    this.updateNotificationStatus();
+    // this.chatNotificationStatusUpdated.emit();
+    console.log("Starts at navigateToChatRight7");
+
+
     this.messageSubscription = this.chatSer.getMessageSubject().subscribe((messages: Message[]) => {
       this.ngZone.run(() => {
         messages.forEach(message => {
@@ -43,6 +51,10 @@ export class ChatRightSectionComponent implements OnInit, OnDestroy, AfterViewCh
         this.scrollToBottom();
       });
     });
+  }
+
+  updateNotificationStatus():void{
+    this.notificationService.updateNotificationStatus();
   }
 
   ngOnDestroy(): void {
@@ -83,7 +95,7 @@ export class ChatRightSectionComponent implements OnInit, OnDestroy, AfterViewCh
    return 0;
   }
   
-  startCall(){}
+  startCall(otherUserId:number){}
   startVideoChat(){}
 
 

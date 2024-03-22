@@ -20,7 +20,7 @@ export class FeedsComponent implements OnInit {
 
     this.getCurrentUser();
     this.followSer.getFollowSubject().subscribe((followed:boolean)=>{
-      if(followed){
+      if(followed  ){
         this.getCurrentUser();
         this.getPosts();
       }
@@ -49,7 +49,7 @@ export class FeedsComponent implements OnInit {
   getPosts(){
     this.service.getAllPostsForFeed().subscribe(
       (posts:Post[])=>{
-        this.feedPosts = posts.filter((post)=>this.currentUser.following.some(followingUser=>followingUser.id===post.user?.id || post.user?.id === this.currentUser.id ))
+        this.feedPosts = posts.filter((post)=>this.currentUser.following.some((followingUser)=>followingUser.id===post.user?.id) || post.user?.id === this.currentUser.id )
         .map(post => post)
         .reverse();
 

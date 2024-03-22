@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { StorageService } from './storage.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { FollowRequestBody, FollowerFollowingCount, FollowerFollowingDetails } from '../model/followDetails';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class FollowService {
 
   constructor(private http:HttpClient, private storage:StorageService) { }
 
-  baseURL:string = "http://localhost:8080";
+  baseURL:string = `${environment.apiUrl}`;
 
   followUser(){
     this.followSubject.next(true);

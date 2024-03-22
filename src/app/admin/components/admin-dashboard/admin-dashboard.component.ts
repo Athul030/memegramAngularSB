@@ -16,7 +16,6 @@ export class AdminDashboardComponent implements OnInit {
   
 
   constructor(private service:AdminService){
-
   }
 
   ngOnInit(): void {

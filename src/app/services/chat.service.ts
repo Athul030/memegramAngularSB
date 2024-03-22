@@ -5,12 +5,13 @@ import { ChatRoomDTO, Message, MessageType, OtherUserRequest } from '../model/me
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { NotificationType, NotificationsDTO } from '../model/notification';
 import { User, UserDTO } from '../model/user';
+import { environment } from '../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class ChatService {
 
-  baseURL:string = "http://localhost:8080";
+  baseURL:string = `${environment.apiUrl}`;
 
   private stompClient: any
   private messageSubject: BehaviorSubject<Message[]> = new BehaviorSubject<Message[]>([]);
@@ -19,7 +20,7 @@ export class ChatService {
     this.initConnenctionSocket();
   }
   initConnenctionSocket() {
-    const url = 'ws://localhost:8080/socket';
+    const url = `${environment.apiUrlWS}/socket`;
     this.stompClient = Stomp.client(url);
   }
   joinRoom(roomId: string) {

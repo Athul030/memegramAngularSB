@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { CustomToken, JwtAuthResponse, Post, User, UserBlockRequest, UserCred, UserDTO } from '../model/user';
 import { Observable, catchError, map, tap, throwError } from 'rxjs';
 import { StorageService } from './storage.service';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  baseURL:string = "http://localhost:8080";
+  baseURL:string = `${environment.apiUrl}`;
 
   constructor(private http:HttpClient, private storage:StorageService) { }
 

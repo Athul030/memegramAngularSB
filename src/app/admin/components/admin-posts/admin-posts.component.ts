@@ -37,18 +37,7 @@ export class AdminPostsComponent implements OnInit {
   }
 
 
-  // fetchPosts(pageIndex:number,pageSize:number){
-  //   this.service.getAllPosts(pageIndex,pageSize).subscribe((page: Page<PostDTO>)=>{
-      
-  //     this.datasource = new MatTableDataSource(page.content);
-  //     this.datasource.paginator = this.paginator;
-  //     this.paginator.length = page.totalElements;
-  //   },
-  //   (error) => {
-  //     console.error('Error fetching posts', error);
-  //   }
-  //   );
-  // }
+
   
   nextPage(event:PageEvent){
     let pageIndex = event.pageIndex;

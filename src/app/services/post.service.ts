@@ -4,6 +4,7 @@ import { StorageService } from './storage.service';
 import { Observable } from 'rxjs';
 import { PostDTO } from '../model/user';
 import { NotificationsDTO } from '../model/notification';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class PostService {
 
   constructor(private http:HttpClient, private storage:StorageService) { }
 
-  baseURL:string = "http://localhost:8080";
+  baseURL:string = `${environment.apiUrl}`;
 
   public getPostCount():Observable<number>{
     

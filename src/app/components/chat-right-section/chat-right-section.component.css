@@ -44,7 +44,7 @@
 
 .message-area-container {
   display: flex;
-  flex-direction: column-reverse; /* Stack messages in reverse order */
+  flex-direction: column-reverse; 
   align-items: flex-start;
   padding: 20px;
   min-height: 69vh;
@@ -65,9 +65,6 @@
   display: flex;
 }
 
-/* .message:nth-child(even){
-  justify-content: flex-start;
-} */
 
  .message-sender-reciever-container {
   display: flex;
@@ -129,22 +126,22 @@ textarea {
 .text-area-container {
   width: 100%;
   display: flex;
-  justify-content: center; /* Center items horizontally */
-  align-items: center; /* Center items vertically */
-  padding: 10px; /* Adjust padding as needed */
+  justify-content: center; 
+  align-items: center; 
+  padding: 10px; 
 }
 
 .button-container {
   display: flex;
-  align-items: center; /* Center items vertically */
+  align-items: center;
 }
 button.send-button {
-  padding: 5px; /* Adjust padding to make the button smaller */
-  margin-right: 10px; /* Add margin between the buttons */
+  padding: 5px; 
+  margin-right: 10px; 
 }
 
 .mat-icon.send-icon {
-  font-size: 18px; /* Adjust the font size for the send icon */
+  font-size: 18px; 
 }
 
 
@@ -174,7 +171,7 @@ text-area-container textarea {
 
 .image-icon-container {
   cursor: pointer;
-  margin-left: 10px; /* Adjust the margin as needed */
+  margin-left: 10px;
 }
 
 

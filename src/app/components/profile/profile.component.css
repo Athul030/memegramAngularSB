@@ -1,6 +1,6 @@
 .forWHolePage{
     display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* Adjust to your needs, e.g., flex-start, flex-end, space-between, etc. */
+  justify-content: flex-start; 
   height: 100vh;
 }

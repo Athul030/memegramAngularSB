@@ -1,5 +1,6 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { environment } from 'src/app/environments/environment';
 import { ChatRoomDTO } from 'src/app/model/message';
 import { SignalDataDTO, SignalType } from 'src/app/model/videocall';
 import { ChatService } from 'src/app/services/chat.service';
@@ -56,7 +57,7 @@ export class WebrtcVideoCallComponent implements OnInit{
     })
     console.log("2");
 
-    this.signaling = new WebSocket('ws://localhost:8080/socket1');
+    this.signaling = new WebSocket(`${environment.apiUrlWS}/socket1`);
     this.signaling.onopen = () => {
       console.log('WebSocket connection opened.');
       console.log('signaling',this.signaling);
@@ -218,7 +219,7 @@ export class WebrtcVideoCallComponent implements OnInit{
 
     console.log('Joining session with ID:', this.sessionId);
     
-    const webSocketUrl = 'ws://localhost:8080/' + this.sessionId;
+    const webSocketUrl = `${environment.apiUrlWS}`+'/' + this.sessionId;
     this.signaling = new WebSocket(webSocketUrl);
   
     this.signaling.onopen = () => {

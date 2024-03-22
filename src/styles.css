@@ -16,12 +16,41 @@
   }
 
 
-/* styles.css or styles.scss */
-/* .custom-snack-bar-container {
-  position: fixed;
-  top: 10;
-  left: 50%;
-  transform: translateX(-50%);
-} */
 
+/* changed */
+/* Global styles */
+body {
+  font-size: 14px; /* Adjust the base font size */
+  line-height: 1.5; /* Adjust line height for better readability */
+  margin: 0;
+  padding: 0;
+}
 
+/* Reduce sizes in app-root */
+.app-root * {
+  font-size: 0.875rem; /* Adjust font size */
+  padding: 0.5rem; /* Adjust padding */
+  margin: 0.25rem 0; /* Adjust margins */
+}
+
+/* Adjust button size */
+.btn {
+  padding: 0.25rem 0.5rem; /* Adjust padding */
+}
+
+/* Reduce heading sizes */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0.25rem 0; /* Adjust margins */
+}
+
+/* Reduce input size */
+input[type="text"],
+input[type="file"],
+textarea {
+  padding: 0.25rem; /* Adjust padding */
+}
+
+/* Reduce label size */
+label {
+  margin-bottom: 0.25rem; /* Adjust margin */
+}

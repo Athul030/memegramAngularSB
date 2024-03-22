@@ -27,7 +27,6 @@ export class ChatRightSectionComponent implements OnInit, OnDestroy, AfterViewCh
   userId:number = this.storageSer.getUserId();
   private messageSubscription!: Subscription;
   @ViewChild('messagesContainer') private messagesContainer!: ElementRef;
-  // @Output() chatNotificationStatusUpdated:EventEmitter<void> = new EventEmitter<void>();
 
   constructor(private storageSer: StorageService, private chatSer: ChatService, private ngZone: NgZone, private cdr: ChangeDetectorRef, public dialog:MatDialog, private router:Router, private videoCallSer:VideocallService, private notificationService:NotificationsService) {
     
@@ -37,7 +36,6 @@ export class ChatRightSectionComponent implements OnInit, OnDestroy, AfterViewCh
   ngOnInit(): void {
     console.log("Starts at navigateToChatRight6");
     this.updateNotificationStatus();
-    // this.chatNotificationStatusUpdated.emit();
     console.log("Starts at navigateToChatRight7");
 
 

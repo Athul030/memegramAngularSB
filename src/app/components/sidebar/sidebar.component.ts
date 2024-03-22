@@ -11,7 +11,6 @@ import { selectImageUrl } from 'src/app/store/store.selectors';
 import { Router } from '@angular/router';
 import { StorageService } from 'src/app/services/storage.service';
 import { resetProfilePicture } from 'src/app/store/store.actions';
-// import { removeUserFromPresence } from 'src/app/store/store.actions';
 
 @Component({
   selector: 'app-sidebar',

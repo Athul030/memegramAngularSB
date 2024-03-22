@@ -8,7 +8,7 @@
 
 .profile-stats ul,
 .profile-bio p {
-    margin-bottom: 10px; /* Adjust the value as needed */
+    margin-bottom: 10px; 
 }
 
 
@@ -162,14 +162,14 @@ img {
     line-height: 1.5;
     margin-top: 2.3rem;
 
-    word-wrap: break-word; /* This property allows long words to be broken and wrap onto the next line */
-    max-width: 75ch; /* Set the maximum width to 80 characters */
+    word-wrap: break-word; 
+    max-width: 75ch; 
 
 }
 
 .profile-bio p {
-    min-width: 64ch; /* Set the minimum width in characters */
-    word-wrap: break-word; /* Allow long words to break and wrap onto the next line */
+    min-width: 64ch; 
+    word-wrap: break-word; 
   }
 
 .profile-real-name,
@@ -350,13 +350,7 @@ img {
     }
 }
 
-/*
 
-The following code will only run if your browser supports CSS grid.
-
-Remove or comment-out the code block below to see how the browser will fall-back to flexbox & floated styling. 
-
-*/
 
 @supports (display: grid) {
     .profile {

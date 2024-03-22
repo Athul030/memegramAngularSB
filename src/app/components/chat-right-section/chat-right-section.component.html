@@ -7,21 +7,12 @@
     </div>
     <div class="call-icons" *ngIf="selectedUser.id">
       <mat-icon class="call-icon" (click)="startCall(selectedUser.id)">call</mat-icon>
-      <!-- <mat-icon class="video-chat-icon" (click)="navigateToVideoCall(selectedUser.id)">videocam</mat-icon> -->
+      
       <mat-icon class="video-chat-icon" (click)="navigateToVideo(selectedUser.id)">videocam</mat-icon>
 
   </div>
 </div>
-   <!-- Messages
-   <div class="message-area-container">
-    <div #messagesContainer class="messages">
-      <div *ngFor="let message of messages.slice().reverse()" class="message">
-        <div [ngClass]="{'sent-message': message.senderId === selectedUser.id, 'received-message': message.senderId !== selectedUser.id}">
-          <div class="message-content">{{message.content}}</div>
-        </div>
-      </div>
-    </div>
-  </div> -->
+  
 
   <!-- Messages -->
 <div class="message-area-container">

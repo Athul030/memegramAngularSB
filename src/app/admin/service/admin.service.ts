@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/internal/Observable';
+import { environment } from 'src/app/environments/environment';
 import { Page, Post, PostDTO, PostsGraphData, ProviderChartData, User, UserDTO } from 'src/app/model/user';
 import { StorageService } from 'src/app/services/storage.service';
 
@@ -11,13 +12,11 @@ import { StorageService } from 'src/app/services/storage.service';
 export class AdminService {
 
 
-  private baseUrl:string="http://localhost:8080";
+  private baseUrl:string=`${environment.apiUrl}`;
 
   constructor(private http:HttpClient, private service:StorageService) { }
 
-  // getAllUsers():Observable<User[]>{
-  //   return this.http.get<User[]>(`${this.baseUrl}/api/user/getAll`);
-  // }
+
 
   getAllUsers(page:number,size:number):Observable<Page<UserDTO>>{
     console.log("pageIndex:",page);
@@ -47,9 +46,9 @@ export class AdminService {
     return this.http.get<Page<PostDTO>>(`${this.baseUrl}/api/posts`,{params});
   }
 
-  logout(): Observable<any> {
+  logout(): Observable<void> {
     
-    return this.http.post<any>(`${this.baseUrl}/api/v1/auth/logout`,{});
+    return this.http.post<void>(`${this.baseUrl}/api/v1/auth/logout`,{});
   }
 
   removePresence(userId: number): void {
@@ -63,9 +62,7 @@ export class AdminService {
     );
   }
 
-  // toggleBlock(id:number):Observable<any>{
-  //   retur ''
-  // }
+
   
 
   blockUserByAdmin(userId: number): Observable<any> {

@@ -22,10 +22,8 @@ export class ChatLeftSectionComponent implements OnInit  {
 
   }
   @Output() userSelected:EventEmitter<{user:UserDTO,chatRoomId:string}> = new EventEmitter();
-  // @Output() chatNotificationStatusUpdated:EventEmitter<void> = new EventEmitter<void>();
   
-  //event emit after selecting user
-  // userSelected$ = new EventEmitter<{}>();
+  
 
   userPresence$!: Observable<boolean>;
   OnlineUsers$!: Observable<number[]>;
@@ -36,7 +34,6 @@ export class ChatLeftSectionComponent implements OnInit  {
   isOnline!:boolean;
 
   ngOnInit(): void {
-      // this.OnlineUsers$ = this.store.select(selectUserIds);
       this.hasNetwork(navigator.onLine);
 
       this.route.params.subscribe( params => {
@@ -46,18 +43,9 @@ export class ChatLeftSectionComponent implements OnInit  {
         }
       })
       this.updateNotificationStatus();
-      // this.chatNotificationStatusUpdated.emit();
   }
 
-  // isUserOnline(userId:number):boolean{
-  //   let onlineUserIds: number[] | undefined=[]  ;
-  //   const subscription = this.OnlineUsers$.subscribe((ids:number[] | undefined)=>{
-  //     onlineUserIds = ids;
-  //   })
-  //   const isOnline = onlineUserIds.includes(userId);
-  //   subscription.unsubscribe();
-  //   return isOnline;
-  // }
+
 
   updateNotificationStatus():void{
     this.notificationService.updateNotificationStatus();
@@ -66,11 +54,9 @@ export class ChatLeftSectionComponent implements OnInit  {
   onSelectUser(user: UserDTO): void {
     this.updateNotificationStatus();
 
-    // this.chatNotificationStatusUpdated.emit();
     console.log("Starts at navigateToChat4Left");
 
-    //emit the user
-    // this.userSelected.emit(user);
+    
     //create or get a chatroom
     if(user.id){
       let currentUserId =  this.storgSer.getUserId()
@@ -90,10 +76,9 @@ export class ChatLeftSectionComponent implements OnInit  {
                 console.log("Chat notification is updated",response);
                 this.updateNotificationStatus();
 
-                // this.chatNotificationStatusUpdated.emit();
                 console.log("Starts at navigateToChat5Left");
 
-              },(error:any)=>{
+              },(error)=>{
                 console.error("Failed to update the chat notification",error);
               }
             );
@@ -106,7 +91,6 @@ export class ChatLeftSectionComponent implements OnInit  {
         }
       )
     }
-    // this.userSelected$.emit(event);
   }
 
   updateUsersPresence(userIds:number[]):void{
@@ -142,7 +126,6 @@ export class ChatLeftSectionComponent implements OnInit  {
   }
 
   transitToOnSelectUser(roomId:string):void{
-    // this.chatNotificationStatusUpdated.emit();
 
     let currentUserId =  this.storgSer.getUserId()
     let user1:UserDTO;

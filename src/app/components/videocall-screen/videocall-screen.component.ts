@@ -55,31 +55,7 @@ export class VideocallScreenComponent implements OnInit,OnDestroy {
       }
       console.log("The zegoinstance is"+this.zegoInstance);
     });
-    //   const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(appID, serverSecret, roomID, userID, userName);
-    //   const zp = ZegoUIKitPrebuilt.create(kitToken);
-    //   zp.joinRoom({
-    //     container: document.querySelector("#root") as HTMLElement,
-    //     sharedLinks: [{
-    //       name: 'Personal link',
-    //       url: window.location.protocol + '//' + window.location.host  + window.location.pathname + '?roomID=' + roomID,
-    //     }],
-    //     scenario: {
-    //       //changed
-    //       mode: ZegoUIKitPrebuilt.OneONoneCall,
-    //     },
-    //     turnOnMicrophoneWhenJoining: false,
-    //     turnOnCameraWhenJoining: false,
-    //     showMyCameraToggleButton: true,
-    //     showMyMicrophoneToggleButton: true,
-    //     showAudioVideoSettingsButton: true,
-    //     showScreenSharingButton: false,
-    //     showTextChat: false,
-    //     showUserList: false,
-    //     maxUsers: 2,
-    //     layout: "Auto",
-    //     showLayoutButton: false,
-    //   });
-    // });
+   
   }
 
   joinRoom(roomID: string) {

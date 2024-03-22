@@ -23,7 +23,7 @@ export class AdminSidebarComponent {
         console.log("respone"+respone);
       },(error) => {
         console.error('Logout failed', error);
-        // Handle logout failure if needed
+        // Handle the logout failure
       }
     )
   }

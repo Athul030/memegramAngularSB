@@ -31,7 +31,10 @@ export class StorageService {
 
   }
 
-  public getAccessToken(): string|null{
+  public  getAccessToken(): string|null{
+    return localStorage.getItem('accessToken');
+  }
+  public static getAccessToken(): string|null{
     return localStorage.getItem('accessToken');
   }
   public getRefreshToken(): string|null{
@@ -79,25 +82,45 @@ export class StorageService {
       role = user.roles[0].name;
     }
     if(typeof(role) === 'string'){
-      return role === "ADMIN";
+      return role === "ROLE_ADMIN";
     }
     return false;
   }
 
-  static isUserLoggedIn():boolean{
-    if(this.getTokens() === null){
-      return false;
+  // static isUserLoggedIn():boolean{
+  //   if(this.getTokens() === null){
+  //     return false;
+  //   }
+  //   const user = this.getUser();
+  //   let role:string | null = '';
+  //   if(user!==null && user.roles!==undefined){
+  //     role = user.roles[0].name;
+  //   }
+  //   if(typeof(role) === 'string'){
+  //     return role === "ROLE_USER";
+  //   }
+  //   return false;
+  // }
+
+  static isUserLoggedIn(): boolean {
+    const tokens = this.getAccessToken();
+    if (!tokens) {
+        return false; // No tokens means not logged in
     }
+
     const user = this.getUser();
-    let role:string | null = '';
-    if(user!==null && user.roles!==undefined){
-      role = user.roles[0].name;
+    console.log("user in storage service",user?.roles);
+    if(user?.roles)
+    console.log("user in storage service",user?.roles[0].name);
+
+    if (!user || !user.roles || user.roles.length === 0) {
+        return false; // No user or roles defined means not logged in
     }
-    if(typeof(role) === 'string'){
-      return role === "USER";
-    }
-    return false;
-  }
+
+    // Check if any of the user's roles match "ROLE_USER"
+    return user.roles.some(role => role.name === "ROLE_USER");
+}
+
 
   public logout(){
     localStorage.removeItem("token");

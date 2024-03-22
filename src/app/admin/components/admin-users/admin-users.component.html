@@ -4,7 +4,6 @@
  <div class="container">
   <h5 class="text-center mt-3">USER LISTING</h5>
   <div class="d-flex my-2">
-      <!-- Add any additional buttons or links here -->
   </div>
   <div class="table-responsive">
       <table class="table table-bordered p-0 m-0">
@@ -44,56 +43,5 @@
 
 
 
-
-
-<!-- <div class="container">
-  <h1>User Listing</h1>
-
-  <table mat-table [dataSource] = "datasource">
-
-    <ng-container matColumnDef="fullName">
-      <mat-header-cell mat-sort-header *matHeaderCellDef>Full Name</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.fullName}}</mat-cell>
-  </ng-container>
-  <ng-container matColumnDef="email">
-      <mat-header-cell mat-sort-header *matHeaderCellDef>Email</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.email}}</mat-cell>
-  </ng-container>
-  <ng-container  matColumnDef="userHandle">
-      <mat-header-cell mat-sort-header *matHeaderCellDef>User handle</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.userHandle}}</mat-cell>
-  </ng-container>
-  <ng-container  matColumnDef="provider">
-    <mat-header-cell mat-sort-header *matHeaderCellDef>Provider</mat-header-cell>
-    <mat-cell *matCellDef="let element">{{element.provider}}</mat-cell>
-</ng-container>
-  
-  
-  <ng-container matColumnDef="blockAction">
-    <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
-    <mat-cell *matCellDef="let element">
-      <button (click)="toggleBlockUser(element)" mat-raised-button [color]="element.blocked ? 'warn' : 'primary'" class="action-button">
-        {{ element.blocked ? 'Unblock' : 'Block' }}
-      </button>
-    </mat-cell>
-  </ng-container>
-  
-  <mat-header-row *matHeaderRowDef="displayedColumns" class="header-row"></mat-header-row>
-   <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-
-   
-  </table>
-
-  <div class="paginator-container">
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="5" [length]="totalElements"
-      (page) = "nextPage($event)" >
-    </mat-paginator>
-    
-  </div>
-  
-  
-
-</div>
- -->
 
 

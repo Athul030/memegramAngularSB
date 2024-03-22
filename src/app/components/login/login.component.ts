@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { environment } from 'src/app/environments/environment';
 import { AuthResponse, UserCred } from 'src/app/model/user';
 import { UserService } from 'src/app/services/user.service';
 import { beginLogin } from 'src/app/store/store.actions';
@@ -29,7 +30,6 @@ export class LoginComponent {
       password:this.builder.control('',[Validators.required])
     });
 
-    // this.handleCallback();
   }
 
 
@@ -50,26 +50,11 @@ export class LoginComponent {
 
     signInWithGoogle() {
       // my OAuth login endpoint 
-      window.location.href = 'http://localhost:8080/oauth2/authorization/google';
+      window.location.href = `${environment.apiUrl}/oauth2/authorization/google`;
 
     }
 
-    // handleCallback() {
-    //   const url = 'http://localhost:8080/login/oauth2/code/google';
-
-    //   this.http.get<AuthResponse>(url).subscribe(
-    //     (response) => {
-    //       console.log('Response JSON:', response);
-    //       // Access specific properties if needed
-    //       const accessToken = response.accessToken;
-    //       const user = response.user;
-    //       // ... and so on
-    //     },
-    //     (error) => {
-    //       console.error('Error fetching data:', error);
-    //     }
-    //   );
-    // }
+    
     
     
   }

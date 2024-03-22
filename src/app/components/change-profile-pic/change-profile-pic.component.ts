@@ -33,7 +33,7 @@ export class ChangeProfilePicComponent {
         }
       );
     } else {
-      // Handle the case where photoSelector or its files property is null
+      // Handle the case where photoSelector or its files property is null value
       console.error("No file selected");
     }
   }
@@ -65,7 +65,7 @@ export class ChangeProfilePicComponent {
               panelClass: 'custom-snack-bar-container',
             })
           }
-      }, (error: any)=>{
+      }, (error)=>{
           console.error('HTTP ERROR',error);
           this.snackBar.open("Error Changing DP at the moment, Try again later",'Ok', {
             duration:3000,

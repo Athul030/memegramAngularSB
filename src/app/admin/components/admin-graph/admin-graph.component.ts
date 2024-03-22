@@ -39,7 +39,6 @@ export class AdminGraphComponent implements OnInit {
   fetchPostsChartData() {
     this.service.getPostsChartData().subscribe(data => {
      
-      // Convert data to format required by ngx-charts
       const groupedData = this.groupDataByDate(data);
       console.log("posts",groupedData);
       this.chartData2 = [

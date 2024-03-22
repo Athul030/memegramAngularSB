@@ -1,7 +1,7 @@
 export const environment = {
     production: false,
     apiUrl: 'http://localhost:8080',
-    // appId : 'c0fb952ba5814fa5b9db72b34a851591', //of agora
+    apiUrlWS: 'ws://localhost:8080', 
     appId:1236957569,
     serverSecret:'090e9d8fa0ceae88e933f8512988ac05',
     channel: 'memegram',

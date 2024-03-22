@@ -5,6 +5,7 @@ import { AdminUsersComponent } from './components/admin-users/admin-users.compon
 import { AdminPostsComponent } from './components/admin-posts/admin-posts.component';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './admin.component';
+import { adminGuard } from './guards/admin.guard';
 
 const routes: Routes = [
   {
@@ -13,11 +14,11 @@ const routes: Routes = [
         path: '',
         component: AdminComponent,
         children: [
-          { path: 'admin', component: AdminComponent },
-          { path: 'dashboard', component: AdminDashboardComponent },
-          { path: 'users', component: AdminUsersComponent },
-          { path: 'posts', component: AdminPostsComponent },
-        ]
+          { path: 'admin', component: AdminComponent, canActivate:[adminGuard]},
+          { path: 'dashboard', component: AdminDashboardComponent , canActivate:[adminGuard] },
+          { path: 'users', component: AdminUsersComponent, canActivate:[adminGuard] },
+          { path: 'posts', component: AdminPostsComponent , canActivate:[adminGuard]},
+        ],canActivate:[adminGuard]
       }
     ]
   }
@@ -26,7 +27,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    CommonModule , [RouterModule.forChild(routes)]
+    CommonModule , RouterModule.forChild(routes)
   ]
 })
 export class AdminRoutingModule { }

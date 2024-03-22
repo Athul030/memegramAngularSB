@@ -1,7 +1,7 @@
 
 
 .instagram-post-card {
-  margin: 10px auto; /* Add margin for centering , increase the margin later*/
+  margin: 10px auto; 
   border-radius: 16px;
   overflow: hidden;
   width: 85%;
@@ -72,13 +72,13 @@
   font-family: 'Arial', sans-serif;
   font-size: 20px; 
   line-height: 1.6;
-  color: #0a204d; /* Change the text color as needed */
-  margin-bottom: 5px; /* Adjust the margin bottom */
+  color: #0a204d; 
+  margin-bottom: 5px; 
   text-align: justify;
   margin-left: 26px;
   margin-top: 10px;
 
-  flex: 1; /* Take up remaining vertical space in the card */
+  flex: 1; 
   position: relative;
 }
 

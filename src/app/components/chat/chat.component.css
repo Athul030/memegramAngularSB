@@ -28,14 +28,13 @@
   
  
   
-/* Add these styles to your component's CSS file or a global style file */
 
 .welcome-container {
   flex:1;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 90vh; /* 100% of the viewport height */
+  min-height: 90vh; 
   background-color: #f0f0f0;
 }
 

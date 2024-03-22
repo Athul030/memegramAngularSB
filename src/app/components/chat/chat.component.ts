@@ -20,9 +20,7 @@ export class ChatComponent implements OnInit {
   roomId!: string;
 
   constructor(private followSer:FollowService, private chatSer:ChatService){
-    // this.chatLeft.userSelected$.subscribe((event)=>{
-    //   this.getFollowerFollowingDetails();
-    // })
+   
   }
   ngOnInit(): void {
     this.getFollowerFollowingDetails();
@@ -37,9 +35,7 @@ export class ChatComponent implements OnInit {
     });
   }
 
-  // selectUser(user:UserDTO):void{
-  //   this.selectedUser = user;
-  // }
+ 
 
   selectUser(event: { user: UserDTO, chatRoomId: string }): void {
     this.selectedUser = event.user;
@@ -54,30 +50,16 @@ export class ChatComponent implements OnInit {
       );
     
 
-    // Optionally, you can join the room here
-    // this.chatSer.joinRoom(this.roomId);
+    
   }
 
   onSelectUser(event: { user: UserDTO, chatRoomId: string }): void {
     this.selectedUser = event.user;
     this.roomId = event.chatRoomId;
 
-    // Optionally, you can join the room here
-    // this.chatSer.joinRoom(this.roomId);
+   
   }
 
-  // createChatRoom(userIds:number[]):void{
-  //   this.chatSer.createChatRoom(userIds).subscribe(
-  //     (chatRoom:ChatRoomDTO)=>{
-  //       this.joinRoom(chatRoom.id);
-  //     }, (error) => {
-  //       console.error('Error creating chat room', error);
-  //     }
-  //   )
-  // }
-
-  // joinRoom(roomId:string):void{
-  //   this.chatSer.joinRoom(roomId);
-  // }
+  
   
 }

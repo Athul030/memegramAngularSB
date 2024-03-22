@@ -8,6 +8,7 @@ import { BehaviorSubject } from 'rxjs';
 import { Stomp } from '@stomp/stompjs';
 import { User } from '../model/user';
 import { NotificationType, NotificationsDTO } from '../model/notification';
+import { environment } from '../environments/environment';
 
 
 @Injectable({
@@ -15,7 +16,7 @@ import { NotificationType, NotificationsDTO } from '../model/notification';
 })
 export class VideocallService {
 
-  baseURL:string = "http://localhost:8080";
+  baseURL:string = `${environment.apiUrl}`;
   private stompClient: any
 
   private userIdForWebRTCSource = new BehaviorSubject<number>(0);
@@ -27,7 +28,7 @@ export class VideocallService {
   }
 
   initConnenctionSocket() {
-    const url = 'ws://localhost:8080/socket';
+    const url = `${environment.apiUrlWS}/socket`;
     this.stompClient = Stomp.client(url);
 
     this.stompClient.connect({}, () => {

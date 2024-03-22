@@ -85,7 +85,7 @@
 
 .profile-stats ul,
 .profile-bio p {
-    margin-bottom: 10px; /* Adjust the value as needed */
+    margin-bottom: 10px; 
 }
 
 
@@ -329,13 +329,7 @@ img {
     }
 }
 
-/*
 
-The following code will only run if your browser supports CSS grid.
-
-Remove or comment-out the code block below to see how the browser will fall-back to flexbox & floated styling. 
-
-*/
 
 @supports (display: grid) {
     .profile {
@@ -401,6 +395,6 @@ Remove or comment-out the code block below to see how the browser will fall-back
 .no-posts-message {
     text-align: center;
     font-size: 36px;
-    color: #555; /* Adjust the color as needed */
+    color: #555; 
     margin-top: 20px;
   }

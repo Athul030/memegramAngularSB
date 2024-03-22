@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { StorageService } from './storage.service';
 import { Observable } from 'rxjs';
 import { ApiResponseCustom, CommentDTO, LikeResponse } from '../model/likeComment';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class LikeCommentService {
 
   constructor(private http:HttpClient, private storage:StorageService) { }
 
-  baseURL:string = "http://localhost:8080";
+  baseURL:string = `${environment.apiUrl}`;
 
   likePost(userId: number, postId: number): Observable<LikeResponse> {
     const likeRequestBody = { userIdOfPersonLiking: userId, postId };

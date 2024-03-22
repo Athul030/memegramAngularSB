@@ -19,8 +19,7 @@ export class AdminUsersComponent implements OnInit {
   totalElements:number = 0;
   //change
   constructor( private service:AdminService) {} 
-  // @ViewChild(MatPaginator,{static:true}) paginator!:MatPaginator;
-  // datasource =new MatTableDataSource<any>();
+  
   userList:UserDTO[]=[];
   displayedColumns: string[] = ['fullName','email','userHandle','blockAction','reportedCount','provider'];
   ngOnInit() {
@@ -48,18 +47,6 @@ export class AdminUsersComponent implements OnInit {
   }
 
   
-
-  // toggleBlockUser(user:UserDTO) { 
-
-  //   if(user.blocked===false){
-  //     this.service.blockUserByAdmin(user.id!).subscribe((response) => {
-  //       console.log(response);
-  //     });
-  //   }else{
-  //     this.service.unBlockUserByAdmin(user.id!).subscribe((response) => {
-  //       console.log(response);
-  //     });
-  //   }
 
   toggleBlockUser(user: UserDTO) {
     const userId = user.id!;

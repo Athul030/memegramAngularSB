@@ -15,7 +15,7 @@ import { VideocallService } from 'src/app/services/videocall.service';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { ChatLeftSectionComponent } from '../chat-left-section/chat-left-section.component';
 import { ChatRightSectionComponent } from '../chat-right-section/chat-right-section.component';
-// import { removeUserFromPresence } from 'src/app/store/store.actions';
+import { environment } from 'src/app/environments/environment';
 
 @Component({
   selector: 'app-header',
@@ -24,9 +24,7 @@ import { ChatRightSectionComponent } from '../chat-right-section/chat-right-sect
 })
 export class HeaderComponent implements OnInit {
 
-  // @ViewChild(ChatLeftSectionComponent) chatLeftSectionComponent!: ChatLeftSectionComponent;
-  // @ViewChild(ChatRightSectionComponent) chatRightSectionComponent!: ChatRightSectionComponent;
-
+  
   showNotifications:boolean=false;
   notificationList!:NotificationsDTO[];
   currentUserId:number = this.serviceNow.getUserId();
@@ -47,7 +45,6 @@ export class HeaderComponent implements OnInit {
     this.getMessageNotificationDetails();
     this.subscribeToChatNotificationStatusUpdate();
 
-    // this.subscirbeToChatNotificationStatusUpdate();
     console.log("Starts at navigateToChat8");
 
   }
@@ -60,20 +57,7 @@ export class HeaderComponent implements OnInit {
     });
   }
   
-  // subscirbeToChatNotificationStatusUpdate():void{
-  //   console.log("Starts at navigateToChat9");
-
-  //   this.chatLeftSectionComponent.chatNotificationStatusUpdated.subscribe(()=>{
-  //     console.log("Starts at navigateToChat10");
-
-  //     this.getMessageNotificationDetails();
-  //   });
-  //   this.chatRightSectionComponent.chatNotificationStatusUpdated.subscribe(()=>{
-  //     console.log("Starts at navigateToChat11");
-
-  //     this.getMessageNotificationDetails();
-  //   });
-  // }
+  
 
   getMessageNotificationDetails(){
     this.notfSer.getMessageNotificationsDetails(this.currentUserId).subscribe((notifications:NotificationsDTO[])=>{
@@ -102,7 +86,7 @@ export class HeaderComponent implements OnInit {
   
   initConnenctionSocket() {
 
-    const url = 'ws://localhost:8080/socket';
+    const url = `${environment.apiUrlWS}/socket`;
     this.stompClient = Stomp.client(url);
 
     this.stompClient.connect({}, ()=>{     
@@ -213,9 +197,7 @@ export class HeaderComponent implements OnInit {
     console.log("Starts at navigateToChat1");
     
     this.getMessageNotificationDetails();
-    // if(chatRoomId === undefined){
-    //   return;
-    // }
+    
     console.log("inside navigatetochat",chatRoomId);
 
     // do it later to set the isread true

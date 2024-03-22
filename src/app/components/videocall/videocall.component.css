@@ -20,26 +20,20 @@
   }
 
 
-/* Basic styling for the wrapper */
 .video-call-wrapper {
     position: relative;
   }
   
-  /* Styling for the outgoing video container */
   .outgoing-video {
     position: relative;
-    /* Add any additional styling you need */
   }
   
-  /* Styling for the incoming video container */
   .incoming-video {
     position: absolute;
-    /* Add any additional styling you need */
   }
   
-  /* Styling for the control buttons */
   .control-button {
-    color: #fff; /* Text color */
+    color: #fff; 
     border: none;
     padding: 10px 15px;
     margin: 0 5px;
@@ -50,10 +44,9 @@
   
 
   
-  /* Styling for the call buttons */
   .call-button {
-    background-color: #2ecc71; /* Example color, adjust as needed */
-    color: #fff; /* Text color */
+    background-color: #2ecc71; 
+    color: #fff; 
     border: none;
     padding: 10px 15px;
     margin: 0 5px;
@@ -63,7 +56,7 @@
   }
   
   .call-button:hover {
-    background-color: #27ae60; /* Example color on hover, adjust as needed */
+    background-color: #27ae60; 
   }
   
 

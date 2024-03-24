@@ -43,7 +43,6 @@ import { FullSizeImageComponent } from './components/full-size-image/full-size-i
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { PickerComponent } from '@ctrl/ngx-emoji-mart'
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { VideocallComponent } from './components/videocall/videocall.component';
 import { WebrtcVideoCallComponent } from './components/webrtc-video-call/webrtc-video-call.component';
 import { MemegeneratorComponent } from './components/memegenerator/memegenerator.component';
 import { VideoCall2Component } from './components/video-call2/video-call2.component';
@@ -77,7 +76,6 @@ import { VideoCallerIdComponent } from './components/video-caller-id/video-calle
     ChatLeftSectionComponent,
     ChatRightSectionComponent,
     FullSizeImageComponent,
-    VideocallComponent,
     WebrtcVideoCallComponent,
     MemegeneratorComponent,
     VideoCall2Component,

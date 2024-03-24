@@ -7,7 +7,6 @@ import { AdminDashboardComponent } from './admin/components/admin-dashboard/admi
 import { OauthCallbackComponent } from './components/oauth-callback/oauth-callback.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ChatComponent } from './components/chat/chat.component';
-import { VideocallComponent } from './components/videocall/videocall.component';
 import { WebrtcVideoCallComponent } from './components/webrtc-video-call/webrtc-video-call.component';
 import { MemegeneratorComponent } from './components/memegenerator/memegenerator.component';
 import { VideoCall2Component } from './components/video-call2/video-call2.component';

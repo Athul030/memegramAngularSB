@@ -1,7 +1,6 @@
 import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { error } from 'logrocket';
 import { Observable, map } from 'rxjs';
 import { ChatRoomDTO } from 'src/app/model/message';
 import { User, UserDTO } from 'src/app/model/user';

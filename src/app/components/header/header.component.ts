@@ -3,7 +3,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Stomp } from '@stomp/stompjs';
-import { log } from 'logrocket';
 import { AdminService } from 'src/app/admin/service/admin.service';
 import { NotificationType, NotificationsDTO } from 'src/app/model/notification';
 import { ChatService } from 'src/app/services/chat.service';

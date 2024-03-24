@@ -43,7 +43,6 @@ import { FullSizeImageComponent } from './components/full-size-image/full-size-i
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { PickerComponent } from '@ctrl/ngx-emoji-mart'
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import * as LogRocket from 'logrocket';
 import { VideocallComponent } from './components/videocall/videocall.component';
 import { WebrtcVideoCallComponent } from './components/webrtc-video-call/webrtc-video-call.component';
 import { MemegeneratorComponent } from './components/memegenerator/memegenerator.component';
@@ -52,11 +51,7 @@ import { Videocall3Component } from './components/videocall3/videocall3.componen
 import { VideocallScreenComponent } from './components/videocall-screen/videocall-screen.component';
 import { VideoCallerIdComponent } from './components/video-caller-id/video-caller-id.component';
 
-//initlaize log rocket
-export function initializeLogRocket(){
-  return ()=>LogRocket.init('u65bs3/memegram');
 
-}
 
 @NgModule({
   declarations: [
@@ -114,11 +109,7 @@ export function initializeLogRocket(){
     
     ],
   providers: [
-    {
-      provide:APP_INITIALIZER,
-      useFactory:initializeLogRocket,
-      multi:true,
-    },
+    
     {
     provide:HTTP_INTERCEPTORS,
     useClass:AuthInterceptInterceptor,

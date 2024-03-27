@@ -4,7 +4,7 @@ export const environment = {
     apiUrl: 'https://badusha.cloud',
 
     // apiUrlWS: 'ws://localhost:8080',
-    apiUrlWS: 'ws://badusha.cloud', 
+    apiUrlWS: 'wss://badusha.cloud', 
 
     appId:1236957569,
     serverSecret:'090e9d8fa0ceae88e933f8512988ac05',

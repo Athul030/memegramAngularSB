@@ -43,7 +43,11 @@ export class FeedsComponent implements OnInit {
   }
 
   onCreatePostClick(){
-    this.dialog.open(CreatePostComponent);
+    const dialogRef = this.dialog.open(CreatePostComponent);
+    dialogRef.componentInstance.postCreated.subscribe(()=>{
+      this.getPosts();
+    });
+
   }
   
   getPosts(){

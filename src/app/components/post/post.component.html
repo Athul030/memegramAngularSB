@@ -39,6 +39,7 @@
   alt="post" 
   (click)="postData.imageUrl && openImageModal(postData.imageUrl)"
   >
+  
   <mat-card-content class="custom-post-content">
     {{postData.content}}
     <span class="post-date-time">{{postData.addedDate | date:'short'}}</span>

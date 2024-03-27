@@ -1,5 +1,5 @@
 import { HttpStatusCode } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Post } from 'src/app/model/user';
 import { UserService } from 'src/app/services/user.service';
@@ -11,6 +11,9 @@ import { MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./create-post.component.css']
 })
 export class CreatePostComponent implements OnInit {
+
+  @Output() postCreated:EventEmitter<void> = new EventEmitter<void>();
+
   selectedImageFile :File | undefined;
   constructor(private service:UserService, private snackBar:MatSnackBar, private dialog:MatDialogRef<CreatePostComponent>){}
   ngOnInit():void{
@@ -55,6 +58,7 @@ export class CreatePostComponent implements OnInit {
             this.snackBar.open('Post Uploaded','Close',{
               duration:3000, panelClass: 'custom-snack-bar-container',
             });
+            this.postCreated.emit();
             this.dialog.close();
           }else{
             console.log('resp',response)

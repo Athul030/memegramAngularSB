@@ -1,10 +1,10 @@
 export const environment = {
     production: false,
     // apiUrl: 'http://localhost:8080',
-    apiUrl: 'https://35.175.236.172',
+    apiUrl: 'http://50.16.146.204:8080',
 
     // apiUrlWS: 'ws://localhost:8080',
-    apiUrlWS: 'wss://35.175.236.172', 
+    apiUrlWS: 'ws://50.16.146.204:8080', 
 
     appId:1236957569,
     serverSecret:'090e9d8fa0ceae88e933f8512988ac05',

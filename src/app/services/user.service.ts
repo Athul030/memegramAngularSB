@@ -62,12 +62,6 @@ export class UserService {
     return this.http.get<CustomToken>(`${this.baseURL}/callback`);
   }
 
-  // public oAuthLogin():Observable<CustomToken>{
-  //   return this.http.get<CustomToken>(`${this.baseURL}/login/oauth2/code/google`)
-  //   .pipe(
-  //     tap(data=>console.log('OAuth Login Respone',data))
-  //   );
-  // }
 
   public getCurrentUser():Observable<UserDTO>{
     return this.http.get<UserDTO>(`${this.baseURL}/api/user/currentUser`);

@@ -22,7 +22,7 @@ const routes: Routes = [
 
   { path: 'admin', loadChildren: () => import('src/app/admin/admin.module').then(m => m.AdminModule) , canActivate:[authGuard] },
 
-  { path: 'callback',component:OauthCallbackComponent ,pathMatch:'full', canActivate:[authGuard]},
+  { path: 'callback',component:OauthCallbackComponent ,pathMatch:'full'},
   { path: 'profile',component:ProfileComponent ,pathMatch:'full', canActivate:[authGuard]},
   { path: 'profile/:userId',component:ProfileComponent ,pathMatch:'full', canActivate:[authGuard]},
   { path: 'chat',component:ChatComponent ,pathMatch:'full', canActivate:[authGuard]},

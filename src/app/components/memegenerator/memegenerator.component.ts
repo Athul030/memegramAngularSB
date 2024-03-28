@@ -57,31 +57,10 @@ export class MemegeneratorComponent {
     context.font = "50px Anton";
     context.fillStyle = "black";
     context.textAlign = "center";
-
-    const wrapText = (text: string, y: number) => {
-      const words = text.split(' ');
-      let currentLine = '';
-  
-      for (let word of words) {
-        const testLine = currentLine + word + ' ';
-        const metrics = context.measureText(testLine);
-        const testWidth = metrics.width;
-  
-        if (testWidth > canvas.width && currentLine !== '') {
-          context.fillText(currentLine.trim(), canvas.width / 2, y);
-          currentLine = '';
-          y += 60; 
-        }
-        currentLine += word + ' ';
-      }
-      context.fillText(currentLine.trim(), canvas.width / 2, y);
-    };
-
-    wrapText(this.lineOneText.toUpperCase(), 100); 
-    wrapText(this.lineTwoText.toUpperCase(), 700); 
     
-    // context.fillText(this.lineOneText.toUpperCase(),canvas.width/2,100);
-    // context.fillText(this.lineTwoText.toUpperCase(),canvas.width/2,700)
+    context.fillText(this.lineOneText.toUpperCase(),canvas.width/2,100);
+    context.fillText(this.lineTwoText.toUpperCase(),canvas.width/2,
+    700)
   }
 
   

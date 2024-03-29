@@ -55,7 +55,21 @@ export class FeedsComponent implements OnInit {
       (posts:Post[])=>{
         this.feedPosts = posts.filter((post)=>this.currentUser.following.some((followingUser)=>followingUser.id===post.user?.id) || post.user?.id === this.currentUser.id )
         .map(post => post)
-        .reverse();
+        ;
+
+        this.feedPosts.sort((a, b) => {
+          let dateA:any;
+          let dateB:any;
+          // Assuming date is stored in a property named createdAt, adjust accordingly if it's named differently
+          if(a.addedDate!==undefined){
+            dateA = new Date(a.addedDate).getTime();
+          }
+          if(b.addedDate!==undefined){
+            dateB = new Date(b.addedDate).getTime();
+          }
+          
+          return dateB! - dateA!;
+        });
 
         // this.feedPosts=posts;
 

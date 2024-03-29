@@ -15,7 +15,7 @@ export class AppComponent {
 
   this.router.events.subscribe((event) => {
     if (event instanceof NavigationStart) {
-      // Check the current route and set a class or style accordingly
+      // Check the current route and set a style 
       const isLoginPage = event.url === '/login';
       document.body.classList.toggle('login-background', isLoginPage);
     }

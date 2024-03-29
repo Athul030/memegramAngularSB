@@ -29,6 +29,7 @@ export class MemegeneratorComponent {
 
     
 
+    
     const fileReader = new FileReader();
     fileReader.readAsDataURL(event.target.files[0]);
     fileReader.onload = (e:any) =>{

@@ -1,10 +1,10 @@
 export const environment = {
     production: false,
-    apiUrl: 'http://localhost:8080',
-    // apiUrl: 'https://badusha.cloud',
+    // apiUrl: 'http://localhost:8080',
+    apiUrl: 'https://badusha.cloud',
 
-    apiUrlWS: 'ws://localhost:8080',
-    // apiUrlWS: 'wss://badusha.cloud', 
+    // apiUrlWS: 'ws://localhost:8080',
+    apiUrlWS: 'wss://badusha.cloud', 
 
     appId:1236957569,
     serverSecret:'090e9d8fa0ceae88e933f8512988ac05',

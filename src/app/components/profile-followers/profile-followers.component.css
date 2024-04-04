@@ -9,6 +9,9 @@
 	background-color: #f2f2f2;
 	border-radius: 5px;
 	margin-bottom: 10px;
+	margin-left: 20%;
+	margin-right: 20%;
+
 }
 
 .follower {
@@ -25,6 +28,7 @@
 	overflow: hidden;
 	margin-right: 10px;
 	cursor: pointer;
+	margin-left: 20%;
 
 }
 
@@ -55,4 +59,33 @@
 	border-radius: 5px;
 	padding: 5px 10px;
 	cursor: pointer;
+	margin-right: 20%;
+
 }
+
+/* pagination*/
+.pagination-container {
+	display: flex;
+	justify-content: center;
+	margin-top: 20px; 
+  }
+  
+  .pagination {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+  }
+  
+  .pagination button {
+	background-color: #f0f0f0; 
+	border: none;
+	padding: 8px 16px;
+	margin: 0 4px;
+	cursor: pointer;
+  }
+  
+  .pagination button:disabled {
+	opacity: 0.5; 
+	cursor: not-allowed;
+  }
+  

@@ -1,6 +1,6 @@
 <div class="followers-container">
     <h1 class="followers-header">Followers</h1>
-    <div class="follower" *ngFor="let follower of allFollowerList" >
+    <div class="follower" *ngFor="let follower of getCurrentPageFollowers()" >
             <div class="thumbnail-container" *ngIf="follower.id" (click)="navigateToUserProfile(follower!.id)">
                 <div class="thumbnail"><img src="{{follower.profilePicUrl}}" alt="thumbnail" ></div>
             </div>
@@ -10,4 +10,14 @@
             </div>
         <button (click)="removeFollower(follower.id)" class="remove-btn">REMOVE</button>
     </div>
-</div>
+ </div> 
+
+ <div class="pagination-container">
+    <div class="pagination">
+      <button (click)="previousPage()" [disabled]="currentPage === 1">Prev</button>
+      <span>Page {{ currentPage }}</span>
+      <button (click)="nextPage()" [disabled]="getCurrentPageFollowers().length < itemsPerPage">Next</button>
+    </div>
+  </div>
+  
+

@@ -83,6 +83,7 @@ export interface Post {
     likes?:LikeDTO[];
     lastComment?:CommentDTO;
     comments?:CommentDTO[];
+    block?:boolean;
   }
 
   export interface PostDTO {
@@ -98,6 +99,7 @@ export interface Post {
     likes?:LikeDTO[];
     lastComment?: CommentDTO;
     comments?:CommentDTO[];
+    block?:boolean;
 
   }
 

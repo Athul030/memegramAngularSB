@@ -8,6 +8,9 @@ import { CommentmodalComponent } from '../commentmodal/commentmodal.component';
 import { StorageService } from 'src/app/services/storage.service';
 import { LikeCommentService } from 'src/app/services/like-comment.service';
 import { CommentDTO, LikeDTO } from 'src/app/model/likeComment';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { EventService } from 'src/app/services/event.service';
 
 @Component({
   selector: 'app-profile-posts',
@@ -25,8 +28,7 @@ export class ProfilePostsComponent implements OnInit {
   otherUserPostsList!:PostDTO[];
   postsList!:PostDTO[];
 
-  constructor(private postSer:PostService, private route:ActivatedRoute, private dialog:MatDialog,private storageSer:StorageService,
-    private likeSer:LikeCommentService){}
+  constructor(private postSer:PostService, private route:ActivatedRoute, private dialog:MatDialog,private storageSer:StorageService, private snackBar:MatSnackBar , private likeSer:LikeCommentService,private eventService:EventService){}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['otherUserPostsInput'] && changes['otherUserPostsInput'].currentValue) {
@@ -131,6 +133,51 @@ export class ProfilePostsComponent implements OnInit {
     })
   }
 
+  deletePost(post: PostDTO) {
+    if (post.postId !== undefined) {
+      this.openConfirmationDialog(post);
+    }
+  }
 
+  openConfirmationDialog(post: PostDTO):void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '250px',
+      data: { message: 'Are you sure you want to delete this post?' }
+    }); 
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.confirmDeletePost(post);
+      }
+    });
+  }
+  confirmDeletePost(post: PostDTO):void {
+    if(post.postId!==undefined)
+    this.postSer.deletePost(post.postId).subscribe(
+      (response)=>{
+        console.log(response);
+        if(response.httpStatus == 'OK'){
+          this.getPostsOfUser();
+          this.snackBar.open('Post Deleted ','Close',{
+            duration:3000, panelClass: 'custom-snack-bar-container',
+          });
+          this.eventService.emitPostRemoved();
+
+        }else{
+          this.snackBar.open('Post Not Deleted ','Close',{
+            duration:3000, panelClass: 'custom-snack-bar-container',
+          });
+        }
+      },
+      (error)=>{
+        console.error('Error deleting post:', error);
+        this.snackBar.open('An error occured while deleting the post','Close',{
+          duration:3000,panelClass:'custom-snack-bar-container',
+        });
+      }
+    )
+  }
+
+  
 
 }

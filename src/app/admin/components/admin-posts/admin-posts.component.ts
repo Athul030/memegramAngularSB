@@ -46,6 +46,32 @@ export class AdminPostsComponent implements OnInit {
   }
 
   toggleBlockPost(post:Post) { 
+    const postId = post.postId!;
+
+    if(post.block==false){
+      this.service.blockPostByAdmin(postId).subscribe(
+        (response)=>{
+          console.log(response);
+          const updatedPostDTO:PostDTO = response;
+          const index = this.postList.findIndex(u=>u.postId == postId);
+          if(index!== -1){
+            this.postList[index] = updatedPostDTO;
+          }
+
+        }
+      )
+    }else{
+      this.service.unBlockPostByAdmin(postId).subscribe(
+        (response)=>{
+          console.log(response);
+          const updatedPostDTO:PostDTO = response;
+          const index = this.postList.findIndex(u=>u.postId == postId);
+          if(index!==-1){
+            this.postList[index] = updatedPostDTO;
+          }
+        }
+      )
+    }
 
     
   }

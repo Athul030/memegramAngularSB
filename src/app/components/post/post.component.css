@@ -27,6 +27,10 @@
   color: #f60404;
 }
 
+.likeCount{
+  cursor: pointer;
+}
+
 .post-actions {
   display: flex;
   align-items: center;

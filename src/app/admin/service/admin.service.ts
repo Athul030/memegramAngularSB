@@ -72,4 +72,12 @@ export class AdminService {
   unBlockUserByAdmin(userId: number): Observable<any> {
     return this.http.patch(`${this.baseUrl}/api/admin/unBlockUser/${userId}`, null); 
   }
+
+  blockPostByAdmin(postId:number):Observable<any>{
+    return this.http.patch(`${this.baseUrl}/api/admin/blockPost/${postId}`,null);
+  }
+
+  unBlockPostByAdmin(postId:number):Observable<any>{
+    return this.http.patch(`${this.baseUrl}/api/admin/unBlockPost/${postId}`,null);
+  }
 }

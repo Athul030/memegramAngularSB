@@ -398,3 +398,7 @@ img {
     color: #555; 
     margin-top: 20px;
   }
+
+  .gallery-item-comments{
+    margin-left: 3rem;
+  }

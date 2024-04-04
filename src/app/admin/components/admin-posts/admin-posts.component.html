@@ -22,8 +22,8 @@
                   <td><div class="image-container"><img [src]="post.imageUrl" alt="Image"></div></td>
                   <td> {{post.addedDate | date: 'd/M/YYYY, h:mm:ss a'}}</td>
                   <td>
-                      <button (click)="toggleBlockPost(post)" mat-raised-button [color]="post.isDeleted ? 'warn' : 'primary'" class="action-button">
-                          {{ post.isDeleted ? 'Unblock' : 'Block' }}
+                      <button (click)="toggleBlockPost(post)" mat-raised-button [color]="post.block ? 'warn' : 'primary'" class="action-button">
+                          {{ post.block ? 'Unblock' : 'Block' }}
                       </button>
                   </td>
               </tr>

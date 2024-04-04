@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { PostDTO } from '../model/user';
 import { NotificationsDTO } from '../model/notification';
 import { environment } from '../environments/environment';
+import { ApiResponseCustom } from '../model/likeComment';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +34,10 @@ export class PostService {
   public getPostsByOtherUser(userId:number):Observable<PostDTO[]>{
     
     return this.http.get<PostDTO[]>(`${this.baseURL}/api/user/posts/${userId}`);
+  }
+
+  public deletePost(postId:number):Observable<ApiResponseCustom>{
+    return this.http.delete<ApiResponseCustom>(`${this.baseURL}/api/postsDelete/${postId}`);
   }
 
   

@@ -86,10 +86,7 @@ label {
     font-size: 18px; 
     font-weight: bold; 
     color: #333; 
-    padding-top: 5%;
-    padding-bottom: 5%;
-    margin-bottom: 20px;
-    margin-top: 20px;
+   
 
 }
 
@@ -107,4 +104,8 @@ label {
     background-clip: text; 
     -webkit-text-fill-color: transparent; 
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); 
+}
+
+.labelForUpload{
+    margin-bottom: 2%;
 }

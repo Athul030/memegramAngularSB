@@ -1,7 +1,7 @@
 
 <div class="following-container">
     <h1 class="following-header">Following</h1>
-    <div class="following" *ngFor="let following of allFollowingList">
+    <div class="following" *ngFor="let following of getCurrentPageFollowing()">
         <div class="thumbnail-container" *ngIf="following.id" (click)="navigateToUserProfile(following!.id)">
             <div class="thumbnail"><img src="{{following.profilePicUrl}}" alt="thumbnail" ></div>
         </div>
@@ -12,3 +12,11 @@
         <button (click)="removeFollow(following.id)" class="follow-btn">Following</button>
     </div>
 </div>
+
+<div class="pagination-container">
+    <div class="pagination">
+      <button (click)="previousPage()" [disabled]="currentPage === 1">Prev</button>
+      <span>Page {{ currentPage }}</span>
+      <button (click)="nextPage()" [disabled]="getCurrentPageFollowing().length < itemsPerPage">Next</button>
+    </div>
+  </div>

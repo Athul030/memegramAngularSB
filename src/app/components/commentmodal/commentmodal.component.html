@@ -39,8 +39,9 @@
   <div class="comment-container">
     <textarea [(ngModel)]="comment" placeholder="Enter your comment here" class="comment-textarea"></textarea>
     <div class="button-container">
-      <button class="comment-button" (click)="submitComment(comment)">Comment</button>
+     
       <button class="cancel-button" (click)="close()">Cancel</button>
+      <button class="comment-button" (click)="submitComment(comment)">Comment</button>
     </div>
   </div>
 </div>

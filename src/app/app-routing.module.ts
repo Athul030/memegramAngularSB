@@ -34,7 +34,10 @@ const routes: Routes = [
   // { path:'webRtcVideoCall/:userId',component: WebrtcVideoCallComponent , pathMatch:'full'}
   { path:'meme',component: MemegeneratorComponent , pathMatch:'full', canActivate:[authGuard]},
   { path:'videoScreen',component:VideocallScreenComponent, pathMatch:'full', canActivate:[authGuard] },
-  { path:'videoScreen/:otherUserId',component:VideocallScreenComponent, pathMatch:'full', canActivate:[authGuard] }
+  { path:'videoScreen/:otherUserId',component:VideocallScreenComponent, pathMatch:'full', canActivate:[authGuard] },
+
+  //haven't pushed it yet
+  { path:'**', component:HomeComponent,pathMatch:'full',canActivate:[authGuard]}
 
 
 

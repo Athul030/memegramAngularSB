@@ -14,7 +14,10 @@ import { StorageService } from 'src/app/services/storage.service';
 })
 export class ProfileFollowersComponent implements OnInit {
 
-  allFollowerList!:UserDTO[];
+  allFollowerList:UserDTO[]=[];
+  currentPage:number = 1;
+  itemsPerPage:number = 5;
+
   constructor(private followSer:FollowService, private storageSer:StorageService,private matSnack:MatSnackBar,
     private eventService:EventService, private router:Router){
 
@@ -73,6 +76,22 @@ export class ProfileFollowersComponent implements OnInit {
 
   navigateToUserProfile(userId:number):void{
     this.router.navigate(['/profile',userId]);
+  }
+
+  getCurrentPageFollowers(){
+    const startIndex = (this.currentPage-1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    console.log(startIndex,endIndex,this.allFollowerList.slice(startIndex,endIndex));
+    
+    return this.allFollowerList.slice(startIndex,endIndex);
+  }
+
+  nextPage(){
+    this.currentPage++;
+  }
+
+  previousPage() {
+    this.currentPage --;
   }
 
 }

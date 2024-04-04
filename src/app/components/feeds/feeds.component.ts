@@ -60,7 +60,6 @@ export class FeedsComponent implements OnInit {
         this.feedPosts.sort((a, b) => {
           let dateA:any;
           let dateB:any;
-          // Assuming date is stored in a property named createdAt, adjust accordingly if it's named differently
           if(a.addedDate!==undefined){
             dateA = new Date(a.addedDate).getTime();
           }

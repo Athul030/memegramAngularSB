@@ -65,3 +65,7 @@ h3 {
   display: flex;
   justify-content: space-between;
 }
+
+.usersAndPosts{
+  cursor: pointer;
+}

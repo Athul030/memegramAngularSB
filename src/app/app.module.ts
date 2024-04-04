@@ -49,7 +49,9 @@ import { VideoCall2Component } from './components/video-call2/video-call2.compon
 import { Videocall3Component } from './components/videocall3/videocall3.component';
 import { VideocallScreenComponent } from './components/videocall-screen/videocall-screen.component';
 import { VideoCallerIdComponent } from './components/video-caller-id/video-caller-id.component';
-
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 
 
 @NgModule({
@@ -82,6 +84,7 @@ import { VideoCallerIdComponent } from './components/video-caller-id/video-calle
     Videocall3Component,
     VideocallScreenComponent,
     VideoCallerIdComponent,
+    ConfirmationDialogComponent,
   
   ],
   imports: [
@@ -99,6 +102,8 @@ import { VideoCallerIdComponent } from './components/video-caller-id/video-calle
     MatMenuModule,
     MatFormFieldModule,
     PickerComponent,
+    MatSelectModule,
+    MatOptionModule,
     StoreModule.forRoot({dp:dpReducer}, {}),
     EffectsModule.forRoot([storeEffects]),
     StoreDevtoolsModule.instrument({

@@ -57,6 +57,11 @@ export class ProfileContentComponent implements OnInit {
       this.otherUsergetCountOfPostAndFollowers(this.otherUserIdValue);
       }
     })
+
+    this.eventService.postRemoved$.subscribe(()=>{
+      this.getCountOfPostAndFollowers();
+      //not getting other users and post and followers since we can only delete our own posts
+    })
   }
 
 

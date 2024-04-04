@@ -13,6 +13,8 @@
                     *ngIf="post.postId !== undefined && post.imageUrl !== undefined && post.lastComment !== undefined" 
                     (click)="openCommentModal(post.postId,post.imageUrl,post.lastComment)"
                     ><span class="visually-hidden">Comments:</span><i class="material-icons" aria-hidden="true">comment</i>{{post.comments?.length}}</li>
+                    <li class="gallery-item-comments" (click)="deletePost(post)" ><span class="visually-hidden">Delete:</span><i class="material-icons" aria-hidden="true">delete</i></li>
+                    
                 </ul>
             </div>
            </div>

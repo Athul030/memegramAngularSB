@@ -44,11 +44,21 @@
     {{postData.content}}
     <span class="post-date-time">{{postData.addedDate | date:'short'}}</span>
   </mat-card-content>
-  <mat-card-actions class="post-actions custom-post-actions">
-    <span class="like-count">{{postData.likes?.length}}</span>
+  <mat-card-actions class="post-actions custom-post-actions like-count">
+    
+    <span class="likeCount" (click)="toggleUserCount()" *ngIf="postData.likes!.length>0">{{postData.likes?.length}}
+          <!-- Display dropdown or modal with the list of liked users
+        <mat-select *ngIf="showLikedUserList">
+          <mat-option *ngFor="let like of postData.likes">
+            {{ like.user.fullName }}
+          </mat-option>
+        </mat-select> -->
+      </span>
     <mat-icon *ngIf="isLikedByUser(postData)" (click)="unlikePost(postData)" class="action-item" color="warn">
       favorite
     </mat-icon>
+
+    
 
     <mat-icon *ngIf="!isLikedByUser(postData)" (click)="likePost(postData)" class="action-item" color="warn">
       favorite_border

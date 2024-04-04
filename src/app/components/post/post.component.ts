@@ -20,7 +20,7 @@ import { LikeDTO } from 'src/app/model/likeComment';
 export class PostComponent {
   
   userId = this.storageSer.getUserId();
-  
+  showLikedUserList:boolean=false;
   @Input() postData!:Post;
   creatorName:string='';
   constructor(private likeSer:LikeCommentService,private storageSer:StorageService, private dialog:MatDialog, private router:Router,
@@ -145,6 +145,10 @@ export class PostComponent {
     }
     return id === this.userId;
 
+  }
+
+  toggleUserCount(){
+    this.showLikedUserList = !this.showLikedUserList;
   }
 
 }
